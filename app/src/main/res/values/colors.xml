@@ -6,4 +6,10 @@
     <color name="colorBackground">#7b91ac</color>
     <color name="colorFButton">#fa78ab</color>
     <color name="colorSpecialOffer">#2e7d32</color>
+    <color name="colorButton">#7B91AC</color>
+    <color name="colorGray">#727272</color>
+    <color name="colorBlack">#000000</color>
+    <color name="colorWhite">#fcfcfc</color>
+    <color name="colorGreen">#45a554</color>
+    <color name="colorOrange">#db5918</color>
 </resources>

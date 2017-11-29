@@ -1,10 +1,13 @@
 package com.levirgon.e_commercedesign;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import java.util.ArrayList;
@@ -16,6 +19,7 @@ public class SingleItemViewActivity extends AppCompatActivity {
     private LinearLayoutManager verticalLayoutManager;
     private ImageSlideAdapter mAdapter;
     private ImageView mItemImage;
+    private Button mAddCartButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +30,19 @@ public class SingleItemViewActivity extends AppCompatActivity {
 
     private void initialize() {
         mItemImage = findViewById(R.id.item_image_view);
+        mAddCartButton = findViewById(R.id.cart_button);
         setUpImageSlide();
+        openNewActivity();
+    }
+
+    private void openNewActivity(){
+        mAddCartButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SingleItemViewActivity.this,CartViewActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void setUpImageSlide() {
