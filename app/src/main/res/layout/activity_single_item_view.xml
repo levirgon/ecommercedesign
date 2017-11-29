@@ -1,0 +1,679 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#eceff1">
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="48dp"
+
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="8dp">
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/item_image_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="240dp"
+                    android:scaleType="centerCrop"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/hand_bag"
+                    tools:ignore="ContentDescription"/>
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/cardView"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="220dp"
+                    app:cardBackgroundColor="@color/colorBackground"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.51"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0">
+
+                    <android.support.constraint.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@android:color/transparent">
+
+                        <TextView
+                            android:id="@+id/item_title_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:fontFamily="@font/poiret_one"
+                            android:text="Hand Bag"
+                            android:textColor="@android:color/background_light"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:ignore="HardcodedText"/>
+
+                        <TextView
+                            android:id="@+id/item_shop_name_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginStart="8dp"
+                            android:fontFamily="@font/poiret_one"
+                            android:text="The Bag Shop"
+                            android:textColor="@android:color/background_light"
+                            android:textSize="12sp"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/item_title_text"
+                            tools:ignore="HardcodedText"/>
+
+                        <RatingBar
+                            android:id="@+id/item_rating_bar"
+                            style="@style/Widget.AppCompat.RatingBar.Small"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="8dp"
+                            android:layout_marginLeft="8dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:progressTint="#b3efeb"
+                            android:rating="3.5"
+                            android:visibility="visible"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/item_shop_name_text"
+                            app:layout_constraintVertical_bias="1.0"
+                            tools:targetApi="lollipop"/>
+
+                        <TextView
+                            android:id="@+id/item_price_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="16dp"
+                            android:layout_marginEnd="16dp"
+                            android:layout_marginRight="16dp"
+                            android:fontFamily="@font/poiret_one"
+                            android:text="10% off"
+                            android:textColor="@android:color/background_light"
+                            android:textSize="24sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            tools:ignore="HardcodedText"/>
+
+                        <TextView
+                            android:id="@+id/item_rating_count_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="8dp"
+                            android:layout_marginLeft="8dp"
+                            android:layout_marginStart="8dp"
+                            android:fontFamily="@font/poiret_one"
+                            android:text="38,589"
+                            android:textColor="@android:color/background_light"
+                            android:textSize="12sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/item_rating_bar"
+                            tools:ignore="HardcodedText"/>
+                    </android.support.constraint.ConstraintLayout>
+                </android.support.v7.widget.CardView>
+
+                <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/floatingActionButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="68dp"
+                    android:layout_marginEnd="24dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:tint="@android:color/background_light"
+                    app:backgroundTint="@color/colorFButton"
+                    app:fabSize="normal"
+                    app:layout_constraintBottom_toBottomOf="@+id/cardView"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:srcCompat="@drawable/buy_icon"
+                    android:layout_marginRight="24dp"/>
+
+            </android.support.constraint.ConstraintLayout>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/images_list"
+                        android:layout_width="match_parent"
+                        android:layout_height="96dp"
+                        android:layout_margin="8dp"/>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="?attr/actionModeSplitBackground"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poiret_one"
+                        android:padding="8dp"
+                        android:text="@string/review_rating"
+                        android:textAlignment="textStart"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:gravity="start"/>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="?attr/actionModeSplitBackground"/>
+                    <android.support.constraint.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:id="@+id/review_card"
+                        android:layout_height="100dp">
+
+                        <TextView
+                            android:id="@+id/review_count_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="16dp"
+                            android:layout_marginStart="32dp"
+                            android:layout_marginTop="8dp"
+                            android:fontFamily="@font/poiret_one"
+                            android:text="5,734"
+                            android:textColor="@color/colorSpecialOffer"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/imageView2"
+                            app:layout_constraintTop_toBottomOf="@+id/item_rating_count_text2"
+                            android:layout_marginLeft="32dp"/>
+
+                        <TextView
+                            android:id="@+id/textView4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="0dp"
+                            android:layout_marginLeft="8dp"
+                            android:layout_marginStart="8dp"
+                            android:fontFamily="@font/poiret_one"
+                            android:text="reviews"
+                            android:textColor="@color/colorAccent"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="@+id/review_count_text"
+                            app:layout_constraintStart_toEndOf="@+id/review_count_text"
+                            app:layout_constraintTop_toTopOf="@+id/review_count_text"/>
+
+                        <View
+                            android:id="@+id/view"
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginBottom="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="8dp"
+                            android:background="?attr/actionModeSplitBackground"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/item_rating_count_text2"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toEndOf="@+id/imageView2"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginRight="8dp"/>
+
+                        <TextView
+                            android:id="@+id/item_rating_count_text2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="32dp"
+                            android:layout_marginTop="16dp"
+                            android:fontFamily="@font/poiret_one"
+                            android:text="38,589"
+                            android:textColor="@color/colorFButton"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            app:layout_constraintStart_toEndOf="@+id/imageView2"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:ignore="HardcodedText"
+                            android:layout_marginLeft="32dp"/>
+
+                        <TextView
+                            android:id="@+id/textView2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="8dp"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="8dp"
+                            android:fontFamily="@font/poiret_one"
+                            android:text="3.5"
+                            android:textColor="#455a64"
+                            android:textSize="48sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_marginLeft="16dp"/>
+
+                        <ImageView
+                            android:id="@+id/imageView2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="16dp"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView2"
+                            app:layout_constraintStart_toEndOf="@+id/textView2"
+                            app:layout_constraintTop_toTopOf="@+id/textView2"
+                            app:srcCompat="@drawable/ic_star"
+                            android:layout_marginLeft="8dp"/>
+
+                        <TextView
+                            android:id="@+id/textView3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:fontFamily="@font/poiret_one"
+                            android:text="ratings"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="@+id/item_rating_count_text2"
+                            app:layout_constraintStart_toEndOf="@+id/item_rating_count_text2"
+                            app:layout_constraintTop_toTopOf="@+id/item_rating_count_text2"
+                            android:layout_marginLeft="8dp"/>
+
+                    </android.support.constraint.ConstraintLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="?attr/actionModeSplitBackground"/>
+
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/cardview_light_background"
+                        android:drawableEnd="@drawable/ic_right_indicator"
+                        android:drawableRight="@drawable/ic_right_indicator"
+                        android:fontFamily="@font/poiret_one"
+                        android:gravity="start|center_vertical"
+                        android:padding="8dp"
+                        android:text="See All Reviews"
+                        android:textAlignment="viewStart"/>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="?attr/actionModeSplitBackground"/>
+
+                    <android.support.constraint.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+
+                        <TextView
+                            android:id="@+id/item_title_expanded"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="16dp"
+                            android:fontFamily="@font/poiret_one"
+                            android:text="Aero Power Play Leather Bags"
+                            android:textColor="@android:color/black"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"/>
+
+                        <TextView
+                            android:id="@+id/offer_time_limit_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginTop="8dp"
+                            android:fontFamily="@font/poiret_one"
+                            android:text="Special Price Ending In 10h 35min"
+                            android:textColor="@color/colorSpecialOffer"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="@+id/item_title_expanded"
+                            app:layout_constraintTop_toBottomOf="@+id/item_title_expanded"
+                            tools:ignore="RtlCompat"/>
+
+                        <TextView
+                            android:id="@+id/current_price_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="16dp"
+                            android:layout_marginTop="8dp"
+                            android:fontFamily="@font/poiret_one"
+                            android:text="$449"
+                            android:textColor="@android:color/background_dark"
+                            android:textSize="24sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/offer_time_limit_text"
+                            app:layout_constraintTop_toBottomOf="@+id/offer_time_limit_text"/>
+
+                        <TextView
+                            android:id="@+id/old_price_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="8dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:background="@drawable/bg_strike_text"
+                            android:fontFamily="@font/poiret_one"
+                            android:padding="4dp"
+                            android:text="499"
+                            android:textColor="@color/colorBackground"
+                            app:layout_constraintBottom_toBottomOf="@+id/current_price_text"
+                            app:layout_constraintStart_toEndOf="@+id/current_price_text"
+                            app:layout_constraintTop_toTopOf="@+id/current_price_text"/>
+
+                        <TextView
+                            android:id="@+id/textView7"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="8dp"
+                            android:layout_marginStart="8dp"
+                            android:fontFamily="@font/poiret_one"
+                            android:text="10% off"
+                            android:textColor="@color/colorSpecialOffer"
+                            app:layout_constraintBottom_toBottomOf="@+id/old_price_text"
+                            app:layout_constraintStart_toEndOf="@+id/old_price_text"
+                            app:layout_constraintTop_toTopOf="@+id/old_price_text"/>
+
+                    </android.support.constraint.ConstraintLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="?attr/actionModeSplitBackground"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:orientation="horizontal">
+
+                        <Button
+                            android:id="@+id/share_button"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@android:color/background_light"
+                            android:fontFamily="@font/poiret_one"
+                            android:text="Share"
+                            android:textColor="@color/colorBackground"
+                            android:textStyle="bold"/>
+
+                        <View
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:background="?attr/actionModeSplitBackground"/>
+
+                        <Button
+                            android:id="@+id/similiar_button"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@android:color/background_light"
+                            android:fontFamily="@font/poiret_one"
+                            android:text="Similiar"
+                            android:textColor="@color/colorBackground"
+                            android:textStyle="bold"/>
+
+                        <View
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:background="?attr/actionModeSplitBackground"/>
+
+                        <Button
+                            android:id="@+id/wishlist_button"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@android:color/background_light"
+                            android:fontFamily="@font/poiret_one"
+                            android:text="WishList"
+                            android:textColor="@color/colorBackground"
+                            android:textStyle="bold"/>
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="?attr/actionModeSplitBackground"/>
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginBottom="4dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="4dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/color_button"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@color/cardview_light_background"
+                        android:fontFamily="@font/poiret_one"
+                        android:text="Color"
+                        android:textColor="@color/colorBackground"
+                        android:textStyle="bold"/>
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="?attr/actionModeSplitBackground"/>
+
+                    <Button
+                        android:id="@+id/size_button"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@color/cardview_light_background"
+                        android:fontFamily="@font/poiret_one"
+                        android:text="size"
+                        android:textColor="@color/colorBackground"
+                        android:textStyle="bold"/>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                app:cardBackgroundColor="@color/cardview_light_background">
+
+                <android.support.constraint.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/textView9"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="8dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        android:fontFamily="@font/poiret_one"
+                        android:text="@string/description"
+                        android:textColor="#455a64"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+
+                    <View
+                        android:id="@+id/divider_desc"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="16dp"
+                        android:background="?attr/actionModeSplitBackground"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/textView9"/>
+
+                    <TextView
+                        android:id="@+id/textView11"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="8dp"
+                        android:fontFamily="@font/poiret_one"
+                        android:text="Note"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/divider_desc"/>
+
+                    <TextView
+                        android:id="@+id/note_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="8dp"
+                        android:fontFamily="@font/poiret_one"
+                        android:text="product color may vary due to photogenic effect"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView11"/>
+
+                    <TextView
+                        android:id="@+id/textView12"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="8dp"
+                        android:fontFamily="@font/poiret_one"
+                        android:text="Highlights"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/note_text"/>
+
+                    <TextView
+                        android:id="@+id/highlighted_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="8dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="8dp"
+                        android:fontFamily="@font/poiret_one"
+                        android:text=".Color: Black,.Material: Mash,Artificial Leather"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="@id/textView12"
+                        app:layout_constraintTop_toBottomOf="@+id/textView12"/>
+
+                    <View
+                        android:id="@+id/divider_highlight"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="16dp"
+                        android:background="?attr/actionModeSplitBackground"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/highlighted_text"/>
+
+                    <TextView
+                        android:id="@+id/all_details_text_indicator"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableEnd="@drawable/ic_right_indicator"
+                        android:drawableRight="@drawable/ic_right_indicator"
+                        android:fontFamily="@font/poiret_one"
+                        android:gravity="start|center_vertical"
+                        android:padding="8dp"
+                        android:text="All Details"
+                        android:textAlignment="viewStart"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/divider_highlight"/>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="0dp"
+                        android:background="?attr/actionModeSplitBackground"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/all_details_text_indicator"/>
+
+                </android.support.constraint.ConstraintLayout>
+            </android.support.v7.widget.CardView>
+
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_gravity="center|bottom"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/cart_button"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/colorPrimary"
+            android:fontFamily="@font/poiret_one"
+            android:text="Add to cart"
+            android:textColor="@color/colorBackground"
+            android:textStyle="bold"/>
+
+        <Button
+            android:id="@+id/buy_now_button"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/colorBackground"
+            android:fontFamily="@font/poiret_one"
+            android:text="buy now"
+            android:textColor="@color/cardview_light_background"
+            android:textStyle="bold"/>
+    </LinearLayout>
+
+</android.support.design.widget.CoordinatorLayout>
