@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.levirgon.e_commercedesign.HomeActivity;
+import com.levirgon.e_commercedesign.ProductsActivity;
 import com.levirgon.e_commercedesign.R;
 import com.levirgon.e_commercedesign.SingleItemViewActivity;
 import com.levirgon.e_commercedesign.model.CategoryItem;
@@ -65,7 +66,7 @@ public class CategoryLoaderAdapter extends RecyclerView.Adapter<CategoryLoaderAd
         holder.categoryName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mContext,SingleItemViewActivity.class);
+                Intent intent = new Intent(mContext,ProductsActivity.class);
                 v.getContext().startActivity(intent);
 
             }
