@@ -1,4 +1,4 @@
-package com.levirgon.e_commercedesign;
+package com.levirgon.e_commercedesign.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -7,6 +7,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.levirgon.e_commercedesign.R;
+import com.levirgon.e_commercedesign.activity.SingleItemViewActivity;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,13 +17,13 @@ import java.util.List;
  * Created by noushad on 11/22/17.
  */
 
-class ImageSlideAdapter extends RecyclerView.Adapter {
+public class ImageSlideAdapter extends RecyclerView.Adapter {
 
     private final Context mContext;
     private List<Integer> images;
     private Context parentContext;
 
-    ImageSlideAdapter(Context context) {
+    public ImageSlideAdapter(Context context) {
         mContext = context;
         images = new ArrayList<>();
     }

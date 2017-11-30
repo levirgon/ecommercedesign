@@ -6,4 +6,5 @@
     <color name="colorBackground">#7b91ac</color>
     <color name="colorFButton">#fa78ab</color>
     <color name="colorSpecialOffer">#2e7d32</color>
+    <color name="colorLayoutBG">#eceff1</color>
 </resources>
