@@ -48,10 +48,10 @@ public class ProductTypeAdapter extends RecyclerView.Adapter<ProductTypeAdapter.
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext())
+        View item = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.album_style_view, parent, false);
 
-        return new MyViewHolder(itemView);
+        return new MyViewHolder(item);
     }
 
     @Override
@@ -62,7 +62,7 @@ public class ProductTypeAdapter extends RecyclerView.Adapter<ProductTypeAdapter.
         holder.productCount.setText(products.getNumOfProducts()+" Pices");
         Glide.with(mContext).load(products.getThumbnail()).into(holder.thumbnail);
 
-        holder.productTitle.setOnClickListener(new View.OnClickListener() {
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mContext,SingleItemViewActivity.class);

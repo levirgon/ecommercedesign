@@ -61,7 +61,7 @@ public class CategoryLoaderAdapter extends RecyclerView.Adapter<CategoryLoaderAd
         CategoryItem categoryItem = categoryItemList.get(position);
         holder.categoryName.setText(categoryItem.getCategory());
         Glide.with(mContext).load(categoryItem.getThumbnail()).into(holder.categoryImage);
-        holder.categoryName.setOnClickListener(new View.OnClickListener() {
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mContext,ProductsActivity.class);
