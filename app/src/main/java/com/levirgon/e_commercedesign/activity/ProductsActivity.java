@@ -37,7 +37,7 @@ public class ProductsActivity extends AppCompatActivity {
         mAdapter = new ProductTypeAdapter(getApplicationContext(),productsList);
         mLayoutManager = new GridLayoutManager(getApplicationContext(), 2);
         recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
+        recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(1), true));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         if(mAdapter == null){
             mAdapter = new ProductTypeAdapter(this,productsList);
