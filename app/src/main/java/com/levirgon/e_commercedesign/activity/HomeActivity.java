@@ -1,4 +1,4 @@
-package com.levirgon.e_commercedesign;
+package com.levirgon.e_commercedesign.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -6,7 +6,8 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import com.levirgon.e_commercedesign.adapters.CategoryLoaderAdapter;
+import com.levirgon.e_commercedesign.R;
+import com.levirgon.e_commercedesign.adapter.CategoryLoaderAdapter;
 import com.levirgon.e_commercedesign.model.CategoryItem;
 
 import java.util.ArrayList;

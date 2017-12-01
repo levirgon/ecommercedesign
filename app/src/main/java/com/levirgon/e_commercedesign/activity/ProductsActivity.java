@@ -1,4 +1,4 @@
-package com.levirgon.e_commercedesign;
+package com.levirgon.e_commercedesign.activity;
 
 import android.content.res.Resources;
 import android.graphics.Rect;
@@ -10,7 +10,8 @@ import android.support.v7.widget.RecyclerView;
 import android.util.TypedValue;
 import android.view.View;
 
-import com.levirgon.e_commercedesign.adapters.ProductTypeAdapter;
+import com.levirgon.e_commercedesign.R;
+import com.levirgon.e_commercedesign.adapter.ProductTypeAdapter;
 import com.levirgon.e_commercedesign.model.Products;
 
 import java.util.ArrayList;
