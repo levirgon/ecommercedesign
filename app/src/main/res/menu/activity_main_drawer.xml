@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:tools="http://schemas.android.com/tools"
+      tools:showIn="navigation_view">
+    <item
+        android:id="@+id/nav_home"
+        android:icon="@drawable/ic_home"
+        android:title="Home"/>
+
+    <group
+        android:id="@+id/grp1"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_electronics_category"
+            android:icon="@drawable/ic_electronics"
+            android:title="Electronics"/>
+        <item
+            android:id="@+id/nav_tv_category"
+            android:icon="@drawable/ic_tv"
+            android:title="@string/tvs_appliances"/>
+        <item
+            android:id="@+id/nav_fashion_category"
+            android:icon="@drawable/ic_fashion"
+            android:title="Fashion"/>
+        <item
+            android:id="@+id/nav_home_furniture_category"
+            android:icon="@drawable/ic_furniture"
+            android:title="@string/home_furniture"/>
+        <item
+            android:id="@+id/nav_more_category"
+            android:icon="@drawable/ic_book"
+            android:title="@string/books_more"/>
+    </group>
+
+    <group
+        android:id="@+id/grp2"
+        >
+        <item
+            android:id="@+id/nav_offer"
+            android:icon="@drawable/ic_offer_zone"
+            android:title="Offer Zone"/>
+        <item
+            android:id="@+id/nav_notifications"
+            android:icon="@drawable/ic_notification"
+            android:title="Notifications"/>
+    </group>
+    <group
+        android:id="@+id/grp3">
+        <item
+            android:id="@+id/nav_rewards"
+            android:icon="@drawable/ic_rewards"
+            android:title="My Rewards"/>
+        <item
+            android:id="@+id/nav_my_cart"
+            android:icon="@drawable/ic_cart"
+            android:title="My Cart"/>
+        <item
+            android:id="@+id/nav_wishlist"
+            android:icon="@drawable/ic_wish_list"
+            android:title="My Wishlist"/>
+        <item
+            android:id="@+id/nav_orders"
+            android:icon="@drawable/ic_orders"
+            android:title="My Orders"/>
+        <item
+            android:id="@+id/nav_account"
+            android:icon="@drawable/ic_account"
+            android:title="My Account"/>
+
+    </group>
+
+</menu>
