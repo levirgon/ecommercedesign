@@ -12,5 +12,6 @@
     <color name="colorWhite">#fcfcfc</color>
     <color name="colorGreen">#45a554</color>
     <color name="colorOrange">#db5918</color>
+    <color name="colorGray_500">#9E9E9E</color>
     <color name="colorLayoutBG">#eceff1</color>
 </resources>

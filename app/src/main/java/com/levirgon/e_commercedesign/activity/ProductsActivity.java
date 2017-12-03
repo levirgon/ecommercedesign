@@ -9,6 +9,8 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.TypedValue;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
 
 import com.levirgon.e_commercedesign.R;
 import com.levirgon.e_commercedesign.adapter.ProductTypeAdapter;
@@ -19,24 +21,30 @@ import java.util.List;
 
 public class ProductsActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
-    private RecyclerView.LayoutManager mLayoutManager;
+    private RecyclerView.LayoutManager mGridLayoutManager,mLinearLayoutManager;
     private ProductTypeAdapter mAdapter;
     private List<Products> productsList;
+    private Button sortButton, filterButton;
+    private ImageButton layoutButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_products);
+        this.setTitle("Products");
         productsList = new ArrayList<>();
         setupProducts();
         initializeProducts();
     }
 
     private void initializeProducts() {
+        sortButton = (Button) findViewById(R.id.sortButton);
+        filterButton = (Button) findViewById(R.id.filterButton);
+        layoutButton = (ImageButton) findViewById(R.id.layoutButton);
         recyclerView = (RecyclerView) findViewById(R.id.product_recycler_view);
         mAdapter = new ProductTypeAdapter(getApplicationContext(),productsList);
-        mLayoutManager = new GridLayoutManager(getApplicationContext(), 2);
-        recyclerView.setLayoutManager(mLayoutManager);
+        mGridLayoutManager = new GridLayoutManager(getApplicationContext(), 2);
+        recyclerView.setLayoutManager(mGridLayoutManager);
         recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(1), true));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         if(mAdapter == null){
