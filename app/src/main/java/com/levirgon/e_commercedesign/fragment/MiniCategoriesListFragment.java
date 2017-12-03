@@ -1,6 +1,5 @@
 package com.levirgon.e_commercedesign.fragment;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -13,6 +12,8 @@ import android.view.ViewGroup;
 
 import com.levirgon.e_commercedesign.R;
 import com.levirgon.e_commercedesign.adapter.MiniCategoriesListAdapter;
+import com.levirgon.e_commercedesign.model.MiniCategory;
+import com.levirgon.e_commercedesign.model.MiniSubCategory;
 import com.levirgon.e_commercedesign.utils.TagManager;
 
 import java.util.ArrayList;
@@ -21,7 +22,6 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link MiniCategoriesListFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
  * Use the {@link MiniCategoriesListFragment#newInstance} factory method to
  * create an instance of this fragment.
@@ -33,7 +33,6 @@ public class MiniCategoriesListFragment extends Fragment {
 
     private String mCategoriesTag;
 
-    private OnFragmentInteractionListener mListener;
     private RecyclerView mRecyclerView;
     private LinearLayoutManager mLinearLayoutManager;
     private MiniCategoriesListAdapter mAdapter;
@@ -69,32 +68,12 @@ public class MiniCategoriesListFragment extends Fragment {
     private View initializeViews(LayoutInflater inflater, ViewGroup container) {
         View view = inflater.inflate(R.layout.fragment_mini_categories, container, false);
         mRecyclerView = view.findViewById(R.id.mini_category_list);
-        mListener = (OnFragmentInteractionListener) getActivity();
         mLinearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(mLinearLayoutManager);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         return view;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
 
     @Override
     public void onResume() {
@@ -103,61 +82,70 @@ public class MiniCategoriesListFragment extends Fragment {
     }
 
     private void updateUI() {
+
+        List<MiniCategory> categories = loadCategories();
         if (mAdapter == null) {
-            mAdapter = new MiniCategoriesListAdapter(getActivity().getApplicationContext(), mListener, mCategoriesTag);
+            mAdapter = new MiniCategoriesListAdapter(categories
+                    , getActivity());
             mRecyclerView.setAdapter(mAdapter);
         } else {
             mRecyclerView.setAdapter(mAdapter);
         }
-        loadFilterOptions();
+
     }
 
-    private void loadFilterOptions() {
-        List<String> options = new ArrayList<>();
+    private List<MiniCategory> loadCategories() {
         switch (mCategoriesTag) {
             case TagManager.CATEGORIE_ELECTRONICS:
-                options = getElectronicsList();
-                break;
+                return getElectronicsList();
+
             case TagManager.CATEGORIE_TV_AND_APPLIANCE:
-                options = getElectronicsList();
-                break;
+                return getElectronicsList();
             case TagManager.CATEGORIE_FASHION:
-                options = getElectronicsList();
-                break;
+                return getElectronicsList();
             case TagManager.CATEGORIE_HOME_AND_FURNITURE:
-                options = getElectronicsList();
-                break;
+                return getElectronicsList();
             case TagManager.CATEGORIE_BOOKS_AND_MORE:
-                options = getElectronicsList();
-                break;
+                return getElectronicsList();
         }
-        mAdapter.addAll(options);
+        return null;
     }
 
 
+    private List<MiniCategory> getElectronicsList() {
+        List<String> categoryTitles = new ArrayList<>();
+        categoryTitles.add("Mobile");
+        categoryTitles.add("Mobile Accessories");
+        categoryTitles.add("Cameras & Accessories");
+        categoryTitles.add("Audio & Video");
+        categoryTitles.add("Smart Watches & Wearables");
+        categoryTitles.add("Laptops");
+        categoryTitles.add("Desktop PCs");
+        categoryTitles.add("Gaming And Accessories");
+        categoryTitles.add("Tablets");
+        categoryTitles.add("Computer Accessories");
+        categoryTitles.add("Televisions");
+        categoryTitles.add("Personal HealthCare");
+        categoryTitles.add("Printer, Monitors And More");
 
-    private List<String> getElectronicsList() {
-        List<String> locations = new ArrayList<>();
-        locations.add("Mobile");
-        locations.add("Mobile Accessories");
-        locations.add("Cameras & Accessories");
-        locations.add("Audio & Video");
-        locations.add("Smart Watches & Wearables");
-        locations.add("Laptops");
-        locations.add("Desktop PCs");
-        locations.add("Gaming And Accessories");
-        locations.add("Tablets");
-        locations.add("Computer Accessories");
-        locations.add("Televisions");
-        locations.add("Personal HealthCare");
-        locations.add("Printer, Monitors And More");
-        return locations;
 
+        List<MiniCategory> options = new ArrayList<>();
+
+        List<MiniSubCategory> subOptions = new ArrayList<>();
+        subOptions.add(new MiniSubCategory("Headphone"));
+        subOptions.add(new MiniSubCategory("Speaker"));
+        subOptions.add(new MiniSubCategory("HomeTheater"));
+
+
+        for (int i = 0; i < categoryTitles.size(); i++)
+            if(i%2==0) {
+                options.add(new MiniCategory(categoryTitles.get(i), subOptions));
+            }else {
+                options.add(new MiniCategory(categoryTitles.get(i), null));
+            }
+
+        return options;
     }
 
 
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(String text, String tag);
-    }
 }
