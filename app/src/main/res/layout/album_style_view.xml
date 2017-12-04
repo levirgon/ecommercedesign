@@ -20,29 +20,27 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="190dp">
+            android:layout_height="match_parent">
 
             <ImageView
                 android:id="@+id/thumbnail"
-                android:padding="4sp"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/album_cover_height"
-                android:scaleType="fitXY"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:padding="4sp"
+                android:scaleType="fitCenter"
                 android:src="@drawable/hand_bag" />
 
             <TextView
                 android:id="@+id/productTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/categoryTextView"
+                android:layout_alignStart="@+id/categoryTextView"
                 android:layout_below="@+id/thumbnail"
-                android:layout_marginEnd="25dp"
-                android:layout_marginRight="25dp"
-                android:layout_toLeftOf="@+id/overflow"
-                android:layout_toStartOf="@+id/overflow"
                 android:fontFamily="@font/poiret_one"
-                android:paddingLeft="@dimen/album_title_padding"
-                android:paddingRight="@dimen/album_title_padding"
-                android:paddingTop="@dimen/album_title_padding"
                 android:text="Product Type"
                 android:textColor="@color/colorButton"
                 android:textSize="@dimen/album_title" />
@@ -51,13 +49,10 @@
                 android:id="@+id/productCount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignEnd="@+id/productTitle"
-                android:layout_alignRight="@+id/productTitle"
-                android:layout_below="@+id/productTitle"
+                android:layout_alignLeft="@+id/textView24"
+                android:layout_alignStart="@+id/textView24"
+                android:layout_below="@+id/textView24"
                 android:fontFamily="@font/poiret_one"
-                android:paddingBottom="@dimen/songs_count_padding_bottom"
-                android:paddingLeft="@dimen/album_title_padding"
-                android:paddingRight="@dimen/album_title_padding"
                 android:text="25 pices"
                 android:textColor="@color/colorButton"
                 android:textSize="@dimen/songs_count" />
@@ -69,14 +64,86 @@
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginEnd="16dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginTop="17dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginRight="12dp"
+                android:layout_marginTop="13dp"
                 android:scaleType="fitXY"
                 android:src="@drawable/like" />
+
+            <TextView
+                android:id="@+id/categoryTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/productTitle"
+                android:layout_marginLeft="11dp"
+                android:layout_marginStart="11dp"
+                android:fontFamily="@font/poiret_one"
+                android:text="Bags "
+                android:textColor="@color/colorButton"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView24"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/categoryTextView"
+                android:layout_alignStart="@+id/categoryTextView"
+                android:layout_below="@+id/categoryTextView"
+                android:fontFamily="@font/poiret_one"
+                android:text="Multicolor"
+                android:textColor="@color/colorButton"
+                android:textSize="8sp" />
+
+            <TextView
+                android:id="@+id/textView25"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/productCount"
+                android:layout_alignStart="@+id/productCount"
+                android:layout_below="@+id/productCount"
+                android:fontFamily="@font/poiret_one"
+                android:text="৳ 770"
+                android:textColor="@color/colorButton"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView26"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/textView25"
+                android:layout_alignBottom="@+id/textView25"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginLeft="83dp"
+                android:layout_marginStart="83dp"
+                android:background="@drawable/bg_strike_text"
+                android:fontFamily="@font/poiret_one"
+                android:text="৳ 880"
+                android:textColor="@color/colorButton"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView27"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/textView26"
+                android:layout_alignBottom="@+id/textView26"
+                android:layout_alignLeft="@+id/textView26"
+                android:layout_alignStart="@+id/textView26"
+                android:layout_marginLeft="67dp"
+                android:layout_marginStart="67dp"
+                android:text="10% off"
+                android:textColor="@color/colorButton"
+                android:textSize="12sp" />
 
         </RelativeLayout>
 
     </android.support.v7.widget.CardView>
+
+
 
 </LinearLayout>
