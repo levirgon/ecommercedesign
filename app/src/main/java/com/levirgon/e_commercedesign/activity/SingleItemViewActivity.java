@@ -13,7 +13,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.levirgon.e_commercedesign.R;
-import com.levirgon.e_commercedesign.adapter.ImageSlideAdapter;
+import com.levirgon.e_commercedesign.adapter.productImagesSlideAdapter;
 import com.levirgon.e_commercedesign.fragment.CartFragment;
 import com.levirgon.e_commercedesign.fragment.CheckOutFragment;
 import com.levirgon.e_commercedesign.model.CartItem;
@@ -27,7 +27,7 @@ public class SingleItemViewActivity extends AppCompatActivity {
 
     private RecyclerView mImagesList;
     private LinearLayoutManager verticalLayoutManager;
-    private ImageSlideAdapter mAdapter;
+    private productImagesSlideAdapter mAdapter;
     private ImageView mItemImage;
     private Button cartButton;
     private Button buyButton;
@@ -97,7 +97,7 @@ public class SingleItemViewActivity extends AppCompatActivity {
         mImagesList.setLayoutManager(verticalLayoutManager);
         mImagesList.setItemAnimator(new DefaultItemAnimator());
         if (mAdapter == null) {
-            mAdapter = new ImageSlideAdapter(this);
+            mAdapter = new productImagesSlideAdapter(this);
             mImagesList.setAdapter(mAdapter);
         } else {
             mImagesList.setAdapter(mAdapter);

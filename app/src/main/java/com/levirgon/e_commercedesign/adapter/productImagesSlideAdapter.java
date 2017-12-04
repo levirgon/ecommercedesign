@@ -17,13 +17,13 @@ import java.util.List;
  * Created by noushad on 11/22/17.
  */
 
-public class ImageSlideAdapter extends RecyclerView.Adapter {
+public class productImagesSlideAdapter extends RecyclerView.Adapter {
 
     private final Context mContext;
     private List<Integer> images;
     private Context parentContext;
 
-    public ImageSlideAdapter(Context context) {
+    public productImagesSlideAdapter(Context context) {
         mContext = context;
         images = new ArrayList<>();
     }

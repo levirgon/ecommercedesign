@@ -9,9 +9,9 @@
     <color name="colorButton">#7b91ac</color>
     <color name="colorGray">#f8f8f8</color>
     <color name="colorBlack">#212121</color>
-    <color name="colorWhite">#fcfcfc</color>
+    <color name="colorWhite">#ffffff</color>
     <color name="colorGreen">#45a554</color>
     <color name="colorOrange">#db5918</color>
-    <color name="colorGray_500">#9E9E9E</color>
+    <color name="colorGray_500">#9e9e9e</color>
     <color name="colorLayoutBG">#eceff1</color>
 </resources>

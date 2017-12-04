@@ -11,4 +11,7 @@ public class TagManager {
     public static final String CATEGORIE_FASHION = "com.levirgon.e_commercedesign.FASHION";
     public static final String CATEGORIE_HOME_AND_FURNITURE = "com.levirgon.e_commercedesign.HOME_AND_FURNITURE";
     public static final String CATEGORIE_BOOKS_AND_MORE = "com.levirgon.e_commercedesign.BOOKS_AND_MORE";
+    public static final int BIG_ITEMS = 1;
+    public static final int HOME_DOD = 2;
+    public static final int SMALL_ITEMS = 3;
 }
