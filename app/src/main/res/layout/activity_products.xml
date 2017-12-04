@@ -20,14 +20,15 @@
             android:background="@color/colorGray_500"
             android:orientation="horizontal">
 
-            <ImageButton
+            <Button
                 android:id="@+id/layoutButton"
                 android:layout_width="63dp"
                 android:layout_height="match_parent"
                 android:layout_marginRight="1sp"
                 android:layout_weight="1"
                 android:background="@color/colorWhite"
-                android:src="@drawable/grid_layout_design" />
+                android:drawableLeft="@drawable/button_image_list"
+                android:paddingLeft="30sp"/>
 
             <Button
                 android:id="@+id/sortButton"

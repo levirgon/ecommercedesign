@@ -23,6 +23,9 @@ import java.util.List;
 public class ProductTypeAdapter extends RecyclerView.Adapter<ProductTypeAdapter.MyViewHolder> {
     private Context mContext;
     private List<Products> productsList;
+    private static final int LIST_ITEM = 0;
+    private static final int GRID_ITEM = 1;
+    boolean isSwitchView = true;
 
 
 
@@ -48,8 +51,14 @@ public class ProductTypeAdapter extends RecyclerView.Adapter<ProductTypeAdapter.
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View item = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.album_style_view, parent, false);
+        View item;
+        if(viewType == LIST_ITEM){
+            item = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.list_style_view,parent,false);
+        }else {
+            item = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.album_style_view, parent, false);
+        }
 
         return new MyViewHolder(item);
     }
@@ -76,5 +85,18 @@ public class ProductTypeAdapter extends RecyclerView.Adapter<ProductTypeAdapter.
     @Override
     public int getItemCount() {
         return productsList.size();
+    }
+    @Override
+    public int getItemViewType (int position) {
+        if (isSwitchView){
+            return LIST_ITEM;
+        }else{
+            return GRID_ITEM;
+        }
+    }
+
+    public boolean toggleItemViewType () {
+        isSwitchView = !isSwitchView;
+        return isSwitchView;
     }
 }

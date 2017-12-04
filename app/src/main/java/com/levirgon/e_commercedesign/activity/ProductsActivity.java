@@ -5,12 +5,15 @@ import android.graphics.Rect;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 
 import com.levirgon.e_commercedesign.R;
 import com.levirgon.e_commercedesign.adapter.ProductTypeAdapter;
@@ -24,8 +27,7 @@ public class ProductsActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager mGridLayoutManager,mLinearLayoutManager;
     private ProductTypeAdapter mAdapter;
     private List<Products> productsList;
-    private Button sortButton, filterButton;
-    private ImageButton layoutButton;
+    private Button sortButton, filterButton, layoutButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,17 +37,18 @@ public class ProductsActivity extends AppCompatActivity {
         productsList = new ArrayList<>();
         setupProducts();
         initializeProducts();
+        onButtonClick();
     }
 
     private void initializeProducts() {
         sortButton = (Button) findViewById(R.id.sortButton);
         filterButton = (Button) findViewById(R.id.filterButton);
-        layoutButton = (ImageButton) findViewById(R.id.layoutButton);
+        layoutButton = (Button) findViewById(R.id.layoutButton);
         recyclerView = (RecyclerView) findViewById(R.id.product_recycler_view);
         mAdapter = new ProductTypeAdapter(getApplicationContext(),productsList);
-        mGridLayoutManager = new GridLayoutManager(getApplicationContext(), 2);
-        recyclerView.setLayoutManager(mGridLayoutManager);
-        recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(1), true));
+        mLinearLayoutManager = new LinearLayoutManager(getApplicationContext());
+        recyclerView.setLayoutManager(mLinearLayoutManager);
+        recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         if(mAdapter == null){
             mAdapter = new ProductTypeAdapter(this,productsList);
@@ -54,9 +57,29 @@ public class ProductsActivity extends AppCompatActivity {
         }else{
             recyclerView.setAdapter(mAdapter);
         }
-        mAdapter.notifyDataSetChanged();
+        //mAdapter.notifyDataSetChanged();
 
     }
+
+    private void onButtonClick(){
+        layoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean isSwitched = mAdapter.toggleItemViewType();
+                if(isSwitched){
+                    layoutButton.setCompoundDrawablesWithIntrinsicBounds(R.drawable.button_image_list,0,0,0);
+                    recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+
+                }else {
+                    layoutButton.setCompoundDrawablesWithIntrinsicBounds(R.drawable.button_image_grid,0,0,0);
+                    recyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(), 2));
+                }
+                mAdapter.notifyDataSetChanged();
+
+            }
+        });
+    }
+
 
     private void setupProducts() {
         int[] products = new int[]{
