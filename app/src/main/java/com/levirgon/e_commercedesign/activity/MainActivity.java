@@ -20,7 +20,7 @@ import com.levirgon.e_commercedesign.fragment.MiniCategoriesListFragment;
 import com.levirgon.e_commercedesign.utils.TagManager;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener,MiniCategoriesListFragment.OnFragmentInteractionListener {
+        implements NavigationView.OnNavigationItemSelectedListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,8 +115,10 @@ public class MainActivity extends AppCompatActivity
         fragmentTransaction.commit();
     }
 
-    @Override
-    public void onFragmentInteraction(String text, String tag) {
+
+    public void onCategorySelected(String text){
         Toast.makeText(this,text,Toast.LENGTH_SHORT).show();
     }
+
+
 }
