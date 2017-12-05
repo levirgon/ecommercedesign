@@ -5,6 +5,9 @@ import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import com.levirgon.e_commercedesign.R;
 import com.levirgon.e_commercedesign.adapter.CategoryLoaderAdapter;
@@ -30,6 +33,8 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void intializeCategory() {
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
         recyclerView = (RecyclerView) findViewById(R.id.home_category_list);
         mAdapter = new CategoryLoaderAdapter(getApplicationContext(),categoryList);
         mLayoutManager = new LinearLayoutManager(getApplicationContext());
@@ -76,5 +81,23 @@ public class HomeActivity extends AppCompatActivity {
             categoryItem = new CategoryItem("Kid's toy",category[7]);
             categoryList.add(categoryItem);
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.all_page, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        return super.onOptionsItemSelected(item);
     }
 }

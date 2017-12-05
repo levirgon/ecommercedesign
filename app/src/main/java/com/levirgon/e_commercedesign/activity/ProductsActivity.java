@@ -9,7 +9,10 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -41,6 +44,8 @@ public class ProductsActivity extends AppCompatActivity {
     }
 
     private void initializeProducts() {
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
         sortButton = (Button) findViewById(R.id.sortButton);
         filterButton = (Button) findViewById(R.id.filterButton);
         layoutButton = (Button) findViewById(R.id.layoutButton);
@@ -133,7 +138,25 @@ public class ProductsActivity extends AppCompatActivity {
 
     }
 
-    private class GridSpacingItemDecoration extends RecyclerView.ItemDecoration {
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.product_page, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        return super.onOptionsItemSelected(item);
+    }
+
+    /*private class GridSpacingItemDecoration extends RecyclerView.ItemDecoration {
         private int spanCount;
         private int spacing;
         private boolean includeEdge;
@@ -166,11 +189,11 @@ public class ProductsActivity extends AppCompatActivity {
         }
     }
 
-    /**
+    *//**
      * Converting dp to pixel
-     */
+     *//*
     private int dpToPx(int dp) {
         Resources r = getResources();
         return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics()));
-    }
+    }*/
 }
