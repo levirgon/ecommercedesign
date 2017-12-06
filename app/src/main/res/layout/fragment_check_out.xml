@@ -4,7 +4,7 @@
              android:layout_width="match_parent"
              android:layout_height="match_parent"
              android:background="@color/colorLayoutBG"
-             tools:context="com.levirgon.e_commercedesign.fragment.CheckOutFragment">
+             tools:context="com.tutexpsoft.ecommercedev.fragment.CheckOutFragment">
 
     <!-- TODO: Update blank fragment layout -->
 

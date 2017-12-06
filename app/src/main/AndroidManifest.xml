@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.levirgon.e_commercedesign">
+          package="com.tutexpsoft.ecommercedev">
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.INTERNET"/>
@@ -14,21 +14,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.HomeActivity"/>
+        <activity android:name="com.tutexpsoft.ecommercedev.activity.HomeActivity"/>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyAk2uTSdb4SyHFslCdPNe-TpNIhDWJX-QM"/>
 
-        <activity android:name=".activity.SingleItemViewActivity"/>
-        <activity android:name=".activity.ProductsActivity"/>
+        <activity android:name="com.tutexpsoft.ecommercedev.activity.SingleItemViewActivity"/>
+        <activity android:name="com.tutexpsoft.ecommercedev.activity.ProductsActivity"/>
 
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts"/>
 
         <activity
-            android:name=".activity.MainActivity"
+            android:name="com.tutexpsoft.ecommercedev.activity.MainActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme">
             <intent-filter>

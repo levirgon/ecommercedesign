@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorGray"
-    tools:context="com.levirgon.e_commercedesign.activity.ProductsActivity">
+    tools:context="com.tutexpsoft.ecommercedev.activity.ProductsActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"

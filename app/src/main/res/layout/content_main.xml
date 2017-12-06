@@ -8,7 +8,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorLayoutBG"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.levirgon.e_commercedesign.activity.MainActivity"
+    tools:context="com.tutexpsoft.ecommercedev.activity.MainActivity"
     tools:showIn="@layout/app_bar_main">
 
 
