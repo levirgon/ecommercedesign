@@ -13,10 +13,9 @@ import android.view.ViewGroup;
 import com.tutexpsoft.ecommercedev.R;
 import com.tutexpsoft.ecommercedev.adapter.MiniCategoriesListAdapter;
 import com.tutexpsoft.ecommercedev.model.MiniCategory;
-import com.tutexpsoft.ecommercedev.model.MiniSubCategory;
+import com.tutexpsoft.ecommercedev.utils.CategoriesManager;
 import com.tutexpsoft.ecommercedev.utils.TagManager;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -97,54 +96,17 @@ public class MiniCategoriesListFragment extends Fragment {
     private List<MiniCategory> loadCategories() {
         switch (mCategoriesTag) {
             case TagManager.CATEGORIE_ELECTRONICS:
-                return getElectronicsList();
-
+                return CategoriesManager.getElectronicsList();
             case TagManager.CATEGORIE_TV_AND_APPLIANCE:
-                return getElectronicsList();
+                return CategoriesManager.getElectronicsList();
             case TagManager.CATEGORIE_FASHION:
-                return getElectronicsList();
+                return CategoriesManager.getElectronicsList();
             case TagManager.CATEGORIE_HOME_AND_FURNITURE:
-                return getElectronicsList();
+                return CategoriesManager.getElectronicsList();
             case TagManager.CATEGORIE_BOOKS_AND_MORE:
-                return getElectronicsList();
+                return CategoriesManager.getElectronicsList();
         }
         return null;
-    }
-
-
-    private List<MiniCategory> getElectronicsList() {
-        List<String> categoryTitles = new ArrayList<>();
-        categoryTitles.add("Mobile");
-        categoryTitles.add("Mobile Accessories");
-        categoryTitles.add("Cameras & Accessories");
-        categoryTitles.add("Audio & Video");
-        categoryTitles.add("Smart Watches & Wearables");
-        categoryTitles.add("Laptops");
-        categoryTitles.add("Desktop PCs");
-        categoryTitles.add("Gaming And Accessories");
-        categoryTitles.add("Tablets");
-        categoryTitles.add("Computer Accessories");
-        categoryTitles.add("Televisions");
-        categoryTitles.add("Personal HealthCare");
-        categoryTitles.add("Printer, Monitors And More");
-
-
-        List<MiniCategory> options = new ArrayList<>();
-
-        List<MiniSubCategory> subOptions = new ArrayList<>();
-        subOptions.add(new MiniSubCategory("Headphone"));
-        subOptions.add(new MiniSubCategory("Speaker"));
-        subOptions.add(new MiniSubCategory("HomeTheater"));
-
-
-        for (int i = 0; i < categoryTitles.size(); i++)
-            if(i%2==0) {
-                options.add(new MiniCategory(categoryTitles.get(i), subOptions));
-            }else {
-                options.add(new MiniCategory(categoryTitles.get(i), null));
-            }
-
-        return options;
     }
 
 

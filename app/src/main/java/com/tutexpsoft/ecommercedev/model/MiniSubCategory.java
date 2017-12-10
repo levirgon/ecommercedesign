@@ -6,9 +6,11 @@ package com.tutexpsoft.ecommercedev.model;
 
 public class MiniSubCategory {
 
-    String title;
+    private int mId;
+    private String title;
 
-    public MiniSubCategory(String title) {
+    public MiniSubCategory(int id, String title) {
+        this.mId = id;
         this.title = title;
     }
 
@@ -16,5 +18,7 @@ public class MiniSubCategory {
         return title;
     }
 
-
+    public int getId() {
+        return mId;
+    }
 }

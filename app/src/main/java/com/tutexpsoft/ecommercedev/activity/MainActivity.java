@@ -47,7 +47,6 @@ public class MainActivity extends AppCompatActivity
         initiate();
         changeSlides();
 
-
     }
 
     private void initiate() {
