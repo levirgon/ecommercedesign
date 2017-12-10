@@ -1,6 +1,5 @@
 package com.tutexpsoft.ecommercedev.Retrofit;
 
-import com.tutexpsoft.ecommercedev.ServerResponseModel.TopProduct;
 import com.tutexpsoft.ecommercedev.utils.URLManager;
 
 import java.util.List;
@@ -18,7 +17,7 @@ public interface EcommerceAPIinterface {
     //replace all the object classes with necessary response models.
 
     @GET(URLManager.BASE_URL + "products?orderby=top_sell&" + URLManager.SECRET_KEY)
-    Call<List<TopProduct>> getTopSellingProducts();
+    Call<List<Object>> getTopSellingProducts();
 
     //replace all the object classes with necessary response models.
 
