@@ -13,6 +13,7 @@ import com.bumptech.glide.Glide;
 import com.tutexpsoft.ecommercedev.R;
 import com.tutexpsoft.ecommercedev.activity.SingleItemViewActivity;
 import com.tutexpsoft.ecommercedev.model.Products;
+import com.tutexpsoft.ecommercedev.utils.TagManager;
 
 import java.util.List;
 
@@ -26,7 +27,6 @@ public class ProductTypeAdapter extends RecyclerView.Adapter<ProductTypeAdapter.
     private static final int LIST_ITEM = 0;
     private static final int GRID_ITEM = 1;
     boolean isSwitchView = true;
-
 
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
@@ -52,10 +52,10 @@ public class ProductTypeAdapter extends RecyclerView.Adapter<ProductTypeAdapter.
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View item;
-        if(viewType == LIST_ITEM){
+        if (viewType == LIST_ITEM) {
             item = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.list_style_view,parent,false);
-        }else {
+                    .inflate(R.layout.list_style_view, parent, false);
+        } else {
             item = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.album_style_view, parent, false);
         }
@@ -68,13 +68,14 @@ public class ProductTypeAdapter extends RecyclerView.Adapter<ProductTypeAdapter.
 
         Products products = productsList.get(position);
         holder.productTitle.setText(products.getProductType());
-        holder.productCount.setText(products.getNumOfProducts()+" Pices");
+        holder.productCount.setText(products.getNumOfProducts() + " Pices");
         Glide.with(mContext).load(products.getThumbnail()).into(holder.thumbnail);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mContext,SingleItemViewActivity.class);
+                Intent intent = new Intent(mContext, SingleItemViewActivity.class);
+                intent.putExtra(TagManager.PRODUCT_ID_KEY, 3713); //this id will change based on item clicked
                 v.getContext().startActivity(intent);
             }
         });
@@ -86,16 +87,17 @@ public class ProductTypeAdapter extends RecyclerView.Adapter<ProductTypeAdapter.
     public int getItemCount() {
         return productsList.size();
     }
+
     @Override
-    public int getItemViewType (int position) {
-        if (isSwitchView){
+    public int getItemViewType(int position) {
+        if (isSwitchView) {
             return LIST_ITEM;
-        }else{
+        } else {
             return GRID_ITEM;
         }
     }
 
-    public boolean toggleItemViewType () {
+    public boolean toggleItemViewType() {
         isSwitchView = !isSwitchView;
         return isSwitchView;
     }

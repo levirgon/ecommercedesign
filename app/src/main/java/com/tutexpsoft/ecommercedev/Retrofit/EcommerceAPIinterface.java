@@ -1,5 +1,6 @@
 package com.tutexpsoft.ecommercedev.Retrofit;
 
+import com.tutexpsoft.ecommercedev.ServerResponseModel.singleItem.ProductItem;
 import com.tutexpsoft.ecommercedev.utils.URLManager;
 
 import java.util.List;
@@ -36,8 +37,8 @@ public interface EcommerceAPIinterface {
 
     //replace all the object classes with necessary response models.
 
-    @GET(URLManager.BASE_URL + "products?{product_id}" + URLManager.SECRET_KEY)
-    Call<Object> getSingleProductDetail(@Path("product_id") String productId);
+    @GET(URLManager.BASE_URL + "products/{product_id}?" + URLManager.SECRET_KEY)
+    Call<ProductItem> getSingleProductDetail(@Path("product_id") int productId);
 
     //replace all the object classes with necessary response models.
 

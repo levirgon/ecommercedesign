@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -16,6 +17,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.tutexpsoft.ecommercedev.R;
+import com.tutexpsoft.ecommercedev.Retrofit.EcommerceServiceProvider;
 import com.tutexpsoft.ecommercedev.adapter.productImagesSlideAdapter;
 import com.tutexpsoft.ecommercedev.fragment.CartFragment;
 import com.tutexpsoft.ecommercedev.fragment.CheckOutFragment;
@@ -38,14 +40,19 @@ public class SingleItemViewActivity extends AppCompatActivity {
     public static final int REPLACE = 2;
     public String CURRENT_FRAGMENT_TAG = TagManager.CART_FRAGMENT;
     private boolean addedToCart = false;
-
+    private NestedScrollView detailContainer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_single_item_view);
+
+        int id = getIntent().getExtras().getInt(TagManager.PRODUCT_ID_KEY);
         initialize();
         setClickListeners();
+
+        detailContainer.setVisibility(View.GONE);
+        new EcommerceServiceProvider().getProductDetails(id);
     }
 
     private void setClickListeners() {
@@ -90,6 +97,7 @@ public class SingleItemViewActivity extends AppCompatActivity {
     private void initialize() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        detailContainer = findViewById(R.id.detail_container);
         cartButton = findViewById(R.id.cart_button);
         buyButton = findViewById(R.id.buy_now_button);
         mItemImage = findViewById(R.id.item_image_view);
