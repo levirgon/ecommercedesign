@@ -37,19 +37,80 @@ public class EcommerceServiceProvider {
     }
 
     public void getProductsOnSale() {
-        mService.getOnSaleProducts().enqueue(new Callback<List<Object>>() {
+        mService.getOnSaleProducts().enqueue(new Callback<List<ProductItem>>() {
             @Override
-            public void onResponse(Call<List<Object>> call, Response<List<Object>> response) {
-                    String jSonString = response.body().toString();
-                    Type listType = new TypeToken<List<Object>>() {}.getType();
-                    List<ProductItem> onSaleProductList = new Gson().fromJson(jSonString,listType);
+            public void onResponse(Call<List<ProductItem>> call, Response<List<ProductItem>> response) {
+                if (response.isSuccessful()){
+                    List<ProductItem> productItemList = response.body();
+                    for (ProductItem productItem: productItemList){
+                        productItem.getId();
+                        productItem.getAttributes();
+                        productItem.getAverageRating();
+                        productItem.getBackordered();
+                        productItem.getBackorders();
+                        productItem.getBackordersAllowed();
+                        productItem.getCatalogVisibility();
+                        productItem.getCategories();
+                        productItem.getCrossSellIds();
+                        productItem.getDateCreated();
+                        productItem.getDateCreatedGmt();
+                        productItem.getDateModified();
+                        productItem.getDateModifiedGmt();
+                        productItem.getDateOnSaleFrom();
+                        productItem.getDateOnSaleFromGmt();
+                        productItem.getDateOnSaleTo();
+                        productItem.getDateOnSaleToGmt();
+                        productItem.getDefaultAttributes();
+                        productItem.getDescription();
+                        productItem.getDimensions();
+                        productItem.getFeatured();
+                        productItem.getGroupedProducts();
+                        productItem.getImages();
+                        productItem.getInStock();
+                        productItem.getLinks();
+                        productItem.getManageStock();
+                        productItem.getMenuOrder();
+                        productItem.getName();
+                        productItem.getOnSale();
+                        productItem.getParentId();
+                        productItem.getPermalink();
+                        productItem.getPrice();
+                        productItem.getPriceHtml();
+                        productItem.getPurchasable();
+                        productItem.getPurchaseNote();
+                        productItem.getRatingCount();
+                        productItem.getRegularPrice();
+                        productItem.getRelatedIds();
+                        productItem.getReviewsAllowed();
+                        productItem.getSalePrice();
+                        productItem.getShippingClass();
+                        productItem.getShippingClassId();
+                        productItem.getShippingRequired();
+                        productItem.getShippingTaxable();
+                        productItem.getShortDescription();
+                        productItem.getSku();
+                        productItem.getSlug();
+                        productItem.getSoldIndividually();
+                        productItem.getStatus();
+                        productItem.getStockQuantity();
+                        productItem.getTags();
+                        productItem.getTaxClass();
+                        productItem.getTaxStatus();
+                        productItem.getTotalSales();
+                        productItem.getType();
+                        productItem.getUpsellIds();
+                        productItem.getVariations();
+                        productItem.getWeight();
+                    }
+                }
             }
 
             @Override
-            public void onFailure(Call<List<Object>> call, Throwable t) {
+            public void onFailure(Call<List<ProductItem>> call, Throwable t) {
                 Log.d(TAG, "onFailure: Failed"+t.getLocalizedMessage());
             }
         });
+
     }
 
     public void getProductDetails(int id) {

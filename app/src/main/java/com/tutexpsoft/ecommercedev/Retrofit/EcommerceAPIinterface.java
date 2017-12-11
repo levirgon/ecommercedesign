@@ -34,7 +34,7 @@ public interface EcommerceAPIinterface {
     //replace all the object classes with necessary response models.
 
     @GET(URLManager.BASE_URL + "products?" + URLManager.SECRET_KEY + "&on_sale=true")
-    Call<List<Object>> getOnSaleProducts();
+    Call<List<ProductItem>> getOnSaleProducts();
 
     //replace all the object classes with necessary response models.
 

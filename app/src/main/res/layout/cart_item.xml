@@ -26,7 +26,6 @@
             app:layout_constraintTop_toBottomOf="@+id/textView7"/>
 
         <TextView
-            android:id="@+id/car_item_discount_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
@@ -121,7 +120,6 @@
             app:layout_constraintVertical_bias="0.0"/>
 
         <TextView
-            android:id="@+id/cart_item_color_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poiret_one"
@@ -156,7 +154,6 @@
             app:layout_constraintTop_toBottomOf="@+id/textView10"/>
 
         <TextView
-            android:id="@+id/textView17"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
@@ -182,7 +179,6 @@
             app:layout_constraintTop_toBottomOf="@+id/cart_item_current_price"/>
 
         <TextView
-            android:id="@+id/cart_item_delivery_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
@@ -209,7 +205,6 @@
             app:layout_constraintTop_toBottomOf="@+id/view2">
 
             <Button
-                android:id="@+id/cart_item_remove_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -220,7 +215,6 @@
                 android:textStyle="bold"/>
 
             <Button
-                android:id="@+id/cart_item_wish_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -232,7 +226,6 @@
         </LinearLayout>
 
         <View
-            android:id="@+id/view23"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginEnd="8dp"
@@ -263,7 +256,6 @@
             android:layout_marginRight="32dp"/>
 
         <TextView
-            android:id="@+id/textView19"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
