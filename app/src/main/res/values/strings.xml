@@ -1,18 +1,14 @@
 <resources>
     <string name="app_name">E-commerce</string>
-    <string name="description_dummy">This Italian leather house located outside Florence (probably neighbors with Montblanc’s leather factory) produces a full product range of business and travel items that combine Italian style with a tech sensibility. These are hand-made leather products designed specifically to safely carry technological devices such as laptop computers, tablets, smartphones, SIM cards and USB sticks. The company was founded in 1987 by then 22-year old engineering student Marco Palmieri who saw an opportunity in tech-oriented leather goods. The company has grown into a network of 100 stores and is traded publicly on the Italian Stock Exchange. It just opened its first U.S. branded store at 509 Madison Avenue. All the materials for the bags are sourced in Italy, with the hides primarily coming from the tanning district in Tuscany.</string>
     <string name="description">Description</string>
-    <string name="currency">$</string>
     <string name="review_rating"><![CDATA[Review & Rating]]></string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_main">MainActivity</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
-    <string name="action_settings">Settings</string>
     <string name="tvs_appliances"><![CDATA[TVs & Appliances]]></string>
     <string name="home_furniture"><![CDATA[Home & Furniture]]></string>
     <string name="books_more"><![CDATA[Books & More]]></string>

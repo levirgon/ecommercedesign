@@ -8,6 +8,13 @@
     android:layout_height="match_parent"
     android:background="@color/colorLayoutBG">
 
+    <ProgressBar
+        android:id="@+id/detail_loading_progress"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"/>
+
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -46,7 +53,6 @@
                     tools:ignore="ContentDescription"/>
 
                 <android.support.v7.widget.CardView
-                    android:id="@+id/cardView"
                     android:layout_width="match_parent"
                     android:layout_height="100dp"
                     android:layout_marginBottom="8dp"
@@ -68,7 +74,7 @@
 
                         <TextView
                             android:id="@+id/item_title_text"
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="8dp"
                             android:layout_marginStart="8dp"
@@ -86,7 +92,7 @@
 
                         <TextView
                             android:id="@+id/item_shop_name_text"
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="8dp"
                             android:layout_marginStart="8dp"
@@ -120,26 +126,25 @@
                             tools:targetApi="lollipop"/>
 
                         <TextView
-                            android:id="@+id/item_price_text"
+                            android:id="@+id/item_stock_indicator"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="16dp"
                             android:layout_marginEnd="16dp"
-                            android:layout_marginRight="16dp"
                             android:fontFamily="@font/poiret_one"
                             android:text="10% off"
                             android:textColor="@android:color/background_light"
                             android:textSize="24sp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
-                            tools:ignore="HardcodedText"/>
+                            tools:ignore="HardcodedText"
+                            android:layout_marginRight="16dp"/>
 
                         <TextView
-                            android:id="@+id/item_rating_count_text"
+                            android:id="@+id/item_rating_count"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="8dp"
-                            android:layout_marginLeft="8dp"
                             android:layout_marginStart="8dp"
                             android:fontFamily="@font/poiret_one"
                             android:text="38,589"
@@ -151,22 +156,6 @@
                             tools:ignore="HardcodedText"/>
                     </android.support.constraint.ConstraintLayout>
                 </android.support.v7.widget.CardView>
-
-                <android.support.design.widget.FloatingActionButton
-                    android:id="@+id/floatingActionButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="68dp"
-                    android:layout_marginEnd="24dp"
-                    android:layout_marginRight="24dp"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:tint="@android:color/background_light"
-                    app:backgroundTint="@color/colorFButton"
-                    app:fabSize="normal"
-                    app:layout_constraintBottom_toBottomOf="@+id/cardView"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:srcCompat="@drawable/buy_icon"/>
 
             </android.support.constraint.ConstraintLayout>
 
@@ -208,7 +197,6 @@
                         android:background="?attr/actionModeSplitBackground"/>
 
                     <android.support.constraint.ConstraintLayout
-                        android:id="@+id/review_card"
                         android:layout_width="match_parent"
                         android:layout_height="100dp">
 
@@ -226,11 +214,10 @@
                             android:textStyle="bold"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toEndOf="@+id/imageView2"
-                            app:layout_constraintTop_toBottomOf="@+id/item_rating_count_text2"
+                            app:layout_constraintTop_toBottomOf="@+id/item_sale_count"
                             app:layout_constraintVertical_bias="0.0"/>
 
                         <TextView
-                            android:id="@+id/textView4"
                             android:layout_width="wrap_content"
                             android:layout_height="0dp"
                             android:layout_marginLeft="8dp"
@@ -244,7 +231,6 @@
                             app:layout_constraintTop_toTopOf="@+id/review_count_text"/>
 
                         <View
-                            android:id="@+id/view"
                             android:layout_width="1dp"
                             android:layout_height="match_parent"
                             android:layout_marginBottom="8dp"
@@ -255,13 +241,13 @@
                             android:layout_marginTop="8dp"
                             android:background="?attr/actionModeSplitBackground"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toStartOf="@+id/item_rating_count_text2"
+                            app:layout_constraintEnd_toStartOf="@+id/item_sale_count"
                             app:layout_constraintHorizontal_bias="0.0"
                             app:layout_constraintStart_toEndOf="@+id/imageView2"
                             app:layout_constraintTop_toTopOf="parent"/>
 
                         <TextView
-                            android:id="@+id/item_rating_count_text2"
+                            android:id="@+id/item_sale_count"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="32dp"
@@ -277,7 +263,7 @@
                             tools:ignore="HardcodedText"/>
 
                         <TextView
-                            android:id="@+id/textView2"
+                            android:id="@+id/overall_rating_text"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="8dp"
@@ -300,23 +286,22 @@
                             android:layout_marginLeft="8dp"
                             android:layout_marginStart="8dp"
                             android:layout_marginTop="16dp"
-                            app:layout_constraintBottom_toBottomOf="@+id/textView2"
-                            app:layout_constraintStart_toEndOf="@+id/textView2"
-                            app:layout_constraintTop_toTopOf="@+id/textView2"
+                            app:layout_constraintBottom_toBottomOf="@+id/overall_rating_text"
+                            app:layout_constraintStart_toEndOf="@+id/overall_rating_text"
+                            app:layout_constraintTop_toTopOf="@+id/overall_rating_text"
                             app:srcCompat="@drawable/ic_star"/>
 
                         <TextView
-                            android:id="@+id/textView3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="8dp"
                             android:layout_marginStart="8dp"
                             android:fontFamily="@font/poiret_one"
-                            android:text="ratings"
+                            android:text="Pieces Sold"
                             android:textStyle="bold"
-                            app:layout_constraintBottom_toBottomOf="@+id/item_rating_count_text2"
-                            app:layout_constraintStart_toEndOf="@+id/item_rating_count_text2"
-                            app:layout_constraintTop_toTopOf="@+id/item_rating_count_text2"/>
+                            app:layout_constraintBottom_toBottomOf="@+id/item_sale_count"
+                            app:layout_constraintStart_toEndOf="@+id/item_sale_count"
+                            app:layout_constraintTop_toTopOf="@+id/item_sale_count"
+                            android:layout_marginLeft="8dp"/>
 
                     </android.support.constraint.ConstraintLayout>
 
@@ -326,6 +311,7 @@
                         android:background="?attr/actionModeSplitBackground"/>
 
                     <Button
+                        android:id="@+id/show_review_button"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@color/cardview_light_background"
@@ -408,10 +394,9 @@
                             app:layout_constraintTop_toTopOf="@+id/current_price_text"/>
 
                         <TextView
-                            android:id="@+id/item_discount_text"
+                            android:id="@+id/item_discount_text2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="8dp"
                             android:layout_marginStart="8dp"
                             android:fontFamily="@font/poiret_one"
                             android:text="10% off"
@@ -419,7 +404,8 @@
                             android:textStyle="bold"
                             app:layout_constraintBottom_toBottomOf="@+id/old_price_text"
                             app:layout_constraintStart_toEndOf="@+id/old_price_text"
-                            app:layout_constraintTop_toTopOf="@+id/old_price_text"/>
+                            app:layout_constraintTop_toTopOf="@+id/old_price_text"
+                            android:layout_marginLeft="8dp"/>
 
                     </android.support.constraint.ConstraintLayout>
 
@@ -666,6 +652,7 @@
     </android.support.v4.widget.NestedScrollView>
 
     <LinearLayout
+        android:id="@+id/button_container"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_gravity="center|bottom"

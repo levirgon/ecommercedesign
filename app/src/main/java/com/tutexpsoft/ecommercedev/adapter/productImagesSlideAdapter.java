@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.tutexpsoft.ecommercedev.R;
 import com.tutexpsoft.ecommercedev.activity.SingleItemViewActivity;
 
@@ -20,12 +21,12 @@ import java.util.List;
 public class productImagesSlideAdapter extends RecyclerView.Adapter {
 
     private final Context mContext;
-    private List<Integer> images;
+    private List<String> imageLinks;
     private Context parentContext;
 
     public productImagesSlideAdapter(Context context) {
         mContext = context;
-        images = new ArrayList<>();
+        imageLinks = new ArrayList<>();
     }
 
     @Override
@@ -40,14 +41,14 @@ public class productImagesSlideAdapter extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        Integer image = images.get(position);
+        String image = imageLinks.get(position);
         ImageVH categoryVH = (ImageVH) holder;
         categoryVH.bind(image);
     }
 
     @Override
     public int getItemCount() {
-        return images == null ? 0 : images.size();
+        return imageLinks == null ? 0 : imageLinks.size();
     }
 
     private class ImageVH extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -59,34 +60,35 @@ public class productImagesSlideAdapter extends RecyclerView.Adapter {
             view.setOnClickListener(this);
         }
 
-        private void bind(int resId) {
-           mImageView.setImageResource(resId);
+        private void bind(String resId) {
+            Glide.with(mContext).load(resId).into(mImageView);
+
         }
 
         @Override
         public void onClick(View v) {
             int pos = getAdapterPosition();
-            int image = images.get(pos);
+            String image = imageLinks.get(pos);
             SingleItemViewActivity activity = (SingleItemViewActivity) mContext;
             activity.onItemSelected(image);
         }
     }
 
-    public void add(int item) {
-        images.add(item);
-        notifyItemInserted(images.size() - 1);
+    public void add(String item) {
+        imageLinks.add(item);
+        notifyItemInserted(imageLinks.size() - 1);
     }
 
-    public void addAll(List<Integer> items) {
-        for (int item : items) {
+    public void addAll(List<String> items) {
+        for (String item : items) {
             add(item);
         }
     }
 
-    public void remove(int item) {
-        int position = images.indexOf(item);
+    public void remove(String item) {
+        int position = imageLinks.indexOf(item);
         if (position > -1) {
-            images.remove(position);
+            imageLinks.remove(position);
             notifyItemRemoved(position);
         }
 
@@ -94,7 +96,7 @@ public class productImagesSlideAdapter extends RecyclerView.Adapter {
 
     public void clear() {
         while (getItemCount() > 0) {
-            remove(images.get(0));
+            remove(imageLinks.get(0));
         }
     }
 
