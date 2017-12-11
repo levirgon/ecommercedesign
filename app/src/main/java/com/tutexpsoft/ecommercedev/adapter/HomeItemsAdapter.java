@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.tutexpsoft.ecommercedev.R;
+import com.tutexpsoft.ecommercedev.ServerResponseModel.singleItem.ProductItem;
 import com.tutexpsoft.ecommercedev.utils.TagManager;
 
 import java.util.ArrayList;
@@ -21,15 +22,15 @@ public class HomeItemsAdapter extends RecyclerView.Adapter {
     private Context mContext;
     private int mItemType;
     private int mListType;
-    List<String> DoDItems; //just for testing cause, will change its type later.
     List<String> RecomendedItems; //just for testing cause, will change its type later.
     private Context parentContext;
+    private List<ProductItem> onSaleItems;
 
     public HomeItemsAdapter(Context context, int itemType, int listType) {
         mContext = context;
         mItemType = itemType;
         mListType = listType;
-        DoDItems = new ArrayList<>();
+        onSaleItems = new ArrayList<>();
         RecomendedItems = new ArrayList<>();
     }
 
@@ -62,9 +63,22 @@ public class HomeItemsAdapter extends RecyclerView.Adapter {
         return 6; //temp//standard limit
     }
 
+    public void addAllOSitems(List<ProductItem> productItemList) {
+        for(ProductItem item : productItemList){
+            add(item);
+        }
+    }
+
+    private void add(ProductItem item) {
+        onSaleItems.add(item);
+        notifyDataSetChanged();
+    }
+
     private class HomeItemVH extends RecyclerView.ViewHolder {
         public HomeItemVH(View view) {
             super(view);
         }
     }
+
+
 }

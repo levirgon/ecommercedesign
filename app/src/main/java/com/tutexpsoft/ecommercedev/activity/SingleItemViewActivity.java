@@ -225,12 +225,17 @@ public class SingleItemViewActivity extends AppCompatActivity {
         if (item.getOnSale()) {
             mCurrentPriceText.setText(item.getSalePrice());
             mOldPriceText.setText(item.getRegularPrice());
+
+            int difference = Integer.parseInt(item.getRegularPrice()) - Integer.parseInt(item.getSalePrice());
+            int discount = (difference*100)/Integer.parseInt(item.getRegularPrice());
+
+            mItemDiscountText.setText(String.valueOf(discount)+"%off");
 //            mOfferExpiryTime.setText(item.getDateOnSaleTo());
         } else {
             mCurrentPriceText.setText(item.getRegularPrice());
-            mOldPriceText.setVisibility(View.INVISIBLE);
-            mOfferExpiryTime.setVisibility(View.INVISIBLE);
-            mItemDiscountText.setText("");
+            mOldPriceText.setVisibility(View.GONE);
+            mOfferExpiryTime.setVisibility(View.GONE);
+            mItemDiscountText.setText("Regular Price");
 
         }
 

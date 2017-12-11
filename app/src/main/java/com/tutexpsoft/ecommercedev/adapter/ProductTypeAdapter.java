@@ -75,7 +75,7 @@ public class ProductTypeAdapter extends RecyclerView.Adapter<ProductTypeAdapter.
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, SingleItemViewActivity.class);
-                intent.putExtra(TagManager.PRODUCT_ID_KEY, 3713); //this id will change based on item clicked
+                intent.putExtra(TagManager.PRODUCT_ID_KEY, 8080); //this id will change based on item clicked
                 v.getContext().startActivity(intent);
             }
         });

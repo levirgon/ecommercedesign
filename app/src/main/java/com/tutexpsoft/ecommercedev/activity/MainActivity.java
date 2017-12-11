@@ -23,8 +23,13 @@ import android.widget.Toast;
 import com.tutexpsoft.ecommercedev.R;
 import com.tutexpsoft.ecommercedev.adapter.HomeItemsAdapter;
 import com.tutexpsoft.ecommercedev.adapter.OfferSlideShowAdapter;
+import com.tutexpsoft.ecommercedev.event.OnSaleItemsEvent;
 import com.tutexpsoft.ecommercedev.fragment.MiniCategoriesListFragment;
 import com.tutexpsoft.ecommercedev.utils.TagManager;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.Timer;
@@ -35,8 +40,8 @@ public class MainActivity extends AppCompatActivity
 
     private ViewPager mViewPager;
     private OfferSlideShowAdapter mSlideShowAdapter;
-    private RecyclerView mDodRecyclerView;
-    private HomeItemsAdapter mDODAdapter;
+    private RecyclerView mOsRecyclerView;
+    private HomeItemsAdapter mOSAdapter;
     private RecyclerView mRecmndRecyclerView;
     private HomeItemsAdapter mRCMNDAdapter;
 
@@ -76,12 +81,12 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void setupDODlist() {
-        mDodRecyclerView = findViewById(R.id.dod_list);
+        mOsRecyclerView = findViewById(R.id.dod_list);
         LinearLayoutManager verticalLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-        mDodRecyclerView.setLayoutManager(verticalLayoutManager);
-        mDodRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        mDODAdapter = new HomeItemsAdapter(this, TagManager.BIG_ITEMS, TagManager.HOME_DOD);
-        mDodRecyclerView.setAdapter(mDODAdapter);
+        mOsRecyclerView.setLayoutManager(verticalLayoutManager);
+        mOsRecyclerView.setItemAnimator(new DefaultItemAnimator());
+        mOSAdapter = new HomeItemsAdapter(this, TagManager.BIG_ITEMS, TagManager.HOME_DOD);
+        mOsRecyclerView.setAdapter(mOSAdapter);
 
     }
 
@@ -213,5 +218,22 @@ public class MainActivity extends AppCompatActivity
         Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
     }
 
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onSaleItemsEvent(OnSaleItemsEvent event) {
+        mOSAdapter.addAllOSitems(event.getProductItemList());
+    }
 
 }
