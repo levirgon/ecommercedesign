@@ -2,6 +2,8 @@ package com.tutexpsoft.ecommercedev.Retrofit;
 
 import android.util.Log;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.tutexpsoft.ecommercedev.ServerResponseModel.singleItem.ProductItem;
 import com.tutexpsoft.ecommercedev.event.ErrorEvent;
 import com.tutexpsoft.ecommercedev.event.ItemDetailEvent;
@@ -9,6 +11,8 @@ import com.tutexpsoft.ecommercedev.event.ItemDetailEvent;
 import org.greenrobot.eventbus.EventBus;
 
 import java.io.IOException;
+import java.lang.reflect.Type;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -33,6 +37,19 @@ public class EcommerceServiceProvider {
     }
 
     public void getProductsOnSale() {
+        mService.getOnSaleProducts().enqueue(new Callback<List<Object>>() {
+            @Override
+            public void onResponse(Call<List<Object>> call, Response<List<Object>> response) {
+                    String jSonString = response.body().toString();
+                    Type listType = new TypeToken<List<Object>>() {}.getType();
+                    List<ProductItem> onSaleProductList = new Gson().fromJson(jSonString,listType);
+            }
+
+            @Override
+            public void onFailure(Call<List<Object>> call, Throwable t) {
+                Log.d(TAG, "onFailure: Failed"+t.getLocalizedMessage());
+            }
+        });
     }
 
     public void getProductDetails(int id) {
