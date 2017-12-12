@@ -21,6 +21,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.tutexpsoft.ecommercedev.R;
+import com.tutexpsoft.ecommercedev.Retrofit.EcommerceServiceProvider;
 import com.tutexpsoft.ecommercedev.adapter.HomeItemsAdapter;
 import com.tutexpsoft.ecommercedev.adapter.OfferSlideShowAdapter;
 import com.tutexpsoft.ecommercedev.event.OnSaleItemsEvent;
@@ -51,6 +52,8 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         initiate();
         changeSlides();
+
+        new EcommerceServiceProvider().getProductsOnSale();
 
     }
 

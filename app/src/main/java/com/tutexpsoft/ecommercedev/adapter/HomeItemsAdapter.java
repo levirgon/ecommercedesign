@@ -1,6 +1,7 @@
 package com.tutexpsoft.ecommercedev.adapter;
 
 import android.content.Context;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -51,16 +52,6 @@ public class HomeItemsAdapter extends RecyclerView.Adapter<HomeItemsAdapter.Home
         RecomendedItems = new ArrayList<>();
     }
 
-    public void addAllOSitems(List<ProductItem> productItemList) {
-        for(ProductItem item : productItemList){
-            add(item);
-        }
-    }
-
-    private void add(ProductItem item) {
-        onSaleItems.add(item);
-        notifyDataSetChanged();
-    }
     @Override
     public HomeItemVH onCreateViewHolder(ViewGroup parent, int viewType) {
         HomeItemVH viewHolder = null;
@@ -80,6 +71,11 @@ public class HomeItemsAdapter extends RecyclerView.Adapter<HomeItemsAdapter.Home
 
         return viewHolder;
     }
+    @Override
+    public int getItemCount() {
+        return onSaleItems == null ? 0 : onSaleItems.size();
+         //return 5; //temp//standard limit
+    }
 
     @Override
     public void onBindViewHolder(HomeItemVH holder, int position) {
@@ -87,13 +83,18 @@ public class HomeItemsAdapter extends RecyclerView.Adapter<HomeItemsAdapter.Home
         holder.productTitle.setText(productItem.getName());
         holder.productNewPrice.setText(productItem.getSalePrice());
         holder.productOldPrice.setText(productItem.getRegularPrice());
-        Glide.with(mContext).load(productItem.getImages()).fitCenter().into(holder.productImage);
+        Glide.with(mContext).load(productItem.getImages().get(0).getSrc()).into(holder.productImage);
     }
 
-    @Override
-    public int getItemCount() {
-        return onSaleItems == null ? 0 : onSaleItems.size();
-       // return 5; //temp//standard limit
+    public void addAllOSitems(List<ProductItem> productItemList) {
+        for(ProductItem item : productItemList){
+            add(item);
+        }
+    }
+
+    private void add(ProductItem item) {
+        onSaleItems.add(item);
+        notifyDataSetChanged();
     }
 
 }
