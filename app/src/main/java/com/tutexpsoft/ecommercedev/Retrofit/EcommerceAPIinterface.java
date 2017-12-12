@@ -24,7 +24,7 @@ public interface EcommerceAPIinterface {
     //replace all the object classes with necessary response models.
 
     @GET(URLManager.BASE_URL + "products?featured=true&" + URLManager.SECRET_KEY)
-    Call<List<Object>> getTopFeaturedProducts();
+    Call<List<ProductItem>> getTopFeaturedProducts();
 
     //replace all the object classes with necessary response models.
 
