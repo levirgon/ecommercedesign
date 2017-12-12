@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity
         LinearLayoutManager verticalLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         mRecmndRecyclerView.setLayoutManager(verticalLayoutManager);
         mRecmndRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        mRCMNDAdapter = new HomeItemsAdapter(this, TagManager.SMALL_ITEMS, TagManager.HOME_DOD);
+        mRCMNDAdapter = new HomeItemsAdapter(this, TagManager.SMALL_ITEMS, TagManager.HOME_OSI);
         mRecmndRecyclerView.setAdapter(mRCMNDAdapter);
 
     }
@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity
         LinearLayoutManager verticalLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         mOsRecyclerView.setLayoutManager(verticalLayoutManager);
         mOsRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        mOSAdapter = new HomeItemsAdapter(this, TagManager.BIG_ITEMS, TagManager.HOME_DOD);
+        mOSAdapter = new HomeItemsAdapter(this, TagManager.BIG_ITEMS, TagManager.HOME_OSI);
         mOsRecyclerView.setAdapter(mOSAdapter);
 
     }
@@ -220,7 +220,6 @@ public class MainActivity extends AppCompatActivity
     public void onCategorySelected(String text) {
         Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
     }
-
 
     @Override
     public void onStart() {

@@ -1,7 +1,6 @@
 package com.tutexpsoft.ecommercedev.adapter;
 
 import android.content.Context;
-import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +10,6 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.tutexpsoft.ecommercedev.R;
-import com.tutexpsoft.ecommercedev.ServerResponseModel.singleItem.Image;
 import com.tutexpsoft.ecommercedev.ServerResponseModel.singleItem.ProductItem;
 import com.tutexpsoft.ecommercedev.utils.TagManager;
 
@@ -73,8 +71,9 @@ public class HomeItemsAdapter extends RecyclerView.Adapter<HomeItemsAdapter.Home
     }
     @Override
     public int getItemCount() {
+
         return onSaleItems == null ? 0 : onSaleItems.size();
-         //return 5; //temp//standard limit
+
     }
 
     @Override
