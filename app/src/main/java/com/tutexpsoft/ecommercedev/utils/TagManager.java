@@ -13,6 +13,7 @@ public class TagManager {
     public static final String CATEGORIE_BOOKS_AND_MORE = "com.levirgon.e_commercedesign.BOOKS_AND_MORE";
     public static final int BIG_ITEMS = 1;
     public static final int HOME_OSI = 2;
+    public static final int HOME_FI = 4;
     public static final int SMALL_ITEMS = 3;
     public static final String PRODUCT_ID_KEY = "com.tutexpsoft.ecommercedev.producct_id";
 }

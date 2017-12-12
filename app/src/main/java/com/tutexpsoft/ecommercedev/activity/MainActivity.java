@@ -24,6 +24,7 @@ import com.tutexpsoft.ecommercedev.R;
 import com.tutexpsoft.ecommercedev.Retrofit.EcommerceServiceProvider;
 import com.tutexpsoft.ecommercedev.adapter.HomeItemsAdapter;
 import com.tutexpsoft.ecommercedev.adapter.OfferSlideShowAdapter;
+import com.tutexpsoft.ecommercedev.event.OnFeaturedItemsEvent;
 import com.tutexpsoft.ecommercedev.event.OnSaleItemsEvent;
 import com.tutexpsoft.ecommercedev.fragment.MiniCategoriesListFragment;
 import com.tutexpsoft.ecommercedev.utils.TagManager;
@@ -52,8 +53,8 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         initiate();
         changeSlides();
-
         new EcommerceServiceProvider().getProductsOnSale();
+        new EcommerceServiceProvider().getFeaturedProducts();
 
     }
 
@@ -236,6 +237,10 @@ public class MainActivity extends AppCompatActivity
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onSaleItemsEvent(OnSaleItemsEvent event) {
         mOSAdapter.addAllOSitems(event.getProductItemList());
+    }
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onFeaturedItemsEvent(OnFeaturedItemsEvent event) {
+        mRCMNDAdapter.addAllRFUitems(event.getProductItemList());
     }
 
 }
