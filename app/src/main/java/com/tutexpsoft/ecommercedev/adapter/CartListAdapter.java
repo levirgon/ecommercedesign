@@ -5,9 +5,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.tutexpsoft.ecommercedev.R;
-import com.tutexpsoft.ecommercedev.model.CartItem;
+import com.tutexpsoft.ecommercedev.ServerResponseModel.singleItem.ProductItem;
 import com.tutexpsoft.ecommercedev.utils.CartManager;
 
 import java.util.List;
@@ -19,7 +20,7 @@ import java.util.List;
 public class CartListAdapter extends RecyclerView.Adapter {
 
     private Context mContext;
-    private List<CartItem> pendingItems;
+    private List<ProductItem> pendingItems;
     private Context parentContext;
 
 
@@ -41,7 +42,7 @@ public class CartListAdapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
 
-        CartItem item = pendingItems.get(position);
+        ProductItem item = pendingItems.get(position);
         CartItemVH cartItemVH = (CartItemVH) holder;
         cartItemVH.bind(item);
     }
@@ -52,6 +53,8 @@ public class CartListAdapter extends RecyclerView.Adapter {
     }
 
     private class CartItemVH extends RecyclerView.ViewHolder implements View.OnClickListener {
+        private TextView itemTitle;
+
         public CartItemVH(View viewItem) {
             super(viewItem);
         }
@@ -61,7 +64,8 @@ public class CartListAdapter extends RecyclerView.Adapter {
 //
         }
 
-        public void bind(CartItem item) {
+        public void bind(ProductItem item) {
+
 //
         }
     }

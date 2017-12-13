@@ -5,7 +5,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.NestedScrollView;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -30,7 +29,6 @@ import com.tutexpsoft.ecommercedev.adapter.productImagesSlideAdapter;
 import com.tutexpsoft.ecommercedev.event.ItemDetailEvent;
 import com.tutexpsoft.ecommercedev.fragment.CartFragment;
 import com.tutexpsoft.ecommercedev.fragment.CheckOutFragment;
-import com.tutexpsoft.ecommercedev.model.CartItem;
 import com.tutexpsoft.ecommercedev.utils.CartManager;
 import com.tutexpsoft.ecommercedev.utils.TagManager;
 
@@ -41,7 +39,7 @@ import org.greenrobot.eventbus.ThreadMode;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SingleItemViewActivity extends AppCompatActivity {
+public class SingleItemViewActivity extends OrientationControllerActivity {
 
     private RecyclerView mImagesList;
     private LinearLayoutManager verticalLayoutManager;
@@ -75,6 +73,7 @@ public class SingleItemViewActivity extends AppCompatActivity {
     private Button mWishListButton;
     private Button mColorButton;
     private Button mSizeButton;
+    private ProductItem mProductItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,7 +93,7 @@ public class SingleItemViewActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (!addedToCart) {
-                    CartManager.getInstance(SingleItemViewActivity.this).addCartItem(new CartItem());
+                    CartManager.getInstance(SingleItemViewActivity.this).addCartItem(mProductItem);
                     cartButton.setText("Go To Cart");
                     cartButton.setTextColor(getResources().getColor(R.color.colorFButton));
                     addedToCart = true;
@@ -219,20 +218,20 @@ public class SingleItemViewActivity extends AppCompatActivity {
     }
 
 
-
     private void updateUI(ProductItem item) {
+        mProductItem = item;
         mItemTitle.setText(item.getName());
         if (item.getOnSale()) {
-            mCurrentPriceText.setText(item.getSalePrice());
+            mCurrentPriceText.setText(TagManager.CURRENCY + item.getSalePrice());
             mOldPriceText.setText(item.getRegularPrice());
 
             int difference = Integer.parseInt(item.getRegularPrice()) - Integer.parseInt(item.getSalePrice());
-            int discount = (difference*100)/Integer.parseInt(item.getRegularPrice());
+            int discount = (difference * 100) / Integer.parseInt(item.getRegularPrice());
 
-            mItemDiscountText.setText(String.valueOf(discount)+"%off");
+            mItemDiscountText.setText(String.valueOf(discount) + "%off");
 //            mOfferExpiryTime.setText(item.getDateOnSaleTo());
         } else {
-            mCurrentPriceText.setText(item.getRegularPrice());
+            mCurrentPriceText.setText( TagManager.CURRENCY + item.getRegularPrice());
             mOldPriceText.setVisibility(View.GONE);
             mOfferExpiryTime.setVisibility(View.GONE);
             mItemDiscountText.setText("Regular Price");

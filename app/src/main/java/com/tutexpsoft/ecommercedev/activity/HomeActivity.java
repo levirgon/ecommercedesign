@@ -1,6 +1,5 @@
 package com.tutexpsoft.ecommercedev.activity;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -16,7 +15,7 @@ import com.tutexpsoft.ecommercedev.model.CategoryItem;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends OrientationControllerActivity {
 
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager mLayoutManager;

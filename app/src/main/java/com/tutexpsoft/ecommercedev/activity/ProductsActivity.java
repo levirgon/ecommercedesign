@@ -1,6 +1,5 @@
 package com.tutexpsoft.ecommercedev.activity;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
@@ -20,7 +19,7 @@ import com.tutexpsoft.ecommercedev.model.Products;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductsActivity extends AppCompatActivity {
+public class ProductsActivity extends OrientationControllerActivity {
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager mGridLayoutManager,mLinearLayoutManager;
     private ProductTypeAdapter mAdapter;

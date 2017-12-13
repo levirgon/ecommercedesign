@@ -2,13 +2,11 @@ package com.tutexpsoft.ecommercedev.utils;
 
 import android.content.Context;
 
-import com.tutexpsoft.ecommercedev.model.CartItem;
+import com.tutexpsoft.ecommercedev.ServerResponseModel.singleItem.ProductItem;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 /**
  * Created by noushad on 8/28/17.
@@ -19,7 +17,7 @@ public class CartManager {
     private static CartManager sCartManager;
 
     //private List<Crime> mCrimes;
-    private Map<UUID, CartItem> mCartItems;
+    private Map<Integer, ProductItem> mCartItems;
 
     public static CartManager getInstance(Context context) {
         if (sCartManager == null) {
@@ -33,19 +31,19 @@ public class CartManager {
 
     }
 
-    public List<CartItem> getCartItems() {
+    public ArrayList<ProductItem> getCartItems() {
         return new ArrayList<>(mCartItems.values());
     }
 
-    public CartItem getCartItem(UUID id) {
+    public ProductItem getCartItem(int id) {
 
         return mCartItems.get(id);
     }
 
-    public int getCartItemPosition(UUID id) {
+    public int getCartItemPosition(int id) {
 
         int i =0;
-        for(Map.Entry<UUID,CartItem> CartItemEntry : mCartItems.entrySet()){
+        for(Map.Entry<Integer, ProductItem> CartItemEntry : mCartItems.entrySet()){
             if (CartItemEntry.getKey().equals(id)){
                 return i;
             }
@@ -55,7 +53,7 @@ public class CartManager {
         return 0;
     }
 
-    public void addCartItem(CartItem cartItem) {
+    public void addCartItem(ProductItem cartItem) {
         mCartItems.put(cartItem.getId(), cartItem);
     }
 
