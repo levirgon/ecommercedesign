@@ -24,8 +24,10 @@ import com.tutexpsoft.ecommercedev.R;
 import com.tutexpsoft.ecommercedev.Retrofit.EcommerceServiceProvider;
 import com.tutexpsoft.ecommercedev.adapter.HomeItemsAdapter;
 import com.tutexpsoft.ecommercedev.adapter.OfferSlideShowAdapter;
+import com.tutexpsoft.ecommercedev.event.NewProductItemsEvent;
 import com.tutexpsoft.ecommercedev.event.OnFeaturedItemsEvent;
 import com.tutexpsoft.ecommercedev.event.OnSaleItemsEvent;
+import com.tutexpsoft.ecommercedev.event.TopSaleItemsEvent;
 import com.tutexpsoft.ecommercedev.fragment.MiniCategoriesListFragment;
 import com.tutexpsoft.ecommercedev.utils.TagManager;
 
@@ -46,6 +48,10 @@ public class MainActivity extends AppCompatActivity
     private HomeItemsAdapter mOSAdapter;
     private RecyclerView mRecmndRecyclerView;
     private HomeItemsAdapter mRCMNDAdapter;
+    private RecyclerView mTopSaleRecyclerView;
+    private HomeItemsAdapter mTopSaleAdapter;
+    private RecyclerView mNewProductsRecyclerView;
+    private HomeItemsAdapter mNewProductsAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +61,8 @@ public class MainActivity extends AppCompatActivity
         changeSlides();
         new EcommerceServiceProvider().getProductsOnSale();
         new EcommerceServiceProvider().getFeaturedProducts();
+        new EcommerceServiceProvider().getTopSellingProducts();
+        new EcommerceServiceProvider().getNewProducts();
 
     }
 
@@ -71,7 +79,8 @@ public class MainActivity extends AppCompatActivity
         setupImageSlide();
         setupDODlist();
         setupRecomendedList();
-
+        setupTopSalelist();
+        setupNewProductslist();
     }
 
     private void setupRecomendedList() {
@@ -91,6 +100,24 @@ public class MainActivity extends AppCompatActivity
         mOsRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mOSAdapter = new HomeItemsAdapter(this, TagManager.BIG_ITEMS, TagManager.HOME_DOD);
         mOsRecyclerView.setAdapter(mOSAdapter);
+
+    }
+    private void setupTopSalelist() {
+        mTopSaleRecyclerView = findViewById(R.id.topsale_product_list);
+        LinearLayoutManager verticalLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        mTopSaleRecyclerView.setLayoutManager(verticalLayoutManager);
+        mTopSaleRecyclerView.setItemAnimator(new DefaultItemAnimator());
+        mTopSaleAdapter = new HomeItemsAdapter(this, TagManager.TOP_SALE, TagManager.HOME_DOD);
+        mTopSaleRecyclerView.setAdapter(mTopSaleAdapter);
+
+    }
+    private void setupNewProductslist() {
+        mNewProductsRecyclerView = findViewById(R.id.new_product_list);
+        LinearLayoutManager verticalLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        mNewProductsRecyclerView.setLayoutManager(verticalLayoutManager);
+        mNewProductsRecyclerView.setItemAnimator(new DefaultItemAnimator());
+        mNewProductsAdapter = new HomeItemsAdapter(this, TagManager.NEW_ITEMS, TagManager.HOME_DOD);
+        mNewProductsRecyclerView.setAdapter(mNewProductsAdapter);
 
     }
 
@@ -242,6 +269,15 @@ public class MainActivity extends AppCompatActivity
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onFeaturedItemsEvent(OnFeaturedItemsEvent event) {
         mRCMNDAdapter.addAllRFUitems(event.getProductItemList());
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void topSaleItemsEvent(TopSaleItemsEvent event) {
+        mTopSaleAdapter.addAllTSitems(event.getProductItemList());
+    }
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void newProductsItemsEvent(NewProductItemsEvent event) {
+        mNewProductsAdapter.addAllNPitems(event.getProductItemList());
     }
 
 }

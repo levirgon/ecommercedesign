@@ -14,5 +14,7 @@ public class TagManager {
     public static final int BIG_ITEMS = 1;
     public static final int HOME_DOD = 2;
     public static final int SMALL_ITEMS = 3;
+    public static final int TOP_SALE = 4;
+    public static final int NEW_ITEMS = 5;
     public static final String PRODUCT_ID_KEY = "com.tutexpsoft.ecommercedev.producct_id";
 }

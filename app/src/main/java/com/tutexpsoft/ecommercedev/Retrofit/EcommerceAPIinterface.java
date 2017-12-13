@@ -19,7 +19,7 @@ public interface EcommerceAPIinterface {
     //replace all the object classes with necessary response models.
 
     @GET(URLManager.BASE_URL + "products?orderby=top_sell&" + URLManager.SECRET_KEY)
-    Call<List<Object>> getTopSellingProducts();
+    Call<List<ProductItem>> getTopSellingProducts();
 
     //replace all the object classes with necessary response models.
 
@@ -29,7 +29,7 @@ public interface EcommerceAPIinterface {
     //replace all the object classes with necessary response models.
 
     @GET(URLManager.BASE_URL + "products?" + URLManager.SECRET_KEY)
-    Call<List<Object>> getTopRecentProducts();
+    Call<List<ProductItem>> getTopRecentProducts();
 
     //replace all the object classes with necessary response models.
 

@@ -5,8 +5,10 @@ import android.util.Log;
 import com.tutexpsoft.ecommercedev.ServerResponseModel.singleItem.ProductItem;
 import com.tutexpsoft.ecommercedev.event.ErrorEvent;
 import com.tutexpsoft.ecommercedev.event.ItemDetailEvent;
+import com.tutexpsoft.ecommercedev.event.NewProductItemsEvent;
 import com.tutexpsoft.ecommercedev.event.OnFeaturedItemsEvent;
 import com.tutexpsoft.ecommercedev.event.OnSaleItemsEvent;
+import com.tutexpsoft.ecommercedev.event.TopSaleItemsEvent;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -27,6 +29,31 @@ public class EcommerceServiceProvider {
     private static final EcommerceAPIinterface mService = ServiceGenerator.createService(EcommerceAPIinterface.class);
 
     public void getTopSellingProducts() {
+        mService.getTopSellingProducts().enqueue(new Callback<List<ProductItem>>() {
+            @Override
+            public void onResponse(Call<List<ProductItem>> call, Response<List<ProductItem>> response) {
+                if(response.isSuccessful()){
+                    List<ProductItem> productItemList = response.body();
+                    if (productItemList != null) {
+                        Log.d(TAG, "onResponse: Successful :" + response.body().toString());
+                        EventBus.getDefault().post(new TopSaleItemsEvent(productItemList));
+                    }else {
+                        try {
+                            Log.d(TAG, "onResponse: Failed :" + response.errorBody().string());
+                            EventBus.getDefault().post(new ErrorEvent("Error Occurred!!"));
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                            EventBus.getDefault().post(new ErrorEvent(e.getMessage()));
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<ProductItem>> call, Throwable t) {
+                Log.d(TAG, "onFailure: Failed" + t.getLocalizedMessage());
+            }
+        });
     }
 
     public void getFeaturedProducts() {
@@ -58,6 +85,31 @@ public class EcommerceServiceProvider {
     }
 
     public void getNewProducts() {
+        mService.getTopRecentProducts().enqueue(new Callback<List<ProductItem>>() {
+            @Override
+            public void onResponse(Call<List<ProductItem>> call, Response<List<ProductItem>> response) {
+                if(response.isSuccessful()){
+                    List<ProductItem> productItemList = response.body();
+                    if (productItemList != null) {
+                        Log.d(TAG, "onResponse: Successful :" + response.body().toString());
+                        EventBus.getDefault().post(new NewProductItemsEvent(productItemList));
+                    }else {
+                        try {
+                            Log.d(TAG, "onResponse: Failed :" + response.errorBody().string());
+                            EventBus.getDefault().post(new ErrorEvent("Error Occurred!!"));
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                            EventBus.getDefault().post(new ErrorEvent(e.getMessage()));
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<ProductItem>> call, Throwable t) {
+                Log.d(TAG, "onFailure: Failed" + t.getLocalizedMessage());
+            }
+        });
     }
 
     public void getProductsOnSale() {
