@@ -48,6 +48,7 @@ public class HomeItemsAdapter extends RecyclerView.Adapter<HomeItemsAdapter.Home
             productNewPrice = (TextView) view.findViewById(R.id.dod_item_price);
             productOldPrice = (TextView) view.findViewById(R.id.dod_item_oldprice);
             productImage = (ImageView) view.findViewById(R.id.dod_item_image);
+
             recommandedProductTitle = (TextView) view.findViewById(R.id.recomended_item_title);
             recommandedProductPrice = (TextView) view.findViewById(R.id.recomended_item_price);
             recommandedProductImage = (ImageView) view.findViewById(R.id.recomended_item_image);
@@ -77,12 +78,12 @@ public class HomeItemsAdapter extends RecyclerView.Adapter<HomeItemsAdapter.Home
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         parentContext = parent.getContext();
         View view = null;
-        if (mItemType == TagManager.BIG_ITEMS) {
+        if (mItemType == TagManager.ON_SALE) {
             view = inflater.inflate(R.layout.home_big_item, parent, false);
             viewHolder = new HomeItemVH(view);
 
         }
-       if (mItemType == TagManager.SMALL_ITEMS) {
+       if (mItemType == TagManager.FEATURE_PRODUCTS) {
            view = inflater.inflate(R.layout.home_small_item, parent, false);
            viewHolder = new HomeItemVH(view);
 
@@ -102,10 +103,11 @@ public class HomeItemsAdapter extends RecyclerView.Adapter<HomeItemsAdapter.Home
     }
     @Override
     public int getItemCount() {
-        if (mItemType == TagManager.BIG_ITEMS) {
+
+        if (mItemType == TagManager.ON_SALE) {
             return onSaleItems.size();
         }
-        if (mItemType == TagManager.SMALL_ITEMS) {
+        if (mItemType == TagManager.FEATURE_PRODUCTS) {
             return recomendedItems.size();
         }
         if (mItemType == TagManager.TOP_SALE) {
@@ -119,14 +121,14 @@ public class HomeItemsAdapter extends RecyclerView.Adapter<HomeItemsAdapter.Home
 
     @Override
     public void onBindViewHolder(HomeItemVH holder, int position) {
-        if (mItemType == TagManager.BIG_ITEMS) {
+        if (mItemType == TagManager.ON_SALE) {
             ProductItem productItem = onSaleItems.get(position);
             holder.productTitle.setText(productItem.getName());
             holder.productNewPrice.setText("৳ " + productItem.getSalePrice());
             holder.productOldPrice.setText("৳ " + productItem.getRegularPrice());
             Glide.with(mContext).load(productItem.getImages().get(0).getSrc()).into(holder.productImage);
         }
-        if (mItemType == TagManager.SMALL_ITEMS) {
+        if (mItemType == TagManager.FEATURE_PRODUCTS) {
             ProductItem productItem1 = recomendedItems.get(position);
             holder.recommandedProductTitle.setText(productItem1.getName());
             holder.recommandedProductPrice.setText("৳ " + productItem1.getRegularPrice());

@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity
         LinearLayoutManager verticalLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         mRecmndRecyclerView.setLayoutManager(verticalLayoutManager);
         mRecmndRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        mRCMNDAdapter = new HomeItemsAdapter(this, TagManager.SMALL_ITEMS, TagManager.HOME_DOD);
+        mRCMNDAdapter = new HomeItemsAdapter(this, TagManager.FEATURE_PRODUCTS, TagManager.HOME_OSI);
         mRecmndRecyclerView.setAdapter(mRCMNDAdapter);
 
     }
@@ -98,7 +98,7 @@ public class MainActivity extends AppCompatActivity
         LinearLayoutManager verticalLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         mOsRecyclerView.setLayoutManager(verticalLayoutManager);
         mOsRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        mOSAdapter = new HomeItemsAdapter(this, TagManager.BIG_ITEMS, TagManager.HOME_DOD);
+        mOSAdapter = new HomeItemsAdapter(this, TagManager.ON_SALE, TagManager.HOME_OSI);
         mOsRecyclerView.setAdapter(mOSAdapter);
 
     }
@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity
         LinearLayoutManager verticalLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         mTopSaleRecyclerView.setLayoutManager(verticalLayoutManager);
         mTopSaleRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        mTopSaleAdapter = new HomeItemsAdapter(this, TagManager.TOP_SALE, TagManager.HOME_DOD);
+        mTopSaleAdapter = new HomeItemsAdapter(this, TagManager.TOP_SALE, TagManager.HOME_OSI);
         mTopSaleRecyclerView.setAdapter(mTopSaleAdapter);
 
     }
@@ -116,7 +116,7 @@ public class MainActivity extends AppCompatActivity
         LinearLayoutManager verticalLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         mNewProductsRecyclerView.setLayoutManager(verticalLayoutManager);
         mNewProductsRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        mNewProductsAdapter = new HomeItemsAdapter(this, TagManager.NEW_ITEMS, TagManager.HOME_DOD);
+        mNewProductsAdapter = new HomeItemsAdapter(this, TagManager.NEW_ITEMS, TagManager.HOME_OSI);
         mNewProductsRecyclerView.setAdapter(mNewProductsAdapter);
 
     }
@@ -249,7 +249,6 @@ public class MainActivity extends AppCompatActivity
         Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
     }
 
-
     @Override
     public void onStart() {
         super.onStart();
@@ -271,6 +270,7 @@ public class MainActivity extends AppCompatActivity
         mRCMNDAdapter.addAllRFUitems(event.getProductItemList());
     }
 
+
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void topSaleItemsEvent(TopSaleItemsEvent event) {
         mTopSaleAdapter.addAllTSitems(event.getProductItemList());
@@ -281,3 +281,6 @@ public class MainActivity extends AppCompatActivity
     }
 
 }
+
+
+
