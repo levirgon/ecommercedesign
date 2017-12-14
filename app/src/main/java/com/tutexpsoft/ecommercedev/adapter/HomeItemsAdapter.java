@@ -1,6 +1,7 @@
 package com.tutexpsoft.ecommercedev.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.tutexpsoft.ecommercedev.R;
 import com.tutexpsoft.ecommercedev.ServerResponseModel.singleItem.ProductItem;
+import com.tutexpsoft.ecommercedev.activity.SingleItemViewActivity;
 import com.tutexpsoft.ecommercedev.utils.TagManager;
 
 import java.util.ArrayList;
@@ -32,9 +34,8 @@ public class HomeItemsAdapter extends RecyclerView.Adapter<HomeItemsAdapter.Home
     private List<ProductItem> newProductItems;
 
 
-
-    public class HomeItemVH extends RecyclerView.ViewHolder {
-        public TextView productTitle, productOldPrice,productNewPrice;
+    public class HomeItemVH extends RecyclerView.ViewHolder implements View.OnClickListener {
+        public TextView productTitle, productOldPrice, productNewPrice;
         public ImageView productImage;
         public TextView recommandedProductTitle, recommandedProductPrice;
         public ImageView recommandedProductImage;
@@ -42,6 +43,8 @@ public class HomeItemsAdapter extends RecyclerView.Adapter<HomeItemsAdapter.Home
         public ImageView topSaleProductImage;
         public TextView newProductTitle, newProductPrice;
         public ImageView newProductImage;
+        private ProductItem item;
+
         public HomeItemVH(View view) {
             super(view);
             productTitle = (TextView) view.findViewById(R.id.dod_item_title);
@@ -59,6 +62,25 @@ public class HomeItemsAdapter extends RecyclerView.Adapter<HomeItemsAdapter.Home
             newProductPrice = (TextView) view.findViewById(R.id.newproducts_item_price);
             newProductImage = (ImageView) view.findViewById(R.id.newproducts_item_image);
 
+            view.setOnClickListener(this);
+        }
+
+
+        public void clicked(Integer id) {
+            Intent intent = new Intent(mContext, SingleItemViewActivity.class);
+            intent.putExtra(TagManager.PRODUCT_ID_KEY, id);
+            mContext.startActivity(intent);
+        }
+
+        public void pass(ProductItem productItem) {
+            item = productItem;
+        }
+
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent(mContext, SingleItemViewActivity.class);
+            intent.putExtra(TagManager.PRODUCT_ID_KEY, item.getId()); //this id will change based on item clicked
+            v.getContext().startActivity(intent);
         }
     }
 
@@ -83,9 +105,9 @@ public class HomeItemsAdapter extends RecyclerView.Adapter<HomeItemsAdapter.Home
             viewHolder = new HomeItemVH(view);
 
         }
-       if (mItemType == TagManager.FEATURE_PRODUCTS) {
-           view = inflater.inflate(R.layout.home_small_item, parent, false);
-           viewHolder = new HomeItemVH(view);
+        if (mItemType == TagManager.FEATURE_PRODUCTS) {
+            view = inflater.inflate(R.layout.home_small_item, parent, false);
+            viewHolder = new HomeItemVH(view);
 
         }
         if (mItemType == TagManager.TOP_SALE) {
@@ -101,6 +123,7 @@ public class HomeItemsAdapter extends RecyclerView.Adapter<HomeItemsAdapter.Home
 
         return viewHolder;
     }
+
     @Override
     public int getItemCount() {
 
@@ -121,35 +144,42 @@ public class HomeItemsAdapter extends RecyclerView.Adapter<HomeItemsAdapter.Home
 
     @Override
     public void onBindViewHolder(HomeItemVH holder, int position) {
+
+        ProductItem productItem = null;
+
         if (mItemType == TagManager.ON_SALE) {
-            ProductItem productItem = onSaleItems.get(position);
+            productItem = onSaleItems.get(position);
             holder.productTitle.setText(productItem.getName());
             holder.productNewPrice.setText("৳ " + productItem.getSalePrice());
             holder.productOldPrice.setText("৳ " + productItem.getRegularPrice());
             Glide.with(mContext).load(productItem.getImages().get(0).getSrc()).into(holder.productImage);
         }
         if (mItemType == TagManager.FEATURE_PRODUCTS) {
-            ProductItem productItem1 = recomendedItems.get(position);
-            holder.recommandedProductTitle.setText(productItem1.getName());
-            holder.recommandedProductPrice.setText("৳ " + productItem1.getRegularPrice());
-            Glide.with(mContext).load(productItem1.getImages().get(0).getSrc()).into(holder.recommandedProductImage);
+            productItem = recomendedItems.get(position);
+            holder.recommandedProductTitle.setText(productItem.getName());
+            holder.recommandedProductPrice.setText("৳ " + productItem.getRegularPrice());
+            Glide.with(mContext).load(productItem.getImages().get(0).getSrc()).into(holder.recommandedProductImage);
         }
         if (mItemType == TagManager.TOP_SALE) {
-            ProductItem productItem2 = topSaleItems.get(position);
-            holder.topSaleProductTitle.setText(productItem2.getName());
-            holder.topSaleProductPrice.setText("৳ " + productItem2.getRegularPrice());
-            Glide.with(mContext).load(productItem2.getImages().get(0).getSrc()).into(holder.topSaleProductImage);
+            productItem = topSaleItems.get(position);
+            holder.topSaleProductTitle.setText(productItem.getName());
+            holder.topSaleProductPrice.setText("৳ " + productItem.getRegularPrice());
+            Glide.with(mContext).load(productItem.getImages().get(0).getSrc()).into(holder.topSaleProductImage);
         }
         if (mItemType == TagManager.NEW_ITEMS) {
-            ProductItem productItem3 = newProductItems.get(position);
-            holder.newProductTitle.setText(productItem3.getName());
-            holder.newProductPrice.setText("৳ " + productItem3.getRegularPrice());
-            Glide.with(mContext).load(productItem3.getImages().get(0).getSrc()).into(holder.newProductImage);
+            productItem = newProductItems.get(position);
+            holder.newProductTitle.setText(productItem.getName());
+            holder.newProductPrice.setText("৳ " + productItem.getRegularPrice());
+            Glide.with(mContext).load(productItem.getImages().get(0).getSrc()).into(holder.newProductImage);
         }
+
+        holder.pass(productItem);
+
+
     }
 
     public void addAllOSitems(List<ProductItem> productItemList) {
-        for(ProductItem item : productItemList){
+        for (ProductItem item : productItemList) {
             add(item);
         }
     }
@@ -159,34 +189,38 @@ public class HomeItemsAdapter extends RecyclerView.Adapter<HomeItemsAdapter.Home
         notifyDataSetChanged();
     }
 
-    public void addAllRFUitems(List<ProductItem> recomendedItemList){
-        for (ProductItem item: recomendedItemList){
+    public void addAllRFUitems(List<ProductItem> recomendedItemList) {
+        for (ProductItem item : recomendedItemList) {
             reAdd(item);
         }
 
     }
-    private void reAdd(ProductItem item){
+
+    private void reAdd(ProductItem item) {
         recomendedItems.add(item);
         notifyDataSetChanged();
     }
 
-    public void addAllTSitems(List<ProductItem> topSaleItemList){
-        for (ProductItem item: topSaleItemList){
+    public void addAllTSitems(List<ProductItem> topSaleItemList) {
+        for (ProductItem item : topSaleItemList) {
             topAdd(item);
         }
 
     }
-    private void topAdd(ProductItem item){
+
+    private void topAdd(ProductItem item) {
         topSaleItems.add(item);
         notifyDataSetChanged();
     }
-    public void addAllNPitems(List<ProductItem> newProductsItemList){
-        for (ProductItem item: newProductsItemList){
+
+    public void addAllNPitems(List<ProductItem> newProductsItemList) {
+        for (ProductItem item : newProductsItemList) {
             newProAdd(item);
         }
 
     }
-    private void newProAdd(ProductItem item){
+
+    private void newProAdd(ProductItem item) {
         newProductItems.add(item);
         notifyDataSetChanged();
     }
