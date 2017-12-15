@@ -19,4 +19,5 @@ public class TagManager {
     public static final int NEW_ITEMS = 6;
     public static final String PRODUCT_ID_KEY = "com.tutexpsoft.ecommercedev.producct_id";
     public static final String CURRENCY = "৳ ";
+    public static final String FULL_LIST_OPERATION = "com.tutexpsoft.ecommercedev.paginated_list";
 }

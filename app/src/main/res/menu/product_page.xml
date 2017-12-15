@@ -4,12 +4,7 @@
     <item
         android:icon="@drawable/ic_menu_search"
         android:orderInCategory="100"
-        android:title="Notifications"
-        app:showAsAction="always"/>
-    <item
-        android:icon="@drawable/ic_menu_wish"
-        android:orderInCategory="100"
-        android:title="Cart"
+        android:title="Search"
         app:showAsAction="always"/>
     <item
         android:icon="@drawable/ic_menu_cart"
