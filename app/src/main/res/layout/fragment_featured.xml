@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.tutexpsoft.ecommercedev.fragment.FeaturedFragment">
-
     <android.support.v7.widget.RecyclerView
         android:id="@+id/product_loader_recycler_view"
         android:layout_width="match_parent"
