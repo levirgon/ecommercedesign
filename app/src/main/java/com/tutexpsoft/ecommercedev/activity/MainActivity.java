@@ -41,7 +41,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class MainActivity extends OrientationControllerActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
     private ViewPager mViewPager;
     private OfferSlideShowAdapter mSlideShowAdapter;
@@ -53,7 +53,7 @@ public class MainActivity extends OrientationControllerActivity
     private HomeItemsAdapter mTopSaleAdapter;
     private RecyclerView mNewProductsRecyclerView;
     private HomeItemsAdapter mNewProductsAdapter;
-    private TextView onSale,topSale,featuredProducts;
+    private TextView tvMoreOnsale, tvMoreFeatured, tvMoreTopSale, tvMoreNewProducts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,17 +76,23 @@ public class MainActivity extends OrientationControllerActivity
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
+        tvMoreFeatured = findViewById(R.id.more_featuredItems);
+        tvMoreNewProducts = findViewById(R.id.more_newProducts);
+        tvMoreTopSale = findViewById(R.id.more_topSale);
+        tvMoreOnsale = findViewById(R.id.more_onSale);
+
+        tvMoreOnsale.setOnClickListener(this);
+        tvMoreTopSale.setOnClickListener(this);
+        tvMoreNewProducts.setOnClickListener(this);
+        tvMoreFeatured.setOnClickListener(this);
+
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        onSale = (TextView) findViewById(R.id.onSaleProductTextView);
-        featuredProducts = (TextView) findViewById(R.id.featuredProductTextView);
-        topSale = (TextView) findViewById(R.id.topSaleProductTextView);
         setupImageSlide();
         setupDODlist();
         setupRecomendedList();
         setupTopSalelist();
         setupNewProductslist();
-        onSaleClick();
     }
 
     private void setupRecomendedList() {
@@ -107,6 +113,7 @@ public class MainActivity extends OrientationControllerActivity
         mOSAdapter = new HomeItemsAdapter(this, TagManager.ON_SALE, TagManager.HOME_OSI);
         mOsRecyclerView.setAdapter(mOSAdapter);
     }
+
     private void setupTopSalelist() {
         mTopSaleRecyclerView = findViewById(R.id.topsale_product_list);
         LinearLayoutManager verticalLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
@@ -116,6 +123,7 @@ public class MainActivity extends OrientationControllerActivity
         mTopSaleRecyclerView.setAdapter(mTopSaleAdapter);
 
     }
+
     private void setupNewProductslist() {
         mNewProductsRecyclerView = findViewById(R.id.new_product_list);
         LinearLayoutManager verticalLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
@@ -124,18 +132,6 @@ public class MainActivity extends OrientationControllerActivity
         mNewProductsAdapter = new HomeItemsAdapter(this, TagManager.NEW_ITEMS, TagManager.HOME_OSI);
         mNewProductsRecyclerView.setAdapter(mNewProductsAdapter);
 
-    }
-
-    private void onSaleClick(){
-            onSale.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent i = new Intent(getApplicationContext(),TabLayoutActivity.class);
-                    i.putExtra("On Sale Load",2);
-                    startActivity(i);
-
-                }
-            });
     }
 
     private void setupImageSlide() {
@@ -282,6 +278,7 @@ public class MainActivity extends OrientationControllerActivity
     public void onSaleItemsEvent(OnSaleItemsEvent event) {
         mOSAdapter.addAllOSitems(event.getProductItemList());
     }
+
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onFeaturedItemsEvent(OnFeaturedItemsEvent event) {
         mRCMNDAdapter.addAllRFUitems(event.getProductItemList());
@@ -292,11 +289,42 @@ public class MainActivity extends OrientationControllerActivity
     public void topSaleItemsEvent(TopSaleItemsEvent event) {
         mTopSaleAdapter.addAllTSitems(event.getProductItemList());
     }
+
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void newProductsItemsEvent(NewProductItemsEvent event) {
         mNewProductsAdapter.addAllNPitems(event.getProductItemList());
     }
 
+    @Override
+    public void onClick(View v) {
+
+        switch (v.getId()) {
+            case R.id.more_featuredItems:
+                new EcommerceServiceProvider().getFeaturedProducts();
+                showFullList(R.id.more_featuredItems);
+                break;
+            case R.id.more_newProducts:
+                new EcommerceServiceProvider().getNewProducts();
+                showFullList(R.id.more_featuredItems);
+                break;
+            case R.id.more_onSale:
+                new EcommerceServiceProvider().getProductsOnSale();
+                showFullList(R.id.more_featuredItems);
+                break;
+            case R.id.more_topSale:
+                new EcommerceServiceProvider().getTopSellingProducts();
+                showFullList(R.id.more_featuredItems);
+                break;
+
+        }
+
+    }
+
+    private void showFullList(int resID) {
+        Intent intent = new Intent(this, ProductsActivity.class);
+        intent.putExtra(TagManager.FULL_LIST_OPERATION, resID);
+        startActivity(intent);
+    }
 }
 
 

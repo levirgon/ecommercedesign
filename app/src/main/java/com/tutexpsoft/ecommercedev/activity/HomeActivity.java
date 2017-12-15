@@ -32,6 +32,7 @@ public class HomeActivity extends OrientationControllerActivity {
     }
 
     private void intializeCategory() {
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         recyclerView = (RecyclerView) findViewById(R.id.home_category_list);

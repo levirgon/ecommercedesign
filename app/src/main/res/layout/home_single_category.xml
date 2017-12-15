@@ -7,7 +7,7 @@
     android:layout_height="240dp">
 
     <ImageView
-        android:id="@+id/categoryImageView"
+        android:id="@+id/category_large_image"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="1dp"
@@ -21,8 +21,8 @@
         app:srcCompat="@drawable/being_single"/>
 
     <TextView
-        android:id="@+id/categoryTextView"
-        android:layout_width="wrap_content"
+        android:id="@+id/category_large_title"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"

@@ -15,7 +15,7 @@
 
         <ImageView
             android:id="@+id/recomended_item_image"
-            android:layout_width="140dp"
+            android:layout_width="0dp"
             android:layout_height="140dp"
             android:layout_marginBottom="8dp"
             android:scaleType="fitXY"
@@ -24,7 +24,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0"
-            app:srcCompat="@drawable/miband" />
+            app:srcCompat="@drawable/miband"/>
 
 
         <android.support.constraint.ConstraintLayout
@@ -62,20 +62,20 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 android:fontFamily="@font/poiret_one"
+                android:gravity="center"
                 android:maxLines="1"
                 android:paddingLeft="8dp"
                 android:paddingRight="8dp"
                 android:text="৳ 320"
+                android:textAlignment="textStart"
                 android:textColor="@color/colorFButton"
                 android:textSize="18sp"
-                android:textStyle="bold"
-                android:gravity="center"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/recomended_item_title"
-                app:layout_constraintVertical_bias="1.0" />
+                app:layout_constraintVertical_bias="1.0"/>
 
         </android.support.constraint.ConstraintLayout>
 

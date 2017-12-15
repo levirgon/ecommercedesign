@@ -11,46 +11,85 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.tutexpsoft.ecommercedev.R;
+import com.tutexpsoft.ecommercedev.ServerResponseModel.singleItem.ProductItem;
 import com.tutexpsoft.ecommercedev.activity.SingleItemViewActivity;
-import com.tutexpsoft.ecommercedev.model.Products;
 import com.tutexpsoft.ecommercedev.utils.TagManager;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by s on 1/12/17.
  */
 
-public class ProductTypeAdapter extends RecyclerView.Adapter<ProductTypeAdapter.MyViewHolder> {
+public class ProductTypeAdapter extends RecyclerView.Adapter<ProductTypeAdapter.ProductVH> {
     private Context mContext;
-    private List<Products> productsList;
+    private List<ProductItem> mProductsList;
     private static final int LIST_ITEM = 0;
     private static final int GRID_ITEM = 1;
     boolean isSwitchView = true;
 
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView productTitle, productCount;
-        public ImageView thumbnail, overflow;
+    public class ProductVH extends RecyclerView.ViewHolder implements View.OnClickListener {
+        public TextView productTitle, productPrice, productOldPrice,
+                productCategory, productDiscount;
+        public ImageView thumbnail;
+        private ProductItem mProduct;
 
-        public MyViewHolder(View view) {
+        public ProductVH(View view) {
             super(view);
-
             productTitle = (TextView) view.findViewById(R.id.productTitle);
-            productCount = (TextView) view.findViewById(R.id.productCount);
+            productPrice = (TextView) view.findViewById(R.id.product_Current_price);
+            productOldPrice = (TextView) view.findViewById(R.id.product_oldPrice);
+            productDiscount = (TextView) view.findViewById(R.id.more_featuredItems);
+            productCategory = (TextView) view.findViewById(R.id.product_category);
             thumbnail = (ImageView) view.findViewById(R.id.thumbnail);
-            overflow = (ImageView) view.findViewById(R.id.overflow);
+            view.setOnClickListener(this);
+        }
 
+
+        public void bind(ProductItem product) {
+            mProduct = product;
+            productTitle.setText(product.getName());
+            if (product.getOnSale()) {
+                productPrice.setText(TagManager.CURRENCY+product.getSalePrice());
+                productOldPrice.setText(product.getRegularPrice());
+
+                if (!product.getSalePrice().equals("")) {
+                    int difference = Integer.parseInt(product.getRegularPrice()) - Integer.parseInt(product.getSalePrice());
+                    int discount = (difference * 100) / Integer.parseInt(product.getRegularPrice());
+
+                    productDiscount.setText(String.valueOf(discount)+"%off");
+                } else {
+
+
+                }
+                Glide.with(mContext).load(product.getImages().get(0).getSrc()).into(thumbnail);
+            } else {
+                productPrice.setText(TagManager.CURRENCY+product.getPrice());
+                Glide.with(mContext).load(product.getImages().get(0).getSrc()).into(thumbnail);
+                productDiscount.setVisibility(View.GONE);
+                productOldPrice.setText("Regular Price");
+            }
+            productCategory.setText(product.getType());
+
+        }
+
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent(mContext, SingleItemViewActivity.class);
+            intent.putExtra(TagManager.PRODUCT_ID_KEY, mProduct.getId()); //this id will change based on item clicked
+            v.getContext().startActivity(intent);
         }
     }
 
-    public ProductTypeAdapter(Context mContext, List<Products> productsList) {
+    public ProductTypeAdapter(Context mContext) {
         this.mContext = mContext;
-        this.productsList = productsList;
+        this.mProductsList = new ArrayList<>();
     }
 
     @Override
-    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ProductVH onCreateViewHolder(ViewGroup parent, int viewType) {
         View item;
         if (viewType == LIST_ITEM) {
             item = LayoutInflater.from(parent.getContext())
@@ -60,32 +99,19 @@ public class ProductTypeAdapter extends RecyclerView.Adapter<ProductTypeAdapter.
                     .inflate(R.layout.album_style_view, parent, false);
         }
 
-        return new MyViewHolder(item);
+        return new ProductVH(item);
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
+    public void onBindViewHolder(ProductVH holder, int position) {
 
-        Products products = productsList.get(position);
-        holder.productTitle.setText(products.getProductType());
-        holder.productCount.setText(products.getNumOfProducts() + " Pices");
-        Glide.with(mContext).load(products.getThumbnail()).into(holder.thumbnail);
-
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(mContext, SingleItemViewActivity.class);
-                intent.putExtra(TagManager.PRODUCT_ID_KEY, 8080); //this id will change based on item clicked
-                v.getContext().startActivity(intent);
-            }
-        });
-
-
+        ProductItem product = mProductsList.get(position);
+        holder.bind(product);
     }
 
     @Override
     public int getItemCount() {
-        return productsList.size();
+        return mProductsList.size();
     }
 
     @Override
@@ -100,5 +126,17 @@ public class ProductTypeAdapter extends RecyclerView.Adapter<ProductTypeAdapter.
     public boolean toggleItemViewType() {
         isSwitchView = !isSwitchView;
         return isSwitchView;
+    }
+
+    private void add(ProductItem item) {
+        mProductsList.add(item);
+        notifyDataSetChanged();
+    }
+
+    public void addAll(List<ProductItem> recomendedItemList) {
+        for (ProductItem item : recomendedItemList) {
+            add(item);
+        }
+
     }
 }

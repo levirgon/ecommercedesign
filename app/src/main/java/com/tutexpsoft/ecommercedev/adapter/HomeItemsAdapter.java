@@ -27,8 +27,10 @@ public class HomeItemsAdapter extends RecyclerView.Adapter<HomeItemsAdapter.Home
     private Context mContext;
     private int mItemType;
     private int mListType;
-    List<ProductItem> recomendedItems; //just for testing cause, will change its type later.
-    private Context parentContext;
+
+
+
+    private List<ProductItem> recomendedItems;
     private List<ProductItem> onSaleItems;
     private List<ProductItem> topSaleItems;
     private List<ProductItem> newProductItems;
@@ -43,7 +45,7 @@ public class HomeItemsAdapter extends RecyclerView.Adapter<HomeItemsAdapter.Home
         public ImageView topSaleProductImage;
         public TextView newProductTitle, newProductPrice;
         public ImageView newProductImage;
-        private ProductItem item;
+        private ProductItem mProductItem;
 
         public HomeItemVH(View view) {
             super(view);
@@ -66,20 +68,14 @@ public class HomeItemsAdapter extends RecyclerView.Adapter<HomeItemsAdapter.Home
         }
 
 
-        public void clicked(Integer id) {
-            Intent intent = new Intent(mContext, SingleItemViewActivity.class);
-            intent.putExtra(TagManager.PRODUCT_ID_KEY, id);
-            mContext.startActivity(intent);
-        }
-
         public void pass(ProductItem productItem) {
-            item = productItem;
+            mProductItem = productItem;
         }
 
         @Override
         public void onClick(View v) {
             Intent intent = new Intent(mContext, SingleItemViewActivity.class);
-            intent.putExtra(TagManager.PRODUCT_ID_KEY, item.getId()); //this id will change based on item clicked
+            intent.putExtra(TagManager.PRODUCT_ID_KEY, mProductItem.getId()); //this id will change based on mProductItem clicked
             v.getContext().startActivity(intent);
         }
     }
@@ -98,7 +94,6 @@ public class HomeItemsAdapter extends RecyclerView.Adapter<HomeItemsAdapter.Home
     public HomeItemVH onCreateViewHolder(ViewGroup parent, int viewType) {
         HomeItemVH viewHolder = null;
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        parentContext = parent.getContext();
         View view = null;
         if (mItemType == TagManager.ON_SALE) {
             view = inflater.inflate(R.layout.home_big_item, parent, false);
@@ -225,4 +220,19 @@ public class HomeItemsAdapter extends RecyclerView.Adapter<HomeItemsAdapter.Home
         notifyDataSetChanged();
     }
 
+    public List<ProductItem> getRecomendedItems() {
+        return recomendedItems;
+    }
+
+    public List<ProductItem> getOnSaleItems() {
+        return onSaleItems;
+    }
+
+    public List<ProductItem> getTopSaleItems() {
+        return topSaleItems;
+    }
+
+    public List<ProductItem> getNewProductItems() {
+        return newProductItems;
+    }
 }

@@ -14,25 +14,30 @@ import android.widget.Button;
 
 import com.tutexpsoft.ecommercedev.R;
 import com.tutexpsoft.ecommercedev.adapter.ProductTypeAdapter;
-import com.tutexpsoft.ecommercedev.model.Products;
+import com.tutexpsoft.ecommercedev.event.NewProductItemsEvent;
+import com.tutexpsoft.ecommercedev.event.OnFeaturedItemsEvent;
+import com.tutexpsoft.ecommercedev.event.OnSaleItemsEvent;
+import com.tutexpsoft.ecommercedev.event.TopSaleItemsEvent;
+import com.tutexpsoft.ecommercedev.utils.TagManager;
 
-import java.util.ArrayList;
-import java.util.List;
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 public class ProductsActivity extends OrientationControllerActivity {
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager mGridLayoutManager,mLinearLayoutManager;
-    private ProductTypeAdapter mAdapter;
-    private List<Products> productsList;
+    private ProductTypeAdapter mTypeAdapter;
     private Button sortButton, filterButton, layoutButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_products);
+
+        int id = getIntent().getExtras().getInt(TagManager.FULL_LIST_OPERATION);
         this.setTitle("Products");
-        productsList = new ArrayList<>();
-        setupProducts();
+        setupProducts(id);
         initializeProducts();
         onButtonClick();
     }
@@ -44,19 +49,18 @@ public class ProductsActivity extends OrientationControllerActivity {
         filterButton = (Button) findViewById(R.id.filterButton);
         layoutButton = (Button) findViewById(R.id.layoutButton);
         recyclerView = (RecyclerView) findViewById(R.id.product_recycler_view);
-        mAdapter = new ProductTypeAdapter(getApplicationContext(),productsList);
+        mTypeAdapter = new ProductTypeAdapter(getApplicationContext());
         mLinearLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(mLinearLayoutManager);
         recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        if(mAdapter == null){
-            mAdapter = new ProductTypeAdapter(this,productsList);
-            recyclerView.setAdapter(mAdapter);
+        if(mTypeAdapter == null){
+            mTypeAdapter = new ProductTypeAdapter(this);
+            recyclerView.setAdapter(mTypeAdapter);
 
         }else{
-            recyclerView.setAdapter(mAdapter);
+            recyclerView.setAdapter(mTypeAdapter);
         }
-        //mAdapter.notifyDataSetChanged();
 
     }
 
@@ -64,71 +68,34 @@ public class ProductsActivity extends OrientationControllerActivity {
         layoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                boolean isSwitched = mAdapter.toggleItemViewType();
+                boolean isSwitched = mTypeAdapter.toggleItemViewType();
                 if(isSwitched){
-                    layoutButton.setCompoundDrawablesWithIntrinsicBounds(R.drawable.button_image_list,0,0,0);
+                    layoutButton.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_grid,0,0,0);
                     recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 
                 }else {
-                    layoutButton.setCompoundDrawablesWithIntrinsicBounds(R.drawable.button_image_grid,0,0,0);
+                    layoutButton.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_list,0,0,0);
                     recyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(), 2));
                 }
-                mAdapter.notifyDataSetChanged();
+                mTypeAdapter.notifyDataSetChanged();
 
             }
         });
     }
 
 
-    private void setupProducts() {
-        int[] products = new int[]{
-                R.drawable.shirt,
-                R.drawable.t_shirt,
-                R.drawable.tshirt,
-                R.drawable.panjabi,
-                R.drawable.pant,
-                R.drawable.shoes,
-                R.drawable.belts,
-                R.drawable.sunglasses,
-                R.drawable.pocket_square,
-                R.drawable.suit_vest,
-                R.drawable.tie,
-                R.drawable.tie_pin,
-                R.drawable.cufflinks,
-                R.drawable.suspenders,
-                R.drawable.leather_bag
-        };
+    private void setupProducts(int id) {
+        switch (id) {
+            case R.id.more_featuredItems:
+                break;
+            case R.id.more_newProducts:
+                break;
+            case R.id.more_onSale:
+                break;
+            case R.id.more_topSale:
+                break;
 
-        Products productsItem = new Products("Shirts",26,products[0]);
-        productsList.add(productsItem);
-        productsItem = new Products("Polo T-Shirts",122,products[1]);
-        productsList.add(productsItem);
-        productsItem = new Products("T-Shirts",200,products[2]);
-        productsList.add(productsItem);
-        productsItem = new Products("Panjabi",12,products[3]);
-        productsList.add(productsItem);
-        productsItem = new Products("Pants",56,products[4]);
-        productsList.add(productsItem);
-        productsItem = new Products("Shoes",18,products[5]);
-        productsList.add(productsItem);
-        productsItem = new Products("Belts",22,products[6]);
-        productsList.add(productsItem);
-        productsItem = new Products("Sun Glasses",8,products[7]);
-        productsList.add(productsItem);
-        productsItem = new Products("Pocket Squares",23,products[8]);
-        productsList.add(productsItem);
-        productsItem = new Products("Suit Vests",43,products[9]);
-        productsList.add(productsItem);
-        productsItem = new Products("Ties",211,products[10]);
-        productsList.add(productsItem);
-        productsItem = new Products("Tie pins",156,products[11]);
-        productsList.add(productsItem);
-        productsItem = new Products("Cufflinks",82,products[12]);
-        productsList.add(productsItem);
-        productsItem = new Products("Suspenders",2,products[13]);
-        productsList.add(productsItem);
-        productsItem = new Products("Leather Bag",33,products[14]);
-        productsList.add(productsItem);
+        }
 
     }
 
@@ -150,44 +117,81 @@ public class ProductsActivity extends OrientationControllerActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    /*private class GridSpacingItemDecoration extends RecyclerView.ItemDecoration {
-        private int spanCount;
-        private int spacing;
-        private boolean includeEdge;
-
-        public GridSpacingItemDecoration(int spanCount, int spacing, boolean includeEdge) {
-            this.spanCount = spanCount;
-            this.spacing = spacing;
-            this.includeEdge = includeEdge;
-        }
-        @Override
-        public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
-            int position = parent.getChildAdapterPosition(view); // item position
-            int column = position % spanCount; // item column
-
-            if (includeEdge) {
-                outRect.left = spacing - column * spacing / spanCount; // spacing - column * ((1f / spanCount) * spacing)
-                outRect.right = (column + 1) * spacing / spanCount; // (column + 1) * ((1f / spanCount) * spacing)
-
-                if (position < spanCount) { // top edge
-                    outRect.top = spacing;
-                }
-                outRect.bottom = spacing; // item bottom
-            } else {
-                outRect.left = column * spacing / spanCount; // column * ((1f / spanCount) * spacing)
-                outRect.right = spacing - (column + 1) * spacing / spanCount; // spacing - (column + 1) * ((1f /    spanCount) * spacing)
-                if (position >= spanCount) {
-                    outRect.top = spacing; // item top
-                }
-            }
-        }
+    @Override
+    public void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
     }
 
-    *//**
-     * Converting dp to pixel
-     *//*
-    private int dpToPx(int dp) {
-        Resources r = getResources();
-        return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics()));
-    }*/
+    @Override
+    public void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onSaleItemsEvent(OnSaleItemsEvent event) {
+        mTypeAdapter.addAll(event.getProductItemList());
+        mTypeAdapter.notifyDataSetChanged();
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onFeaturedItemsEvent(OnFeaturedItemsEvent event) {
+        mTypeAdapter.addAll(event.getProductItemList());
+        mTypeAdapter.notifyDataSetChanged();
+    }
+
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void topSaleItemsEvent(TopSaleItemsEvent event) {
+        mTypeAdapter.addAll(event.getProductItemList());
+        mTypeAdapter.notifyDataSetChanged();
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void newProductsItemsEvent(NewProductItemsEvent event) {
+        mTypeAdapter.addAll(event.getProductItemList());
+        mTypeAdapter.notifyDataSetChanged();
+    }
+
+//    /*private class GridSpacingItemDecoration extends RecyclerView.ItemDecoration {
+//        private int spanCount;
+//        private int spacing;
+//        private boolean includeEdge;
+//
+//        public GridSpacingItemDecoration(int spanCount, int spacing, boolean includeEdge) {
+//            this.spanCount = spanCount;
+//            this.spacing = spacing;
+//            this.includeEdge = includeEdge;
+//        }
+//        @Override
+//        public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
+//            int position = parent.getChildAdapterPosition(view); // item position
+//            int column = position % spanCount; // item column
+//
+//            if (includeEdge) {
+//                outRect.left = spacing - column * spacing / spanCount; // spacing - column * ((1f / spanCount) * spacing)
+//                outRect.right = (column + 1) * spacing / spanCount; // (column + 1) * ((1f / spanCount) * spacing)
+//
+//                if (position < spanCount) { // top edge
+//                    outRect.top = spacing;
+//                }
+//                outRect.bottom = spacing; // item bottom
+//            } else {
+//                outRect.left = column * spacing / spanCount; // column * ((1f / spanCount) * spacing)
+//                outRect.right = spacing - (column + 1) * spacing / spanCount; // spacing - (column + 1) * ((1f /    spanCount) * spacing)
+//                if (position >= spanCount) {
+//                    outRect.top = spacing; // item top
+//                }
+//            }
+//        }
+//    }
+//
+//    *//**
+//     * Converting dp to pixel
+//     *//*
+//    private int dpToPx(int dp) {
+//        Resources r = getResources();
+//        return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics()));
+//    }
 }

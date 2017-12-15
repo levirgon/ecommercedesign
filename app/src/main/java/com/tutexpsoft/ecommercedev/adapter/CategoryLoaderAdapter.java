@@ -35,8 +35,8 @@ public class CategoryLoaderAdapter extends RecyclerView.Adapter<CategoryLoaderAd
         public MyViewHolder(View view){
             super(view);
 
-            categoryName = (TextView) view.findViewById(R.id.categoryTextView);
-            categoryImage = (ImageView) view.findViewById(R.id.categoryImageView);
+            categoryName = (TextView) view.findViewById(R.id.category_large_title);
+            categoryImage = (ImageView) view.findViewById(R.id.category_large_image);
 
         }
 
