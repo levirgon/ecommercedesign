@@ -27,7 +27,7 @@
         android:id="@+id/detail_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60sp"
+        android:layout_marginBottom="48dp"
         android:fillViewport="true">
 
         <LinearLayout
@@ -153,7 +153,8 @@
                             android:textStyle="bold"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toEndOf="@+id/item_rating_bar"
-                            tools:ignore="HardcodedText"/>
+                            tools:ignore="HardcodedText"
+                            android:layout_marginLeft="8dp"/>
                     </android.support.constraint.ConstraintLayout>
                 </android.support.v7.widget.CardView>
 
@@ -521,7 +522,7 @@
 
                 <android.support.constraint.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="match_parent">
 
                     <TextView
                         android:id="@+id/textView9"
@@ -579,10 +580,9 @@
                         app:layout_constraintTop_toBottomOf="@+id/textView11"/>
 
                     <TextView
-                        android:id="@+id/textView12"
+                        android:id="@+id/highlights"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="16dp"
                         android:layout_marginStart="16dp"
                         android:layout_marginTop="8dp"
                         android:fontFamily="@font/poiret_one"
@@ -591,32 +591,29 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/note_text"/>
 
-                    <TextView
-                        android:id="@+id/highlighted_text"
-                        android:layout_width="wrap_content"
+                    <WebView
+                        android:id="@+id/details_text"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="8dp"
-                        android:layout_marginLeft="16dp"
-                        android:layout_marginRight="8dp"
-                        android:layout_marginStart="16dp"
+                        android:layout_marginStart="8dp"
                         android:layout_marginTop="8dp"
-                        android:fontFamily="@font/poiret_one"
-                        android:text=".Color: Black,.Material: Mash,Artificial Leather"
-                        android:textStyle="bold"
+                        android:gravity="start"
+                        android:textAlignment="textStart"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.0"
-                        app:layout_constraintStart_toStartOf="@id/textView12"
-                        app:layout_constraintTop_toBottomOf="@+id/textView12"/>
+                        app:layout_constraintStart_toStartOf="@+id/highlights"
+                        app:layout_constraintTop_toBottomOf="@+id/highlights"/>
 
                     <View
                         android:id="@+id/divider_highlight"
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:layout_marginTop="16dp"
+                        android:layout_marginTop="8dp"
                         android:background="?attr/actionModeSplitBackground"
                         app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="1.0"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/highlighted_text"/>
+                        app:layout_constraintTop_toBottomOf="@id/details_text"/>
 
                     <TextView
                         android:id="@+id/all_details_text_indicator"
@@ -631,9 +628,10 @@
                         android:textAlignment="viewStart"
                         android:textSize="18sp"
                         android:textStyle="bold"
+                        app:layout_constraintTop_toBottomOf="@id/divider_highlight"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/divider_highlight"/>
+                        tools:layout_editor_absoluteY="1dp"/>
 
                     <View
                         android:layout_width="match_parent"

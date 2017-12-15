@@ -12,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -74,6 +75,7 @@ public class SingleItemViewActivity extends OrientationControllerActivity {
     private Button mColorButton;
     private Button mSizeButton;
     private ProductItem mProductItem;
+    private WebView webText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -156,6 +158,7 @@ public class SingleItemViewActivity extends OrientationControllerActivity {
         mWishListButton = findViewById(R.id.wishlist_button);
         mColorButton = findViewById(R.id.color_button);
         mSizeButton = findViewById(R.id.size_button);
+        webText = findViewById(R.id.details_text);
 
     }
 
@@ -237,6 +240,10 @@ public class SingleItemViewActivity extends OrientationControllerActivity {
             mItemDiscountText.setText("Regular Price");
 
         }
+
+        String html = item.getDescription();
+
+        webText.loadData(html,"text/html","utf-8");
 
         Glide.with(this).load(item.getImages().get(0).getSrc()).into(mItemImage);
         mOverallRating.setText(item.getAverageRating());
