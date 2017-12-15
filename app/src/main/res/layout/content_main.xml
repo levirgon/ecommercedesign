@@ -47,7 +47,7 @@
                     android:text="On Sale"
                     android:textColor="@android:color/black"
                     android:textSize="18sp"
-                    app:layout_constraintEnd_toStartOf="@+id/textView24"
+                    app:layout_constraintEnd_toStartOf="@+id/onSaleProductTextView"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -55,7 +55,7 @@
                     android:layout_marginLeft="16dp"/>
 
                 <TextView
-                    android:id="@+id/textView24"
+                    android:id="@+id/onSaleProductTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
@@ -151,13 +151,13 @@
                     android:text="Featured Products"
                     android:textColor="@color/colorBlack"
                     android:textSize="18sp"
-                    app:layout_constraintEnd_toStartOf="@+id/textView27"
+                    app:layout_constraintEnd_toStartOf="@+id/featuredProductTextView"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"/>
 
                 <TextView
-                    android:id="@+id/textView27"
+                    android:id="@+id/featuredProductTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
@@ -200,13 +200,13 @@
                     android:text="Top Sales"
                     android:textColor="@color/colorBlack"
                     android:textSize="18sp"
-                    app:layout_constraintEnd_toStartOf="@+id/textView31"
+                    app:layout_constraintEnd_toStartOf="@+id/topSaleProductTextView"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"/>
 
                 <TextView
-                    android:id="@+id/textView31"
+                    android:id="@+id/topSaleProductTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"

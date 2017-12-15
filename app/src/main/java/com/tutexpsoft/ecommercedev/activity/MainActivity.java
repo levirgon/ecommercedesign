@@ -17,6 +17,8 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.tutexpsoft.ecommercedev.R;
@@ -51,6 +53,7 @@ public class MainActivity extends OrientationControllerActivity
     private HomeItemsAdapter mTopSaleAdapter;
     private RecyclerView mNewProductsRecyclerView;
     private HomeItemsAdapter mNewProductsAdapter;
+    private TextView onSale,topSale,featuredProducts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,11 +78,15 @@ public class MainActivity extends OrientationControllerActivity
         toggle.syncState();
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        onSale = (TextView) findViewById(R.id.onSaleProductTextView);
+        featuredProducts = (TextView) findViewById(R.id.featuredProductTextView);
+        topSale = (TextView) findViewById(R.id.topSaleProductTextView);
         setupImageSlide();
         setupDODlist();
         setupRecomendedList();
         setupTopSalelist();
         setupNewProductslist();
+        onSaleClick();
     }
 
     private void setupRecomendedList() {
@@ -117,6 +124,18 @@ public class MainActivity extends OrientationControllerActivity
         mNewProductsAdapter = new HomeItemsAdapter(this, TagManager.NEW_ITEMS, TagManager.HOME_OSI);
         mNewProductsRecyclerView.setAdapter(mNewProductsAdapter);
 
+    }
+
+    private void onSaleClick(){
+            onSale.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent(getApplicationContext(),TabLayoutActivity.class);
+                    i.putExtra("On Sale Load",2);
+                    startActivity(i);
+
+                }
+            });
     }
 
     private void setupImageSlide() {

@@ -169,4 +169,89 @@ public class EcommerceServiceProvider {
         });
     }
 
+    public void getFeaturedProductsMore(){
+        mService.getFeaturedProductsMore().enqueue(new Callback<List<ProductItem>>() {
+            @Override
+            public void onResponse(Call<List<ProductItem>> call, Response<List<ProductItem>> response) {
+                if(response.isSuccessful()){
+                    List<ProductItem> productItemList = response.body();
+                    if (productItemList != null) {
+                        Log.d(TAG, "onResponse: Successful :" + response.body().toString());
+                        EventBus.getDefault().post(new OnFeaturedItemsEvent(productItemList));
+                    }else {
+                        try {
+                            Log.d(TAG, "onResponse: Failed :" + response.errorBody().string());
+                            EventBus.getDefault().post(new ErrorEvent("Error Occurred!!"));
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                            EventBus.getDefault().post(new ErrorEvent(e.getMessage()));
+                        }
+                    }
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<List<ProductItem>> call, Throwable t) {
+                Log.d(TAG, "onFailure: Failed" + t.getLocalizedMessage());
+            }
+        });
+    }
+
+    public void getTopSellingProductsMore(){
+        mService.getTopRecentProductsMore().enqueue(new Callback<List<ProductItem>>() {
+            @Override
+            public void onResponse(Call<List<ProductItem>> call, Response<List<ProductItem>> response) {
+                if(response.isSuccessful()){
+                    List<ProductItem> productItemList = response.body();
+                    if (productItemList != null) {
+                        Log.d(TAG, "onResponse: Successful :" + response.body().toString());
+                        EventBus.getDefault().post(new TopSaleItemsEvent(productItemList));
+                    }else {
+                        try {
+                            Log.d(TAG, "onResponse: Failed :" + response.errorBody().string());
+                            EventBus.getDefault().post(new ErrorEvent("Error Occurred!!"));
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                            EventBus.getDefault().post(new ErrorEvent(e.getMessage()));
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<ProductItem>> call, Throwable t) {
+                Log.d(TAG, "onFailure: Failed" + t.getLocalizedMessage());
+            }
+        });
+    }
+
+    public void getOnSaleProductsMore(){
+        mService.getOnSaleProductsMore().enqueue(new Callback<List<ProductItem>>() {
+            @Override
+            public void onResponse(Call<List<ProductItem>> call, Response<List<ProductItem>> response) {
+                if (response.isSuccessful()) {
+                    List<ProductItem> productItemList = response.body();
+                    if (productItemList != null) {
+                        Log.d(TAG, "onResponse: Successful :" + response.body().toString());
+                        EventBus.getDefault().post(new OnSaleItemsEvent(productItemList));
+                    }
+                } else {
+                    try {
+                        Log.d(TAG, "onResponse: Failed :" + response.errorBody().string());
+                        EventBus.getDefault().post(new ErrorEvent("Error Occurred!!"));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        EventBus.getDefault().post(new ErrorEvent(e.getMessage()));
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<ProductItem>> call, Throwable t) {
+                Log.d(TAG, "onFailure: Failed" + t.getLocalizedMessage());
+            }
+        });
+    }
+
 }
