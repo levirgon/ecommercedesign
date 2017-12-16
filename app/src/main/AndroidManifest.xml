@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.tutexpsoft.ecommercedev">
+    package="com.tutexpsoft.ecommercedev">
 
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -14,31 +14,31 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.HomeActivity"/>
+        <activity android:name=".activity.HomeActivity" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyAk2uTSdb4SyHFslCdPNe-TpNIhDWJX-QM"/>
+            android:value="AIzaSyAk2uTSdb4SyHFslCdPNe-TpNIhDWJX-QM" />
 
-        <activity android:name=".activity.SingleItemViewActivity"/>
-        <activity android:name=".activity.ProductsActivity"/>
+        <activity android:name=".activity.SingleItemViewActivity" />
+        <activity android:name=".activity.ProductsActivity" />
 
         <meta-data
             android:name="preloaded_fonts"
-            android:resource="@array/preloaded_fonts"/>
+            android:resource="@array/preloaded_fonts" />
 
         <activity
             android:name=".activity.MainActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.OrientationControllerActivity">
-        </activity>
+        <activity android:name=".activity.OrientationControllerActivity"></activity>
+        <activity android:name=".activity.TabLayoutActivity"></activity>
     </application>
 
 </manifest>

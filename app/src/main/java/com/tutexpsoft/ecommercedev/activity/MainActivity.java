@@ -112,7 +112,6 @@ public class MainActivity extends OrientationControllerActivity
         mOsRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mOSAdapter = new HomeItemsAdapter(this, TagManager.ON_SALE, TagManager.HOME_OSI);
         mOsRecyclerView.setAdapter(mOSAdapter);
-
     }
 
     private void setupTopSalelist() {
