@@ -13,6 +13,7 @@ import android.widget.Button;
 
 import com.tutexpsoft.ecommercedev.R;
 import com.tutexpsoft.ecommercedev.adapter.CartListAdapter;
+import com.tutexpsoft.ecommercedev.utils.CartManager;
 
 
 public class CartFragment extends Fragment {
@@ -83,7 +84,7 @@ public class CartFragment extends Fragment {
         mCartRecyclerView.setLayoutManager(layoutManager);
         mCartRecyclerView.setItemAnimator(new DefaultItemAnimator());
         if (mAdapter == null) {
-            mAdapter = new CartListAdapter(getActivity());
+            mAdapter = new CartListAdapter(getActivity(), CartManager.getInstance(getActivity()).getCartItems());
             mCartRecyclerView.setAdapter(mAdapter);
         } else {
             mCartRecyclerView.setAdapter(mAdapter);
