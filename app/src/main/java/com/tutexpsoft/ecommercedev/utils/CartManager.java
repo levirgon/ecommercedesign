@@ -16,8 +16,8 @@ public class CartManager {
 
     private static CartManager sCartManager;
 
-    //private List<Crime> mCrimes;
     private Map<Integer, ProductItem> mCartItems;
+    private Context mContext;
 
     public static CartManager getInstance(Context context) {
         if (sCartManager == null) {
@@ -27,6 +27,7 @@ public class CartManager {
     }
 
     private CartManager(Context context) {
+        mContext = context;
         mCartItems = new LinkedHashMap<>();
 
     }

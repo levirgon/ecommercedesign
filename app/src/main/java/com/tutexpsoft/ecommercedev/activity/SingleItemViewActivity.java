@@ -94,13 +94,17 @@ public class SingleItemViewActivity extends OrientationControllerActivity {
         cartButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!addedToCart) {
-                    CartManager.getInstance(SingleItemViewActivity.this).addCartItem(mProductItem);
-                    cartButton.setText("Go To Cart");
-                    cartButton.setTextColor(getResources().getColor(R.color.colorFButton));
-                    addedToCart = true;
+                if (mProductItem.getInStock()) {
+                    if (!addedToCart) {
+                        CartManager.getInstance(SingleItemViewActivity.this).addCartItem(mProductItem);
+                        cartButton.setText("Go To Cart");
+                        cartButton.setTextColor(getResources().getColor(R.color.colorFButton));
+                        addedToCart = true;
+                    } else {
+                        startFragment(CartFragment.newInstance(), REPLACE);
+                    }
                 } else {
-                    startFragment(CartFragment.newInstance(), REPLACE);
+                    Toast.makeText(SingleItemViewActivity.this, "Out Of Stock", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -108,8 +112,11 @@ public class SingleItemViewActivity extends OrientationControllerActivity {
         buyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                startFragment(CheckOutFragment.newInstance(), REPLACE);
+                if (mProductItem.getInStock()) {
+                    startFragment(CheckOutFragment.newInstance(), REPLACE);
+                } else {
+                    Toast.makeText(SingleItemViewActivity.this, "Out Of Stock", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -234,7 +241,7 @@ public class SingleItemViewActivity extends OrientationControllerActivity {
             mItemDiscountText.setText(String.valueOf(discount) + "%off");
 //            mOfferExpiryTime.setText(item.getDateOnSaleTo());
         } else {
-            mCurrentPriceText.setText( TagManager.CURRENCY + item.getRegularPrice());
+            mCurrentPriceText.setText(TagManager.CURRENCY + item.getRegularPrice());
             mOldPriceText.setVisibility(View.GONE);
             mOfferExpiryTime.setVisibility(View.GONE);
             mItemDiscountText.setText("Regular Price");
@@ -243,7 +250,7 @@ public class SingleItemViewActivity extends OrientationControllerActivity {
 
         String html = item.getDescription();
 
-        webText.loadData(html,"text/html","utf-8");
+        webText.loadData(html, "text/html", "utf-8");
 
         Glide.with(this).load(item.getImages().get(0).getSrc()).into(mItemImage);
         mOverallRating.setText(item.getAverageRating());

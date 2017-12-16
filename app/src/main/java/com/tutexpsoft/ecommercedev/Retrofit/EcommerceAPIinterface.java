@@ -55,15 +55,9 @@ public interface EcommerceAPIinterface {
     @GET(URLManager.BASE_URL + "products/{product_id}?" + URLManager.SECRET_KEY)
     Call<ProductItem> getSingleProductDetail(@Path("product_id") int productId);
 
-    //replace all the object classes with necessary response models.
+    @GET(URLManager.BASE_URL+"menus/vertical"+URLManager.SECRET_KEY)
+    Call<Object> getCategories(@Path("product_id") int productId);
 
-//    @GET(URLManager.BASE_URL + "products?" + URLManager.SECRET_KEY + "&category={category_id}")
-//    Call<List<Object>> getProductByCategory(@Path("category_id") String categoryId);
-//
-//    //replace all the object classes with necessary response models.
-//
-//    @GET(URLManager.BASE_URL + "products/categories?" + URLManager.SECRET_KEY)
-//    Call<List<Object>> getAllCategories(@Path("category_id") String categoryId);
 
 
 }
