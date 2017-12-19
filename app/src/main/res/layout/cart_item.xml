@@ -30,27 +30,29 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
             android:fontFamily="@font/poiret_one"
             android:text="10% off"
             android:textColor="@color/colorSpecialOffer"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/cart_item_old_price"
+            app:layout_constraintBottom_toBottomOf="@+id/cart_item_current_price"
             app:layout_constraintStart_toEndOf="@+id/cart_item_old_price"
-            app:layout_constraintTop_toTopOf="@+id/cart_item_old_price"/>
+            app:layout_constraintTop_toBottomOf="@+id/textView16" />
 
         <TextView
             android:id="@+id/cart_item_old_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
             android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
             android:background="@drawable/bg_strike_text"
             android:fontFamily="@font/poiret_one"
             android:padding="4dp"
             android:text="499"
             android:textColor="@color/colorBackground"
             app:layout_constraintBottom_toBottomOf="@+id/cart_item_current_price"
-            app:layout_constraintStart_toEndOf="@+id/cart_item_current_price"/>
+            app:layout_constraintStart_toEndOf="@+id/cart_item_current_price"
+            app:layout_constraintTop_toBottomOf="@+id/textView16" />
 
         <TextView
             android:id="@+id/cart_item_current_price"
@@ -155,16 +157,16 @@
             app:layout_constraintTop_toBottomOf="@+id/textView10"/>
 
         <TextView
+            android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
             android:layout_marginStart="8dp"
             android:fontFamily="@font/poiret_one"
             android:text="TuteXP.soft"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/textView16"
             app:layout_constraintStart_toEndOf="@+id/textView16"
-            app:layout_constraintTop_toTopOf="@+id/textView16"/>
+            app:layout_constraintTop_toTopOf="@+id/textView16" />
 
         <TextView
             android:id="@+id/textView7"

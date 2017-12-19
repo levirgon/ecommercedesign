@@ -13,7 +13,7 @@ import android.widget.Button;
 
 import com.tutexpsoft.ecommercedev.R;
 import com.tutexpsoft.ecommercedev.adapter.CartListAdapter;
-import com.tutexpsoft.ecommercedev.utils.CartManager;
+import com.tutexpsoft.ecommercedev.cartstore.CartManager;
 
 
 public class CartFragment extends Fragment {

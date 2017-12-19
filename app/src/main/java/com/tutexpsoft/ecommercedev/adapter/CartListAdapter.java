@@ -11,10 +11,12 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.tutexpsoft.ecommercedev.R;
 import com.tutexpsoft.ecommercedev.ServerResponseModel.singleItem.ProductItem;
-import com.tutexpsoft.ecommercedev.utils.CartManager;
+import com.tutexpsoft.ecommercedev.cartstore.CartManager;
+import com.tutexpsoft.ecommercedev.cartstore.CartStoreItem;
 import com.tutexpsoft.ecommercedev.utils.TagManager;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by noushad on 11/30/17.
@@ -23,13 +25,12 @@ import java.util.ArrayList;
 public class CartListAdapter extends RecyclerView.Adapter {
 
     private Context mContext;
-    private ArrayList<ProductItem> mCartItems;
+    private List<CartStoreItem> mCartItems;
     private Context parentContext;
 
 
-    public CartListAdapter(Context context, ArrayList<ProductItem> cartItems) {
+    public CartListAdapter(Context context, List<CartStoreItem> cartItems) {
         mContext = context;
-        mCartItems = CartManager.getInstance(context).getCartItems();
         mCartItems = cartItems;
     }
 
@@ -46,7 +47,7 @@ public class CartListAdapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
 
-        ProductItem item = mCartItems.get(position);
+        CartStoreItem item = mCartItems.get(position);
         CartItemVH cartItemVH = (CartItemVH) holder;
         cartItemVH.bind(item);
     }
@@ -80,25 +81,25 @@ public class CartListAdapter extends RecyclerView.Adapter {
 
         }
 
-        public void bind(ProductItem item) {
+        public void bind(CartStoreItem item) {
 
-            itemTitle.setText(item.getName());
-            if (item.getOnSale()) {
-                itemCurrentPrice.setText(TagManager.CURRENCY + item.getSalePrice());
-                itemOldPrice.setText(item.getRegularPrice());
+            itemTitle.setText(item.getTitle());
+            if (item.isOnSale()) {
+                itemCurrentPrice.setText(TagManager.CURRENCY + item.getCurrentPrice());
+                itemOldPrice.setText(item.getOldPrice());
+//
+//                int difference = Integer.parseInt(item.getRegularPrice()) - Integer.parseInt(item.getSalePrice());
+//                int discount = (difference * 100) / Integer.parseInt(item.getRegularPrice());
 
-                int difference = Integer.parseInt(item.getRegularPrice()) - Integer.parseInt(item.getSalePrice());
-                int discount = (difference * 100) / Integer.parseInt(item.getRegularPrice());
-
-                itemDiscount.setText(String.valueOf(discount) + "%off");
+                itemDiscount.setText(item.getDiscount() + "%off");
             } else {
-                itemCurrentPrice.setText( TagManager.CURRENCY + item.getRegularPrice());
+                itemCurrentPrice.setText( TagManager.CURRENCY + item.getCurrentPrice());
                 itemOldPrice.setVisibility(View.GONE);
                 itemDiscount.setText("Regular Price");
 
             }
 
-            Glide.with(mContext).load(item.getImages().get(0).getSrc()).into(mItemImage);
+            Glide.with(mContext).load(item.getImageId()).into(mItemImage);
         }
     }
 }

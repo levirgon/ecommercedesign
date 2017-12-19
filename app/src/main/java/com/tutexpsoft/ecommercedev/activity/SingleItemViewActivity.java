@@ -1,5 +1,6 @@
 package com.tutexpsoft.ecommercedev.activity;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -30,7 +31,7 @@ import com.tutexpsoft.ecommercedev.adapter.productImagesSlideAdapter;
 import com.tutexpsoft.ecommercedev.event.ItemDetailEvent;
 import com.tutexpsoft.ecommercedev.fragment.CartFragment;
 import com.tutexpsoft.ecommercedev.fragment.CheckOutFragment;
-import com.tutexpsoft.ecommercedev.utils.CartManager;
+import com.tutexpsoft.ecommercedev.cartstore.CartManager;
 import com.tutexpsoft.ecommercedev.utils.TagManager;
 
 import org.greenrobot.eventbus.EventBus;
@@ -96,7 +97,8 @@ public class SingleItemViewActivity extends OrientationControllerActivity {
             public void onClick(View v) {
                 if (mProductItem.getInStock()) {
                     if (!addedToCart) {
-                        CartManager.getInstance(SingleItemViewActivity.this).addCartItem(mProductItem);
+                        CartManager.getInstance(SingleItemViewActivity.this).setApp(getApplication());
+                        CartManager.getInstance(SingleItemViewActivity.this).addCartItem(mProductItem,mItemDiscountText.getText().toString());
                         cartButton.setText("Go To Cart");
                         cartButton.setTextColor(getResources().getColor(R.color.colorFButton));
                         addedToCart = true;
