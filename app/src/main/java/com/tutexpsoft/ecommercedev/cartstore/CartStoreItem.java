@@ -12,7 +12,7 @@ import io.objectbox.annotation.Id;
 public class CartStoreItem {
 
 
-    @Id
+    @Id(assignable = true)
     long id;
     private String title;
     private String discount;

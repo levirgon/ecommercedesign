@@ -5,8 +5,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.tutexpsoft.ecommercedev.R;
@@ -29,9 +31,9 @@ public class CartListAdapter extends RecyclerView.Adapter {
     private Context parentContext;
 
 
-    public CartListAdapter(Context context, List<CartStoreItem> cartItems) {
+    public CartListAdapter(Context context) {
         mContext = context;
-        mCartItems = cartItems;
+        mCartItems = CartManager.getInstance(context).getCartItems();
     }
 
     @Override
@@ -57,7 +59,7 @@ public class CartListAdapter extends RecyclerView.Adapter {
         return mCartItems == null ? 0 : mCartItems.size();
     }
 
-    private class CartItemVH extends RecyclerView.ViewHolder{
+    private class CartItemVH extends RecyclerView.ViewHolder {
         private TextView itemTitle;
         private TextView itemDiscount;
         private TextView itemOldPrice;
@@ -66,9 +68,13 @@ public class CartListAdapter extends RecyclerView.Adapter {
         private TextView itemColor;
         private TextView itemDeliveryDate;
         private ImageView mItemImage;
+        private Button removeButton;
+        private Button addWishButton;
+        private CartStoreItem mItem;
 
         public CartItemVH(View viewItem) {
             super(viewItem);
+
             itemTitle = viewItem.findViewById(R.id.cart_item_title);
             itemDiscount = viewItem.findViewById(R.id.cart_item_discount);
             itemOldPrice = viewItem.findViewById(R.id.cart_item_old_price);
@@ -77,23 +83,40 @@ public class CartListAdapter extends RecyclerView.Adapter {
             itemColor = viewItem.findViewById(R.id.cart_item_color);
             itemDeliveryDate = viewItem.findViewById(R.id.delivery_date);
             mItemImage = viewItem.findViewById(R.id.cart_item_image);
+            removeButton = viewItem.findViewById(R.id.remove_button);
+            addWishButton = viewItem.findViewById(R.id.wish_add_button);
 
+            removeButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    CartManager.getInstance(mContext).remove(mItem);
+                    int currPosition = mCartItems.indexOf(mItem);
+                    mCartItems.remove(currPosition);
+                    notifyItemRemoved(currPosition);
+
+                }
+            });
+
+            addWishButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(mContext,"YOUR WISH HAS BEEN GRANTED",Toast.LENGTH_SHORT).show();
+                }
+            });
 
         }
 
         public void bind(CartStoreItem item) {
+            mItem = item;
 
             itemTitle.setText(item.getTitle());
             if (item.isOnSale()) {
                 itemCurrentPrice.setText(TagManager.CURRENCY + item.getCurrentPrice());
                 itemOldPrice.setText(item.getOldPrice());
-//
-//                int difference = Integer.parseInt(item.getRegularPrice()) - Integer.parseInt(item.getSalePrice());
-//                int discount = (difference * 100) / Integer.parseInt(item.getRegularPrice());
 
-                itemDiscount.setText(item.getDiscount() + "%off");
+                itemDiscount.setText(item.getDiscount());
             } else {
-                itemCurrentPrice.setText( TagManager.CURRENCY + item.getCurrentPrice());
+                itemCurrentPrice.setText(TagManager.CURRENCY + item.getCurrentPrice());
                 itemOldPrice.setVisibility(View.GONE);
                 itemDiscount.setText("Regular Price");
 

@@ -6,6 +6,7 @@ import android.graphics.drawable.Drawable;
 import android.util.Log;
 
 import com.tutexpsoft.ecommercedev.ServerResponseModel.singleItem.ProductItem;
+import com.tutexpsoft.ecommercedev.fragment.CartFragment;
 
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -24,7 +25,7 @@ public class CartManager {
     private static CartManager sCartManager;
     private Box<CartStoreItem> cartBox;
     private Query<CartStoreItem> cartQuery;
-    private Map<Integer, ProductItem> mCartItems;
+    //    private Map<Integer, ProductItem> mCartItems;
     private Context mContext;
     private Application mApplication;
 
@@ -37,7 +38,7 @@ public class CartManager {
 
     private CartManager(Context context) {
         mContext = context;
-        mCartItems = new LinkedHashMap<>();
+//        mCartItems = new LinkedHashMap<>();
 
 
     }
@@ -49,38 +50,37 @@ public class CartManager {
         for (CartStoreItem item : items) {
             Log.d(TAG, "updateCart: " + item.getTitle());
         }
-        Log.d(TAG, "updateCart: "+items.size());
+        Log.d(TAG, "updateCart: " + items.size());
 
     }
 
 
     public List<CartStoreItem> getCartItems() {
-//        return new ArrayList<>(mCartItems.values());
-         List<CartStoreItem> items = cartQuery.find();
-         return items;
+        List<CartStoreItem> items = cartQuery.find();
+        return items;
     }
 
-    public ProductItem getCartItem(int id) {
+//    public ProductItem getCartItem(int id) {
+//
+//      return mCartItems.get(id);
+//    }
 
-        return mCartItems.get(id);
-    }
 
     public int getCartItemPosition(int id) {
 
         int i = 0;
-        for (Map.Entry<Integer, ProductItem> CartItemEntry : mCartItems.entrySet()) {
-            if (CartItemEntry.getKey().equals(id)) {
-                return i;
-            }
-            i++;
-        }
+//        for (Map.Entry<Integer, ProductItem> CartItemEntry : mCartItems.entrySet()) {
+//            if (CartItemEntry.getKey().equals(id)) {
+//                return i;
+//            }
+//            i++;
+//        }
 
         return 0;
     }
 
     public void addCartItem(ProductItem item, String text) {
 
-//        mCartItems.put(cartItem.getId(), cartItem);
         String img = item.getImages().get(0).getSrc();
         String title;
         String discount;
@@ -104,18 +104,34 @@ public class CartManager {
             currentPrice = item.getPrice();
         }
         quantity = 1;
-        cartBox.put(new CartStoreItem(0, title, discount, oldPrice, currentPrice, quantity, size, color, null, img, onSale));
+        cartBox.put(new CartStoreItem(item.getId(), title, discount, oldPrice, currentPrice, quantity, size, color, null, img, onSale));
         updateCart();
 
     }
 
 
     public void setApp(Application application) {
-
-        mApplication = application;
-        BoxStore boxStore = ((App) application).getBoxStore();
-        cartBox = boxStore.boxFor(CartStoreItem.class);
-        cartQuery = cartBox.query().order(CartStoreItem_.title).build();
-        updateCart();
+        if (mApplication == null) {
+            mApplication = application;
+            BoxStore boxStore = ((App) application).getBoxStore();
+            cartBox = boxStore.boxFor(CartStoreItem.class);
+            cartQuery = cartBox.query().order(CartStoreItem_.title).build();
+            updateCart();
+        }
     }
+
+    public void remove(CartStoreItem item) {
+        cartBox.remove(item);
+        updateCart();
+
+    }
+
+    public boolean contains(Integer id) {
+        try {
+            return cartBox.get(id) != null;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
 }

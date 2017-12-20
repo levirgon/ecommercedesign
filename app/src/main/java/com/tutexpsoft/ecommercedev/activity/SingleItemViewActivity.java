@@ -1,6 +1,5 @@
 package com.tutexpsoft.ecommercedev.activity;
 
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -52,7 +51,6 @@ public class SingleItemViewActivity extends OrientationControllerActivity {
     public static final int CREATE_NEW = 1;
     public static final int REPLACE = 2;
     public String CURRENT_FRAGMENT_TAG = TagManager.CART_FRAGMENT;
-    private boolean addedToCart = false;
     private NestedScrollView detailContainer;
     private LinearLayout buttonContainer;
     private ProgressBar detailProgress;
@@ -75,7 +73,7 @@ public class SingleItemViewActivity extends OrientationControllerActivity {
     private Button mWishListButton;
     private Button mColorButton;
     private Button mSizeButton;
-    private ProductItem mProductItem;
+    private ProductItem mItem;
     private WebView webText;
 
     @Override
@@ -95,13 +93,11 @@ public class SingleItemViewActivity extends OrientationControllerActivity {
         cartButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mProductItem.getInStock()) {
-                    if (!addedToCart) {
-                        CartManager.getInstance(SingleItemViewActivity.this).setApp(getApplication());
-                        CartManager.getInstance(SingleItemViewActivity.this).addCartItem(mProductItem,mItemDiscountText.getText().toString());
+                if (mItem.getInStock()) {
+                    if (!CartManager.getInstance(SingleItemViewActivity.this).contains(mItem.getId())) {
+                        CartManager.getInstance(SingleItemViewActivity.this).addCartItem(mItem, mItemDiscountText.getText().toString());
                         cartButton.setText("Go To Cart");
                         cartButton.setTextColor(getResources().getColor(R.color.colorFButton));
-                        addedToCart = true;
                     } else {
                         startFragment(CartFragment.newInstance(), REPLACE);
                     }
@@ -114,7 +110,7 @@ public class SingleItemViewActivity extends OrientationControllerActivity {
         buyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mProductItem.getInStock()) {
+                if (mItem.getInStock()) {
                     startFragment(CheckOutFragment.newInstance(), REPLACE);
                 } else {
                     Toast.makeText(SingleItemViewActivity.this, "Out Of Stock", Toast.LENGTH_SHORT).show();
@@ -220,6 +216,8 @@ public class SingleItemViewActivity extends OrientationControllerActivity {
         if (getFragmentManager().getBackStackEntryCount() > 0) {
             getFragmentManager().popBackStack();
         } else {
+            Toast.makeText(this,"On BackPressed",Toast.LENGTH_LONG).show();
+            updateUI();
             super.onBackPressed();
         }
     }
@@ -230,45 +228,52 @@ public class SingleItemViewActivity extends OrientationControllerActivity {
     }
 
 
-    private void updateUI(ProductItem item) {
-        mProductItem = item;
-        mItemTitle.setText(item.getName());
-        if (item.getOnSale()) {
-            mCurrentPriceText.setText(TagManager.CURRENCY + item.getSalePrice());
-            mOldPriceText.setText(item.getRegularPrice());
+    private void updateUI() {
 
-            int difference = Integer.parseInt(item.getRegularPrice()) - Integer.parseInt(item.getSalePrice());
-            int discount = (difference * 100) / Integer.parseInt(item.getRegularPrice());
+        if (CartManager.getInstance(SingleItemViewActivity.this).contains(mItem.getId())) {
+            cartButton.setText("Go To Cart");
+            cartButton.setTextColor(getResources().getColor(R.color.colorFButton));
+        }else{
+            cartButton.setText("Add To Cart");
+            cartButton.setTextColor(getResources().getColor(R.color.colorBackground));
+        }
+        mItemTitle.setText(mItem.getName());
+        if (mItem.getOnSale()) {
+            mCurrentPriceText.setText(TagManager.CURRENCY + mItem.getSalePrice());
+            mOldPriceText.setText(mItem.getRegularPrice());
+
+            int difference = Integer.parseInt(mItem.getRegularPrice()) - Integer.parseInt(mItem.getSalePrice());
+            int discount = (difference * 100) / Integer.parseInt(mItem.getRegularPrice());
 
             mItemDiscountText.setText(String.valueOf(discount) + "%off");
-//            mOfferExpiryTime.setText(item.getDateOnSaleTo());
+//            mOfferExpiryTime.setText(mItem.getDateOnSaleTo());
         } else {
-            mCurrentPriceText.setText(TagManager.CURRENCY + item.getRegularPrice());
+            mCurrentPriceText.setText(TagManager.CURRENCY + mItem.getRegularPrice());
             mOldPriceText.setVisibility(View.GONE);
             mOfferExpiryTime.setVisibility(View.GONE);
             mItemDiscountText.setText("Regular Price");
 
         }
 
-        String html = item.getDescription();
+        String html = mItem.getDescription();
 
         webText.loadData(html, "text/html", "utf-8");
 
-        Glide.with(this).load(item.getImages().get(0).getSrc()).into(mItemImage);
-        mOverallRating.setText(item.getAverageRating());
-        mRatingCount.setText(String.valueOf(item.getRatingCount()));
-        mSaleCount.setText(String.valueOf(item.getTotalSales()));
-        if (item.getInStock()) {
+        Glide.with(this).load(mItem.getImages().get(0).getSrc()).into(mItemImage);
+        mOverallRating.setText(mItem.getAverageRating());
+        mRatingCount.setText(String.valueOf(mItem.getRatingCount()));
+        mSaleCount.setText(String.valueOf(mItem.getTotalSales()));
+        if (mItem.getInStock()) {
             mItemStockIndicator.setText("In Stock");
 
         } else {
             mItemStockIndicator.setText("Out Of Stock");
         }
 
-        int rating = (int) Double.parseDouble(item.getAverageRating());
+        int rating = (int) Double.parseDouble(mItem.getAverageRating());
         mRatingBar.setRating(rating);
 
-        setUpImageSlide(item.getImages());
+        setUpImageSlide(mItem.getImages());
 
     }
 
@@ -290,7 +295,16 @@ public class SingleItemViewActivity extends OrientationControllerActivity {
         detailContainer.setVisibility(View.VISIBLE);
         buttonContainer.setVisibility(View.VISIBLE);
         detailProgress.setVisibility(View.GONE);
-        updateUI(event.getItem());
+        mItem = event.getItem();
+        updateUI();
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Toast.makeText(this,"On Resume",Toast.LENGTH_LONG).show();
+        CartManager.getInstance(SingleItemViewActivity.this).setApp(getApplication());
 
     }
 }

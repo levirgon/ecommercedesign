@@ -54,10 +54,10 @@ public class CartFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_cart, container, false);
         checkoutButton = view.findViewById(R.id.checkout_button);
-        setupCartItemsList(view);
+        mCartRecyclerView = view.findViewById(R.id.cart_items_list);
+        setupCartItemsList();
         setClickListener();
         return view;
     }
@@ -78,13 +78,13 @@ public class CartFragment extends Fragment {
 
 
 
-    private void setupCartItemsList(View view) {
-        mCartRecyclerView = view.findViewById(R.id.cart_items_list);
+    public void setupCartItemsList() {
+
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         mCartRecyclerView.setLayoutManager(layoutManager);
         mCartRecyclerView.setItemAnimator(new DefaultItemAnimator());
         if (mAdapter == null) {
-            mAdapter = new CartListAdapter(getActivity(), CartManager.getInstance(getActivity()).getCartItems());
+            mAdapter = new CartListAdapter(getActivity());
             mCartRecyclerView.setAdapter(mAdapter);
         } else {
             mCartRecyclerView.setAdapter(mAdapter);

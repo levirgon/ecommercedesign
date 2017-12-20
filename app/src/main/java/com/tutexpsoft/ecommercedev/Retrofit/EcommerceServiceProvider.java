@@ -24,7 +24,7 @@ import retrofit2.Response;
  */
 
 public class EcommerceServiceProvider {
-    private static final String TAG = "EcommerceServiceProvider";
+    private static final String TAG = "EcommerceProvider";
 
     private static final EcommerceAPIinterface mService = ServiceGenerator.createService(EcommerceAPIinterface.class);
 
