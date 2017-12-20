@@ -120,10 +120,15 @@ public class CartManager {
         }
     }
 
-    public void remove(CartStoreItem item) {
+    public void removeCartItem(CartStoreItem item) {
         cartBox.remove(item);
         updateCart();
+    }
 
+    public void updateCartItemQuantity(CartStoreItem item,int quantity){
+        item.setQuantity(quantity);
+        cartBox.put(item);
+        updateCart();
     }
 
     public boolean contains(Integer id) {

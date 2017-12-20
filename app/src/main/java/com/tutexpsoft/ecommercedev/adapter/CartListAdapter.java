@@ -6,18 +6,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.tutexpsoft.ecommercedev.R;
-import com.tutexpsoft.ecommercedev.ServerResponseModel.singleItem.ProductItem;
 import com.tutexpsoft.ecommercedev.cartstore.CartManager;
 import com.tutexpsoft.ecommercedev.cartstore.CartStoreItem;
+import com.tutexpsoft.ecommercedev.event.ItemChangedEvent;
 import com.tutexpsoft.ecommercedev.utils.TagManager;
 
-import java.util.ArrayList;
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.List;
 
 /**
@@ -67,10 +69,13 @@ public class CartListAdapter extends RecyclerView.Adapter {
         private TextView itemSize;
         private TextView itemColor;
         private TextView itemDeliveryDate;
+        private TextView quantityText;
         private ImageView mItemImage;
         private Button removeButton;
         private Button addWishButton;
         private CartStoreItem mItem;
+        private ImageButton increaseBUtton;
+        private ImageButton decreaseButton;
 
         public CartItemVH(View viewItem) {
             super(viewItem);
@@ -85,14 +90,44 @@ public class CartListAdapter extends RecyclerView.Adapter {
             mItemImage = viewItem.findViewById(R.id.cart_item_image);
             removeButton = viewItem.findViewById(R.id.remove_button);
             addWishButton = viewItem.findViewById(R.id.wish_add_button);
+            quantityText = viewItem.findViewById(R.id.item_quantity);
+            increaseBUtton = viewItem.findViewById(R.id.increase_button);
+            decreaseButton = viewItem.findViewById(R.id.decrease_button);
+
+
+            increaseBUtton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int quantity = Integer.parseInt(quantityText.getText().toString());
+                    ++quantity;
+                    quantityText.setText(String.valueOf(quantity));
+                    CartManager.getInstance(mContext).updateCartItemQuantity(mItem,quantity);
+                    EventBus.getDefault().post(new ItemChangedEvent());
+                }
+            });
+
+            decreaseButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int quantity = Integer.parseInt(quantityText.getText().toString());
+                    if (quantity > 1) {
+                        --quantity;
+                        quantityText.setText(String.valueOf(quantity));
+                        CartManager.getInstance(mContext).updateCartItemQuantity(mItem,quantity);
+                        EventBus.getDefault().post(new ItemChangedEvent());
+
+                    }
+                }
+            });
 
             removeButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    CartManager.getInstance(mContext).remove(mItem);
+                    CartManager.getInstance(mContext).removeCartItem(mItem);
                     int currPosition = mCartItems.indexOf(mItem);
                     mCartItems.remove(currPosition);
                     notifyItemRemoved(currPosition);
+                    EventBus.getDefault().post(new ItemChangedEvent());
 
                 }
             });
@@ -100,7 +135,7 @@ public class CartListAdapter extends RecyclerView.Adapter {
             addWishButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(mContext,"YOUR WISH HAS BEEN GRANTED",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mContext, "YOUR WISH HAS BEEN GRANTED", Toast.LENGTH_SHORT).show();
                 }
             });
 
@@ -113,7 +148,6 @@ public class CartListAdapter extends RecyclerView.Adapter {
             if (item.isOnSale()) {
                 itemCurrentPrice.setText(TagManager.CURRENCY + item.getCurrentPrice());
                 itemOldPrice.setText(item.getOldPrice());
-
                 itemDiscount.setText(item.getDiscount());
             } else {
                 itemCurrentPrice.setText(TagManager.CURRENCY + item.getCurrentPrice());
@@ -121,6 +155,7 @@ public class CartListAdapter extends RecyclerView.Adapter {
                 itemDiscount.setText("Regular Price");
 
             }
+            quantityText.setText(String.valueOf(item.getQuantity()));
 
             Glide.with(mContext).load(item.getImageId()).into(mItemImage);
         }

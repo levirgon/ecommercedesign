@@ -40,7 +40,7 @@ public class CartStoreItem {
         this.discount = discount;
         this.oldPrice = oldPrice;
         this.currentPrice = currentPrice;
-        quantity = quantity;
+        this.quantity = quantity;
         this.size = size;
         this.color = color;
         this.delivery_date = delivery_date;
@@ -84,10 +84,6 @@ public class CartStoreItem {
         return delivery_date;
     }
 
-//
-//    public Drawable getImageId() {
-//        return imageId;
-//    }
 
 
     public int getQuantity() {
@@ -95,7 +91,7 @@ public class CartStoreItem {
     }
 
     public void setQuantity(int quantity) {
-        quantity = quantity;
+        this.quantity = quantity;
     }
 
     public boolean isOnSale() {
