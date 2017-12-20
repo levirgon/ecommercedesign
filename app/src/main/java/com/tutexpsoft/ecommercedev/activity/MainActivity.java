@@ -202,7 +202,9 @@ public class MainActivity extends OrientationControllerActivity
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
+switch (id){
 
+}
         //noinspection SimplifiableIfStatement
         return super.onOptionsItemSelected(item);
     }

@@ -589,20 +589,23 @@
                         android:text="Highlights"
                         android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/note_text"/>
+                        app:layout_constraintTop_toBottomOf="@+id/note_text"
+                        android:layout_marginLeft="16dp" />
 
                     <WebView
                         android:id="@+id/details_text"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
+                        android:layout_marginEnd="16dp"
                         android:layout_marginStart="8dp"
                         android:layout_marginTop="8dp"
                         android:gravity="start"
                         android:textAlignment="textStart"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="@+id/highlights"
-                        app:layout_constraintTop_toBottomOf="@+id/highlights"/>
+                        app:layout_constraintTop_toBottomOf="@+id/highlights"
+                        android:layout_marginRight="16dp"
+                        android:layout_marginLeft="8dp" />
 
                     <View
                         android:id="@+id/divider_highlight"

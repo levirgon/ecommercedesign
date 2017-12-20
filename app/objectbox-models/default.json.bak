@@ -1,0 +1,70 @@
+{
+  "_note1": "KEEP THIS FILE! Check it into a version control system (VCS) like git.",
+  "_note2": "ObjectBox manages crucial IDs for your object model. See docs for details.",
+  "_note3": "If you have VCS merge conflicts, you must resolve them according to ObjectBox docs.",
+  "entities": [
+    {
+      "id": "1:2288708828369364631",
+      "lastPropertyId": "13:6098044986170917825",
+      "name": "CartStoreItem",
+      "properties": [
+        {
+          "id": "1:8543760525517555619",
+          "name": "id"
+        },
+        {
+          "id": "2:2848357294933825951",
+          "name": "title"
+        },
+        {
+          "id": "3:7037058660623402206",
+          "name": "discount"
+        },
+        {
+          "id": "4:6089930990314404810",
+          "name": "oldPrice"
+        },
+        {
+          "id": "5:6664890561873778260",
+          "name": "currentPrice"
+        },
+        {
+          "id": "6:37246565296139320",
+          "name": "size"
+        },
+        {
+          "id": "7:7078721968631621570",
+          "name": "color"
+        },
+        {
+          "id": "8:6685941071221364482",
+          "name": "delivery_date"
+        },
+        {
+          "id": "11:426969636288052513",
+          "name": "isOnSale"
+        },
+        {
+          "id": "13:6098044986170917825",
+          "name": "quantity"
+        }
+      ],
+      "relations": []
+    }
+  ],
+  "lastEntityId": "1:2288708828369364631",
+  "lastIndexId": "0:0",
+  "lastRelationId": "0:0",
+  "lastSequenceId": "0:0",
+  "modelVersion": 4,
+  "modelVersionParserMinimum": 4,
+  "retiredEntityUids": [],
+  "retiredIndexUids": [],
+  "retiredPropertyUids": [
+    366171346499988054,
+    1993225472925674218,
+    7731893384327838366
+  ],
+  "retiredRelationUids": [],
+  "version": 1
+}
