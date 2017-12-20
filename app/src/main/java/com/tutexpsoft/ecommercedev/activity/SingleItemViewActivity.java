@@ -216,7 +216,6 @@ public class SingleItemViewActivity extends OrientationControllerActivity {
         if (getFragmentManager().getBackStackEntryCount() > 0) {
             getFragmentManager().popBackStack();
         } else {
-            Toast.makeText(this,"On BackPressed",Toast.LENGTH_LONG).show();
             updateUI();
             super.onBackPressed();
         }
@@ -291,7 +290,6 @@ public class SingleItemViewActivity extends OrientationControllerActivity {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onItemDetailEvent(ItemDetailEvent event) {
-        Toast.makeText(this, "Data Recieved", Toast.LENGTH_SHORT).show();
         detailContainer.setVisibility(View.VISIBLE);
         buttonContainer.setVisibility(View.VISIBLE);
         detailProgress.setVisibility(View.GONE);
@@ -303,7 +301,6 @@ public class SingleItemViewActivity extends OrientationControllerActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        Toast.makeText(this,"On Resume",Toast.LENGTH_LONG).show();
         CartManager.getInstance(SingleItemViewActivity.this).setApp(getApplication());
 
     }
