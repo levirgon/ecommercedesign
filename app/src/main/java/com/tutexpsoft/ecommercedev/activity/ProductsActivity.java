@@ -13,22 +13,32 @@ import android.view.View;
 import android.widget.Button;
 
 import com.tutexpsoft.ecommercedev.R;
+import com.tutexpsoft.ecommercedev.ServerResponseModel.singleItem.ProductItem;
 import com.tutexpsoft.ecommercedev.adapter.ProductTypeAdapter;
 import com.tutexpsoft.ecommercedev.event.NewProductItemsEvent;
 import com.tutexpsoft.ecommercedev.event.OnFeaturedItemsEvent;
 import com.tutexpsoft.ecommercedev.event.OnSaleItemsEvent;
 import com.tutexpsoft.ecommercedev.event.TopSaleItemsEvent;
+import com.tutexpsoft.ecommercedev.utils.PaginationScrollListener;
 import com.tutexpsoft.ecommercedev.utils.TagManager;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.util.List;
+
 public class ProductsActivity extends OrientationControllerActivity {
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager mGridLayoutManager,mLinearLayoutManager;
     private ProductTypeAdapter mTypeAdapter;
     private Button sortButton, filterButton, layoutButton;
+    private static final int PAGE_START = 1;
+    private boolean isLoading = false;
+    private boolean isLastPage = false;
+    private int TOTAL_PAGES = 16;
+    private int currentPage = PAGE_START;
+    List<ProductItem> productItems;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,12 +67,68 @@ public class ProductsActivity extends OrientationControllerActivity {
         if(mTypeAdapter == null){
             mTypeAdapter = new ProductTypeAdapter(this);
             recyclerView.setAdapter(mTypeAdapter);
+            recyclerView.addOnScrollListener(new PaginationScrollListener(mLinearLayoutManager) {
+                @Override
+                protected void loadMoreItems() {
+                    isLoading = true;
+                    currentPage += 1;
+                    loadNextPage();
+                }
+
+                @Override
+                public int getTotalPageCount() {
+                    return TOTAL_PAGES;
+                }
+
+                @Override
+                public boolean isLastPage() {
+                    return isLastPage;
+                }
+
+                @Override
+                public boolean isLoading() {
+                    return isLoading;
+                }
+            });
+            loadFirstPage();
 
         }else{
             recyclerView.setAdapter(mTypeAdapter);
+            recyclerView.addOnScrollListener(new PaginationScrollListener(mLinearLayoutManager) {
+                @Override
+                protected void loadMoreItems() {
+                    isLoading = true;
+                    currentPage += 1;
+                    loadNextPage();
+                }
+
+                @Override
+                public int getTotalPageCount() {
+                    return TOTAL_PAGES;
+                }
+
+                @Override
+                public boolean isLastPage() {
+                    return isLastPage;
+                }
+
+                @Override
+                public boolean isLoading() {
+                    return isLoading;
+                }
+            });
+            loadFirstPage();
         }
 
     }
+
+    private void loadNextPage() {
+
+    }
+    private void loadFirstPage(){
+
+    }
+
 
     private void onButtonClick(){
         layoutButton.setOnClickListener(new View.OnClickListener() {

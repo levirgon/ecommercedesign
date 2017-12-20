@@ -42,8 +42,8 @@ public interface EcommerceAPIinterface {
 
     //replace all the object classes with necessary response models.
 
-    @GET(URLManager.BASE_URL + "products?" + URLManager.SECRET_KEY+"&per_page=30")
-    Call<List<ProductItem>> getTopRecentProductsMore();
+    @GET(URLManager.BASE_URL + "products?" + URLManager.SECRET_KEY+"&page={page_number}")
+    Call<List<ProductItem>> getTopRecentProductsMore(@Path("page_number") int page_number);
 
     //replace all the object classes with necessary response models.
 

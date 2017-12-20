@@ -28,6 +28,8 @@ public class ProductTypeAdapter extends RecyclerView.Adapter<ProductTypeAdapter.
     private static final int LIST_ITEM = 0;
     private static final int GRID_ITEM = 1;
     boolean isSwitchView = true;
+    private boolean isLoadingAdded = false;
+    private static final int LOADING = 2;
 
 
     public class ProductVH extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -111,15 +113,16 @@ public class ProductTypeAdapter extends RecyclerView.Adapter<ProductTypeAdapter.
 
     @Override
     public int getItemCount() {
-        return mProductsList.size();
+
+        return mProductsList == null ? 0: mProductsList.size();
     }
 
     @Override
     public int getItemViewType(int position) {
         if (isSwitchView) {
-            return LIST_ITEM;
+            return (position == mProductsList.size()-1 && isLoadingAdded)?LOADING:LIST_ITEM;
         } else {
-            return GRID_ITEM;
+            return (position == mProductsList.size()-1 && isLoadingAdded)?LOADING:GRID_ITEM;
         }
     }
 
@@ -130,7 +133,7 @@ public class ProductTypeAdapter extends RecyclerView.Adapter<ProductTypeAdapter.
 
     private void add(ProductItem item) {
         mProductsList.add(item);
-        notifyDataSetChanged();
+        notifyItemInserted(mProductsList.size() - 1);
     }
 
     public void addAll(List<ProductItem> recomendedItemList) {
@@ -139,4 +142,41 @@ public class ProductTypeAdapter extends RecyclerView.Adapter<ProductTypeAdapter.
         }
 
     }
+    public void remove(ProductItem productItem) {
+        int position = mProductsList.indexOf(productItem);
+        if (position > -1) {
+            mProductsList.remove(position);
+            notifyItemRemoved(position);
+        }
+    }
+    public void clear() {
+        isLoadingAdded = false;
+        while (getItemCount() > 0) {
+            remove(getItem(0));
+        }
+    }
+
+    public void addLoadingFooter() {
+        isLoadingAdded = true;
+        add(new ProductItem());
+    }
+    public void removeLoadingFooter() {
+        isLoadingAdded = false;
+
+        int position = mProductsList.size() - 1;
+        ProductItem item = getItem(position);
+
+        if (item != null) {
+            mProductsList.remove(position);
+            notifyItemRemoved(position);
+        }
+    }
+    public ProductItem getItem(int position) {
+        return mProductsList.get(position);
+    }
+
+    public void loadFirstPage() {
+
+    }
+
 }
