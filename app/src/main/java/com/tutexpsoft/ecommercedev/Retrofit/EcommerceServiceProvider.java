@@ -1,5 +1,6 @@
 package com.tutexpsoft.ecommercedev.Retrofit;
 
+import android.annotation.SuppressLint;
 import android.util.Log;
 
 import com.tutexpsoft.ecommercedev.ServerResponseModel.singleItem.ProductItem;
@@ -30,6 +31,7 @@ public class EcommerceServiceProvider {
 
     public void getTopSellingProducts() {
         mService.getTopSellingProducts().enqueue(new Callback<List<ProductItem>>() {
+            @SuppressLint("LongLogTag")
             @Override
             public void onResponse(Call<List<ProductItem>> call, Response<List<ProductItem>> response) {
                 if(response.isSuccessful()){
@@ -49,6 +51,7 @@ public class EcommerceServiceProvider {
                 }
             }
 
+            @SuppressLint("LongLogTag")
             @Override
             public void onFailure(Call<List<ProductItem>> call, Throwable t) {
                 Log.d(TAG, "onFailure: Failed" + t.getLocalizedMessage());
@@ -58,6 +61,7 @@ public class EcommerceServiceProvider {
 
     public void getFeaturedProducts() {
         mService.getTopFeaturedProducts().enqueue(new Callback<List<ProductItem>>() {
+            @SuppressLint("LongLogTag")
             @Override
             public void onResponse(Call<List<ProductItem>> call, Response<List<ProductItem>> response) {
                 if(response.isSuccessful()){
@@ -77,6 +81,7 @@ public class EcommerceServiceProvider {
                 }
             }
 
+            @SuppressLint("LongLogTag")
             @Override
             public void onFailure(Call<List<ProductItem>> call, Throwable t) {
                 Log.d(TAG, "onFailure: Failed" + t.getLocalizedMessage());
@@ -86,6 +91,7 @@ public class EcommerceServiceProvider {
 
     public void getNewProducts() {
         mService.getTopRecentProducts().enqueue(new Callback<List<ProductItem>>() {
+            @SuppressLint("LongLogTag")
             @Override
             public void onResponse(Call<List<ProductItem>> call, Response<List<ProductItem>> response) {
                 if(response.isSuccessful()){
@@ -105,6 +111,7 @@ public class EcommerceServiceProvider {
                 }
             }
 
+            @SuppressLint("LongLogTag")
             @Override
             public void onFailure(Call<List<ProductItem>> call, Throwable t) {
                 Log.d(TAG, "onFailure: Failed" + t.getLocalizedMessage());
@@ -114,6 +121,7 @@ public class EcommerceServiceProvider {
 
     public void getProductsOnSale() {
         mService.getOnSaleProducts().enqueue(new Callback<List<ProductItem>>() {
+            @SuppressLint("LongLogTag")
             @Override
             public void onResponse(Call<List<ProductItem>> call, Response<List<ProductItem>> response) {
                 if (response.isSuccessful()) {
@@ -133,6 +141,7 @@ public class EcommerceServiceProvider {
                 }
             }
 
+            @SuppressLint("LongLogTag")
             @Override
             public void onFailure(Call<List<ProductItem>> call, Throwable t) {
                 Log.d(TAG, "onFailure: Failed" + t.getLocalizedMessage());
@@ -143,6 +152,7 @@ public class EcommerceServiceProvider {
 
     public void getProductDetails(int id) {
         mService.getSingleProductDetail(id).enqueue(new Callback<ProductItem>() {
+            @SuppressLint("LongLogTag")
             @Override
             public void onResponse(Call<ProductItem> call, Response<ProductItem> response) {
                 if (response.isSuccessful()) {
@@ -162,6 +172,7 @@ public class EcommerceServiceProvider {
                 }
             }
 
+            @SuppressLint("LongLogTag")
             @Override
             public void onFailure(Call<ProductItem> call, Throwable t) {
                 Log.d(TAG, "onFailure: Failed" + t.getLocalizedMessage());
@@ -171,6 +182,7 @@ public class EcommerceServiceProvider {
 
     public void getFeaturedProductsMore(){
         mService.getFeaturedProductsMore().enqueue(new Callback<List<ProductItem>>() {
+            @SuppressLint("LongLogTag")
             @Override
             public void onResponse(Call<List<ProductItem>> call, Response<List<ProductItem>> response) {
                 if(response.isSuccessful()){
@@ -191,6 +203,7 @@ public class EcommerceServiceProvider {
 
             }
 
+            @SuppressLint("LongLogTag")
             @Override
             public void onFailure(Call<List<ProductItem>> call, Throwable t) {
                 Log.d(TAG, "onFailure: Failed" + t.getLocalizedMessage());
@@ -200,6 +213,7 @@ public class EcommerceServiceProvider {
 
     public void getTopSellingProductsMore(){
         mService.getTopRecentProductsMore().enqueue(new Callback<List<ProductItem>>() {
+            @SuppressLint("LongLogTag")
             @Override
             public void onResponse(Call<List<ProductItem>> call, Response<List<ProductItem>> response) {
                 if(response.isSuccessful()){
@@ -219,6 +233,7 @@ public class EcommerceServiceProvider {
                 }
             }
 
+            @SuppressLint("LongLogTag")
             @Override
             public void onFailure(Call<List<ProductItem>> call, Throwable t) {
                 Log.d(TAG, "onFailure: Failed" + t.getLocalizedMessage());
@@ -228,6 +243,7 @@ public class EcommerceServiceProvider {
 
     public void getOnSaleProductsMore(){
         mService.getOnSaleProductsMore().enqueue(new Callback<List<ProductItem>>() {
+            @SuppressLint("LongLogTag")
             @Override
             public void onResponse(Call<List<ProductItem>> call, Response<List<ProductItem>> response) {
                 if (response.isSuccessful()) {
@@ -247,6 +263,37 @@ public class EcommerceServiceProvider {
                 }
             }
 
+            @SuppressLint("LongLogTag")
+            @Override
+            public void onFailure(Call<List<ProductItem>> call, Throwable t) {
+                Log.d(TAG, "onFailure: Failed" + t.getLocalizedMessage());
+            }
+        });
+    }
+
+    public void getNewProductsMore(){
+        mService.getTopRecentProductsMore().enqueue(new Callback<List<ProductItem>>() {
+            @SuppressLint("LongLogTag")
+            @Override
+            public void onResponse(Call<List<ProductItem>> call, Response<List<ProductItem>> response) {
+                if(response.isSuccessful()){
+                    List<ProductItem> productItemList = response.body();
+                    if (productItemList != null) {
+                        Log.d(TAG, "onResponse: Successful :" + response.body().toString());
+                        EventBus.getDefault().post(new NewProductItemsEvent(productItemList));
+                    }else {
+                        try {
+                            Log.d(TAG, "onResponse: Failed :" + response.errorBody().string());
+                            EventBus.getDefault().post(new ErrorEvent("Error Occurred!!"));
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                            EventBus.getDefault().post(new ErrorEvent(e.getMessage()));
+                        }
+                    }
+                }
+            }
+
+            @SuppressLint("LongLogTag")
             @Override
             public void onFailure(Call<List<ProductItem>> call, Throwable t) {
                 Log.d(TAG, "onFailure: Failed" + t.getLocalizedMessage());

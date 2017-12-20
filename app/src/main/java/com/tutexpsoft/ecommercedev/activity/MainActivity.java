@@ -300,19 +300,19 @@ public class MainActivity extends OrientationControllerActivity
 
         switch (v.getId()) {
             case R.id.more_featuredItems:
-                new EcommerceServiceProvider().getFeaturedProducts();
+                new EcommerceServiceProvider().getFeaturedProductsMore();
                 showFullList(R.id.more_featuredItems);
                 break;
             case R.id.more_newProducts:
-                new EcommerceServiceProvider().getNewProducts();
+                new EcommerceServiceProvider().getNewProductsMore();
                 showFullList(R.id.more_featuredItems);
                 break;
             case R.id.more_onSale:
-                new EcommerceServiceProvider().getProductsOnSale();
+                new EcommerceServiceProvider().getOnSaleProductsMore();
                 showFullList(R.id.more_featuredItems);
                 break;
             case R.id.more_topSale:
-                new EcommerceServiceProvider().getTopSellingProducts();
+                new EcommerceServiceProvider().getTopSellingProductsMore();
                 showFullList(R.id.more_featuredItems);
                 break;
 
