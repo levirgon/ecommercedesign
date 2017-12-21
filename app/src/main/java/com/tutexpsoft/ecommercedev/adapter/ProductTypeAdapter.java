@@ -114,15 +114,18 @@ public class ProductTypeAdapter extends RecyclerView.Adapter<ProductTypeAdapter.
     @Override
     public int getItemCount() {
 
-        return mProductsList == null ? 0: mProductsList.size();
+        return mProductsList.size();
+        //return mProductsList == null ? 0: mProductsList.size();
     }
 
     @Override
     public int getItemViewType(int position) {
         if (isSwitchView) {
-            return (position == mProductsList.size()-1 && isLoadingAdded)?LOADING:LIST_ITEM;
+            return LIST_ITEM;
+            //return (position == mProductsList.size()-1 && isLoadingAdded)?LOADING:LIST_ITEM;
         } else {
-            return (position == mProductsList.size()-1 && isLoadingAdded)?LOADING:GRID_ITEM;
+            return GRID_ITEM;
+            //return (position == mProductsList.size()-1 && isLoadingAdded)?LOADING:GRID_ITEM;
         }
     }
 
@@ -133,7 +136,8 @@ public class ProductTypeAdapter extends RecyclerView.Adapter<ProductTypeAdapter.
 
     private void add(ProductItem item) {
         mProductsList.add(item);
-        notifyItemInserted(mProductsList.size() - 1);
+        //notifyItemInserted(mProductsList.size() - 1);
+        notifyDataSetChanged();
     }
 
     public void addAll(List<ProductItem> recomendedItemList) {
@@ -142,7 +146,7 @@ public class ProductTypeAdapter extends RecyclerView.Adapter<ProductTypeAdapter.
         }
 
     }
-    public void remove(ProductItem productItem) {
+   /* public void remove(ProductItem productItem) {
         int position = mProductsList.indexOf(productItem);
         if (position > -1) {
             mProductsList.remove(position);
@@ -177,6 +181,6 @@ public class ProductTypeAdapter extends RecyclerView.Adapter<ProductTypeAdapter.
 
     public void loadFirstPage() {
 
-    }
+    }*/
 
 }

@@ -67,7 +67,7 @@ public class ProductsActivity extends OrientationControllerActivity {
         if(mTypeAdapter == null){
             mTypeAdapter = new ProductTypeAdapter(this);
             recyclerView.setAdapter(mTypeAdapter);
-            recyclerView.addOnScrollListener(new PaginationScrollListener(mLinearLayoutManager) {
+            /*recyclerView.addOnScrollListener(new PaginationScrollListener(mLinearLayoutManager) {
                 @Override
                 protected void loadMoreItems() {
                     isLoading = true;
@@ -90,11 +90,11 @@ public class ProductsActivity extends OrientationControllerActivity {
                     return isLoading;
                 }
             });
-            loadFirstPage();
+            loadFirstPage();*/
 
         }else{
             recyclerView.setAdapter(mTypeAdapter);
-            recyclerView.addOnScrollListener(new PaginationScrollListener(mLinearLayoutManager) {
+            /*recyclerView.addOnScrollListener(new PaginationScrollListener(mLinearLayoutManager) {
                 @Override
                 protected void loadMoreItems() {
                     isLoading = true;
@@ -117,9 +117,9 @@ public class ProductsActivity extends OrientationControllerActivity {
                     return isLoading;
                 }
             });
-            loadFirstPage();
-        }
+            loadFirstPage();*/
 
+        }
     }
 
     private void loadNextPage() {

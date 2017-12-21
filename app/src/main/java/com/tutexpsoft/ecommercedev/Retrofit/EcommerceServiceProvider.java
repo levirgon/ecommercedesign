@@ -212,7 +212,7 @@ public class EcommerceServiceProvider {
     }
 
     public void getTopSellingProductsMore(){
-        mService.getTopRecentProductsMore().enqueue(new Callback<List<ProductItem>>() {
+        mService.getTopSellingProductsMore().enqueue(new Callback<List<ProductItem>>() {
             @SuppressLint("LongLogTag")
             @Override
             public void onResponse(Call<List<ProductItem>> call, Response<List<ProductItem>> response) {

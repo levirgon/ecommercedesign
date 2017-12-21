@@ -37,17 +37,22 @@ public interface EcommerceAPIinterface {
 
     //replace all the object classes with necessary response models.
 
-    @GET(URLManager.BASE_URL + "products?featured=true&" + URLManager.SECRET_KEY+"&per_page=30")
+    @GET(URLManager.BASE_URL + "products?orderby=top_sell&" + URLManager.SECRET_KEY+"&per_page=100")
+    Call<List<ProductItem>> getTopSellingProductsMore();
+
+    //replace all the object classes with necessary response models.
+
+    @GET(URLManager.BASE_URL + "products?featured=true&" + URLManager.SECRET_KEY+"&per_page=100")
     Call<List<ProductItem>> getFeaturedProductsMore();
 
     //replace all the object classes with necessary response models.
 
-    @GET(URLManager.BASE_URL + "products?" + URLManager.SECRET_KEY+"&page={page_number}")
-    Call<List<ProductItem>> getTopRecentProductsMore(@Path("page_number") int page_number);
+    @GET(URLManager.BASE_URL + "products?" + URLManager.SECRET_KEY+"&per_page=100")
+    Call<List<ProductItem>> getTopRecentProductsMore();
 
     //replace all the object classes with necessary response models.
 
-    @GET(URLManager.BASE_URL + "products?" + URLManager.SECRET_KEY + "&on_sale=true&per_page=30")
+    @GET(URLManager.BASE_URL + "products?" + URLManager.SECRET_KEY + "&on_sale=true&per_page=100")
     Call<List<ProductItem>> getOnSaleProductsMore();
 
     //replace all the object classes with necessary response models.
